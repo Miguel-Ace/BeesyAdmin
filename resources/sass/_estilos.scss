@@ -1,0 +1,255 @@
+html{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background: #EAF2F8;
+    font-family: 'Poppins', sans-serif;
+}
+.mostrar{
+    display: none;
+    &:first-child{
+        display: block;
+    }
+}
+.titulo-tabla{
+    &:first-child{
+        display: contents !important;
+    }
+}
+.regresar2{
+    width: 120px;
+    margin: .7rem;
+    background: rgb(33, 101, 197);
+    color: white;
+    border-radius: .5rem;
+    padding: .5rem 1rem ;
+    align-items: center;
+    a{
+        text-decoration: none;
+        color: white;
+    }
+    &:hover{
+        background: rgba(33, 101, 197, .9);
+    }
+}
+.negritaSpan{
+    font-weight: bolder;
+}
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2.6rem;
+    color: white;
+    height: 4.5rem;
+    font-size: 1.2rem;
+    background: rgba(0,0,0,.8);
+    // Parte del logo
+    .logo{
+        display: flex;
+        width: 170px;
+        justify-content: space-between;
+        align-items: center;
+        .negrita{
+            font-weight: bold;
+        }
+        .oculto{
+            display: none;
+        }
+        ion-icon{
+            cursor: pointer;
+        }
+    }
+    // Parte salida del usuario
+    .salir{
+        display: flex;
+        width: 70px;
+        justify-content: space-between;
+        align-items: center;
+        ion-icon{
+            transition: .3s ease;
+        }
+        &:hover{
+            opacity: .8;
+        }
+        &:hover ion-icon{
+            transform: rotate(180deg);
+            transition: .3s ease;
+        }
+    }
+}
+
+
+// Contenido Principal
+.contenedor{
+    display: flex;
+    justify-content: space-between;
+    min-height: 100vh;
+    .asidebar{
+        flex: 0 0 calc(18%);
+        background: white;
+        box-shadow: 2px 2px 10px 1px rgba(0, 0, 0, .1);
+
+        .usuario{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            p{
+                font-size: 1.1rem;
+                font-weight: bold;
+            }
+            img{
+                border-radius: 50%;
+            }
+        }
+
+        // Trabajando con los catálogos
+        .menu{
+            p{
+                padding: 0 1.5rem;
+                opacity: .5;
+                text-transform: uppercase;
+            }
+            .catalogos{
+                display: flex;
+                flex-direction: column;
+                a{
+                    padding: 1rem 1.5rem;
+                    text-decoration: none;
+                    color: rgba(0,0,0,.8);
+                    font-size: 1rem;
+                    display: flex;
+                    align-items: center;
+                    ion-icon{
+                        font-size: 1.8rem;
+                        transition: .3s ease;
+                        margin-right: .5rem;
+                    }
+                    &:hover{
+                        background-color: #2980B9;
+                        color: white;
+                    }
+                    &:hover ion-icon{
+                        margin-right: 1rem;
+                        transition: .3s ease;
+                    }
+                }
+            }
+        }
+    }
+
+    // tranajando vistas
+    .contenido{
+        flex: 0 0 calc(82% - 2px);
+        .subheader{
+            height: 4.5rem;
+            background-color: white;
+            box-shadow: 2px 2px 10px 1px rgba(0, 0, 0, .1);
+            display: flex;
+            align-items: center;
+            font-size: 1.4rem;
+            text-transform: uppercase;
+            font-weight: lighter;
+            padding: 0 2rem;
+            font-family: 'Secular One', sans-serif;
+        }
+
+        .tablas{
+            padding: 3rem 2rem;
+            .superior{
+                height: 3rem;
+                background: white;
+                display: flex;
+                margin-bottom: 2px;
+                display: flex;
+                align-items: center;
+                font-family: 'Secular One', sans-serif;
+                text-transform: uppercase;
+                padding: 0 2rem;
+                span{
+                    display: flex;
+                    justify-content: space-between;
+                    flex: 1;
+                }
+            }
+            .form{
+                margin-bottom: 2rem;
+                form{
+                    padding: 1rem;
+                    background: white;
+                    margin: 0;
+                    .enviar{
+                        width: 120px;
+                        margin: 1rem;
+                        background: rgb(33, 33, 197);
+                        color: white;
+                        border-radius: .5rem;
+                        padding: .5rem 1rem ;
+                        display: flex;
+                        align-items: center;
+                        &:hover{
+                            background: rgba(33, 33, 197, .9);
+                        }
+                    }
+                    .enviar ion-icon{
+                        margin:0 2px;
+                        font-size: 1rem;
+                    }
+                    .regresar{
+                        width: 120px;
+                        margin: 1rem;
+                        background: rgb(33, 101, 197);
+                        color: white;
+                        border-radius: .5rem;
+                        padding: .5rem 1rem ;
+                        display: flex;
+                        align-items: center;
+                        a{
+                            text-decoration: none;
+                            color: white;
+                        }
+                        &:hover{
+                            background: rgba(33, 101, 197, .9);
+                        }
+                    }
+                }
+            }
+            .color{
+                background: white;
+            }
+        }
+    }
+}
+
+// Botones
+.edit{
+    padding: .3rem .5rem;
+    background: #1ABC9C;
+    color: white;
+    border-radius: .4rem;
+    font-size: 1.1rem;
+}
+.show{
+    padding: .3rem .5rem;
+    background: #1f6ac5;
+    color: white;
+    border-radius: .4rem;
+    font-size: 1.1rem;
+}
+.delete{
+    display: inline-block;
+    button{
+        padding: .2rem .5rem;
+        background: #CD6155;
+        color: white;
+        border-radius: .4rem;
+        font-size: 1.1rem;
+        &:hover{
+            color: black;
+        }
+    }
+}

@@ -1,0 +1,393 @@
+@extends('home')
+
+@section('titulo')
+Proyecto
+@endsection
+
+@section('tituloForm')
+Agregar Proyecto
+@endsection
+
+@section('creacion')
+
+{{-- FOREACH INICIO --}}
+@foreach ($proyectos as $proyecto)
+
+@if ($proyecto->select_plantilla == NULL)
+
+@if ($busqueda == "")
+
+    <div class="mostrar">
+        <form action="{{url('/proyectos')}}" id="form" class="" method="post">
+            @if ($errors->any())
+                <ul class="bg-white text-danger p-2">
+                    @foreach ($errors->all() as $error)
+                    <li>{{$error}}</li>
+                    @endforeach
+                </ul>
+            @endif
+            {{-- {{$proyecto->id}} --}}
+            @csrf
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre" value="{{old('nombre')}}" @error("nombre")style="border: solid 2px red"@enderror>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <label for="id_cliente" class="form-label">Cliente</label>
+                    <select class="form-select" name="id_cliente" @error("id_cliente")style="border: solid 2px red"@enderror>
+                        <option value="">Selecciona un cliente</option>
+                        @foreach ($clientes as $cliente)
+                            @foreach ($datos as $dato)
+                                @if ($cliente->id == $dato->id_cliente)
+                                {{$valor = $cliente->id}}
+                                @endif
+                            @endforeach
+
+                            @if ($valor !== $cliente->id)
+                                <option value="{{$cliente->id}}">{{$cliente->nombre}}</option>
+                            @else
+                                <option value="">{{$cliente->nombre}} - ya utilzado</option>
+                            @endif
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="mb-3">
+                        <label for="responsable_cliente" class="form-label">Responsable del Cliente</label>
+                        <input type="text" class="form-control" id="responsable_cliente" name="responsable_cliente" value="{{old('responsable_cliente')}}" @error("responsable_cliente")style="border: solid 2px red"@enderror>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="mb-3">
+                        <label for="email_responsable" class="form-label">Email del Responsable</label>
+                        <input type="email" class="form-control" id="email_responsable" name="email_responsable" value="{{old('email_responsable')}}" @error("email_responsable")style="border: solid 2px red"@enderror>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="mb-3">
+                        <label for="telefono_responsable" class="form-label">Teléfono del Responsable</label>
+                        <input type="number" class="form-control" id="telefono_responsable" name="telefono_responsable" value="{{old('telefono_responsable')}}" @error("telefono_responsable")style="border: solid 2px red"@enderror>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <label for="id_usuario" class="form-label">Usuario</label>
+                    <select class="form-select" name="id_usuario" @error("id_usuario")style="border: solid 2px red"@enderror>
+                        <option value="">Selecciona un usuario</option>
+                        @foreach ($usuarios as $usuario)
+                            <option value="{{$usuario->id}}">{{$usuario->nombre}}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="mb-3">
+                        <label for="fecha_inicio" class="form-label">Fecha Inicio</label>
+                        <input type="datetime-local" class="form-control" id="fecha_inicio" name="fecha_inicio" value="{{old('fecha_inicio')}}" @error("fecha_inicio")style="border: solid 2px red"@enderror>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="mb-3">
+                        <label for="fecha_fin" class="form-label">Fecha Final</label>
+                        <input type="datetime-local" class="form-control" id="fecha_fin" name="fecha_fin" value="{{old('fecha_fin')}}" @error("fecha_fin")style="border: solid 2px red"@enderror>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <label for="" class="form-label">Selecciona una Plantilla</label>
+                    <select class="form-select" id="select">
+                        <option value="" id="">Seleccione Plantilla</option>
+                        @foreach ($datos as $dato)
+                            @if ($dato->id_cliente == NULL)
+                                <option value="{{$dato->id}}" id="select_plantilla">{{$dato->select_plantilla}}</option>
+                            @endif
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+            <button type="submit" class="enviar" id="enviar">
+            <ion-icon name="save-outline"></ion-icon>
+            Guardar
+            </button>
+
+        </form>
+        <form action="{{url('/proyectos')}}" method="get" class="formularioBuscador d-none">
+            <input type="text" class="" name="buscar" id="cargar" placeholder="Buscar" value="{{$busqueda}}">
+            <input class="btn btn-primary" id="cargarEnviar" type="submit" value="Buscar">
+        </form>
+
+    </div>
+
+@endif
+
+@elseif ($proyecto->id == $busqueda)
+
+<form action="{{url('/proyectos')}}" id="form" class="" method="post">
+    @if ($errors->any())
+        <ul class="bg-white text-danger p-2">
+            @foreach ($errors->all() as $error)
+            <li>{{$error}}</li>
+            @endforeach
+        </ul>
+    @endif
+    {{-- {{$proyecto->id}} --}}
+    @csrf
+    <div class="row">
+        <div class="col-md-3">
+            <div class="mb-3">
+                <label for="nombre" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="nombre" name="nombre" value="{{$proyecto->nombre}}" @error("nombre")style="border: solid 2px red"@enderror>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <label for="id_cliente" class="form-label">Cliente</label>
+            <select class="form-select" name="id_cliente" @error("id_cliente")style="border: solid 2px red"@enderror>
+                <option value="">Selecciona un cliente</option>
+                @foreach ($clientes as $cliente)
+                    @foreach ($datos as $dato)
+                        @if ($cliente->id == $dato->id_cliente)
+                        {{$valor = $cliente->id}}
+                        @endif
+                    @endforeach
+
+                    @if ($valor !== $cliente->id)
+                        <option value="{{$cliente->id}}">{{$cliente->nombre}}</option>
+                    @else
+                        <option value="">{{$cliente->nombre}} - ya utilzado</option>
+                    @endif
+                @endforeach
+            </select>
+        </div>
+
+        <div class="col-md-3">
+            <div class="mb-3">
+                <label for="responsable_cliente" class="form-label">Responsable del Cliente</label>
+                <input type="text" class="form-control" id="responsable_cliente" name="responsable_cliente" value="{{$proyecto->responsable_cliente}}" @error("responsable_cliente")style="border: solid 2px red"@enderror>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="mb-3">
+                <label for="email_responsable" class="form-label">Email del Responsable</label>
+                <input type="email" class="form-control" id="email_responsable" name="email_responsable" value="{{$proyecto->email_responsable}}" @error("email_responsable")style="border: solid 2px red"@enderror>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="mb-3">
+                <label for="telefono_responsable" class="form-label">Teléfono del Responsable</label>
+                <input type="number" class="form-control" id="telefono_responsable" name="telefono_responsable" value="{{$proyecto->telefono_responsable}}" @error("telefono_responsable")style="border: solid 2px red"@enderror>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <label for="id_usuario" class="form-label">Usuario</label>
+            <select class="form-select" name="id_usuario" @error("id_usuario")style="border: solid 2px red"@enderror>
+                <option value="">Selecciona un usuario</option>
+                @foreach ($usuarios as $usuario)
+                    <option value="{{$usuario->id}}">{{$usuario->nombre}}</option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="col-md-3">
+            <div class="mb-3">
+                <label for="fecha_inicio" class="form-label">Fecha Inicio</label>
+                <input type="datetime-local" class="form-control" id="fecha_inicio" name="fecha_inicio" value="{{$proyecto->fecha_inicio}}" @error("fecha_inicio")style="border: solid 2px red"@enderror>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="mb-3">
+                <label for="fecha_fin" class="form-label">Fecha Final</label>
+                <input type="datetime-local" class="form-control" id="fecha_fin" name="fecha_fin" value="{{$proyecto->fecha_fin}}" @error("fecha_fin")style="border: solid 2px red"@enderror>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <label for="select_plantilla" class="form-label">Selecciona una Plantilla</label>
+            <select class="form-select" id="select">
+                <option value="" id="">Seleccione Plantilla</option>
+                @foreach ($proyectos as $proyecto)
+                    @if ($proyecto->id_cliente == NULL)
+                        <option value="{{$proyecto->id}}" id="select_plantilla">{{$proyecto->select_plantilla}}</option>
+                    @endif
+                @endforeach
+            </select>
+        </div>
+    </div>
+    <button type="submit" class="enviar" id="enviar">
+    <ion-icon name="save-outline"></ion-icon>
+    Guardar
+    </button>
+
+</form>
+<form action="{{url('/proyectos')}}" method="get" class="formularioBuscador d-none">
+    <input type="text" name="buscar" class="" id="cargar" placeholder="Buscar" value="{{$busqueda}}">
+    <input class="btn btn-primary" id="cargarEnviar" type="submit" value="Buscar">
+</form>
+
+@endif
+
+@endforeach
+{{-- FOREACH FIN --}}
+
+@endsection
+
+@section('tituloTabla')
+Lista de Proyectos
+
+{{-- Espacio del buscador --}}
+<form action="{{url('/proyectos')}}" method="get" class="formularioBuscador d-none">
+    <input type="text" name="buscar" id="buscar" placeholder="Buscar" value="{{$busqueda}}">
+    <input type="submit" value="Buscar">
+</form>
+@endsection
+
+@section('tablas')
+<div class="col-md-12 fs-6">
+    <table class="table table-bordered table-hover">
+        <thead>
+            @foreach ($datos as $dato)
+                @if ($dato->id_cliente != "" && $dato->id_usuario != "")
+                    <tr  class="titulo-tabla d-none">
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Cliente</th>
+                        <th scope="col">Responsable Cliente</th>
+                        <th scope="col">Email Responsable</th>
+                        <th scope="col">Teléfono Responsable</th>
+                        <th scope="col">Usuario</th>
+                        <th scope="col">Fecha Inicio</th>
+                        <th scope="col">Fecha Final</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                @elseif ($dato->nombre != '' && $dato->id_cliente != $busqueda)
+                    <tr>
+                        <th scope="col">Nombre</th>
+                        {{-- <th scope="col">Cliente</th> --}}
+                        <th scope="col">Responsable Cliente</th>
+                        <th scope="col">Email Responsable</th>
+                        <th scope="col">Teléfono Responsable</th>
+                        {{-- <th scope="col">Usuario</th> --}}
+                        <th scope="col">Fecha Inicio</th>
+                        <th scope="col">Fecha Final</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                @endif
+
+            @endforeach
+        </thead>
+        <tbody class="text-center">
+            @foreach ($datos as $dato )
+                @if ($dato->id_cliente != "" && $dato->id_usuario != "")
+                    <tr>
+                        <td>{{$dato->nombre}}</td>
+                        <td>{{$dato->clientes->nombre}}</td>
+                        <td>{{$dato->responsable_cliente}}</td>
+                        <td>{{$dato->email_responsable}}</td>
+                        <td>{{$dato->telefono_responsable}}</td>
+                        <td>{{$dato->usuarios->nombre}}</td>
+                        <td>{{$dato->fecha_inicio}}</td>
+                        <td>{{$dato->fecha_fin}}</td>
+                        <td class="d-flex">
+                            {{-- @foreach ($detalleProyectos as $detalleProyecto)
+                                {{$valor = $detalleProyecto->id}}
+                            @endforeach --}}
+                            <a href="{{url('/detalle_proyectos?buscar='.$dato->id)}}" class="show"><ion-icon name="add-circle-outline"></ion-icon></a>
+                            |
+                            <a href="{{url('proyectos/'.$dato->id.'/edit')}}" class="edit"><ion-icon name="pencil-outline"></ion-icon></a>
+                            {{-- |
+                            <form action="{{url('proyectos/'.$dato->id)}}" method="POST" class="delete">
+                                @csrf
+                                {{method_field('DELETE')}}
+                                <button type="submit"><ion-icon name="beaker-outline"></ion-icon></button>
+                            </form> --}}
+                        </td>
+                    </tr>
+                @elseif ($dato->nombre != '' && $dato->id_cliente != $busqueda)
+                    <tr>
+                        <td>{{$dato->nombre}}</td>
+                        {{-- <td>{{$dato->clientes->nombre}}</td> --}}
+                        <td>{{$dato->responsable_cliente}}</td>
+                        <td>{{$dato->email_responsable}}</td>
+                        <td>{{$dato->telefono_responsable}}</td>
+                        {{-- <td>{{$dato->usuarios->nombre}}</td> --}}
+                        <td>{{$dato->fecha_inicio}}</td>
+                        <td>{{$dato->fecha_fin}}</td>
+                        <td class="d-flex">
+                            {{-- @foreach ($detalleProyectos as $detalleProyecto)
+                                {{$valor = $detalleProyecto->id}}
+                            @endforeach --}}
+                            <a href="{{url('/detalle_proyectos?buscar='.$dato->id)}}" class="show"><ion-icon name="add-circle-outline"></ion-icon></a>
+                            |
+                            <a href="{{url('proyectos/'.$dato->id.'/edit')}}" class="edit"><ion-icon name="pencil-outline"></ion-icon></a>
+                            {{-- |
+                            <form action="{{url('proyectos/'.$dato->id)}}" method="POST" class="delete">
+                                @csrf
+                                {{method_field('DELETE')}}
+                                <button type="submit"><ion-icon name="beaker-outline"></ion-icon></button>
+                            </form> --}}
+                        </td>
+                    </tr>
+                @endif
+            @endforeach
+        </tbody>
+    </table>
+</div>
+
+<script>
+    // const inputs = document.querySelectorAll('input');
+    // const formulario = document.querySelector('#form');
+    const btnCargar = document.getElementById('cargar');
+    const btnCargarEnviar = document.getElementById('cargarEnviar');
+    const select = document.getElementById('select');
+
+    select.onclick = (e) => {
+        let valor = e.target.value;
+        console.log(valor);
+        btnCargar.value = valor;
+            if (valor != '') {
+                btnCargarEnviar.click();
+            }
+        }
+
+    // let proyectos = JSON.parse('{!! json_encode($proyectos) !!}');
+    // proyectos.forEach(element => {
+    //     let nombrePlantilla = element.select_plantilla;
+    //     let idPlantilla = element.id;
+
+    //     if (nombrePlantilla != null) {
+
+    //         // console.log(nombrePlantilla);
+    //         // formulario.onclick = (e) => {
+
+    //         //     let valor = e.target.value;
+    //         //     console.log(valor)
+    //         //     if (valor == idPlantilla) {
+    //         //         if (valor != undefined && valor != '' && btnCargar.id == 'cargar') {
+    //         //             btnCargar.value = valor;
+    //         //             btnCargarEnviar.click();
+    //         //         }
+    //         //         // console.log(valor);
+    //         //     }else{
+    //         //         if (valor != undefined && valor != '' && btnCargar.id == 'cargar') {
+    //         //             btnCargar.value = valor;
+    //         //             btnCargarEnviar.click();
+    //         //         }
+    //         //         // console.log(valor);
+    //         //     }
+    //         // }
+    //     }
+
+    // });
+</script>
+@endsection
