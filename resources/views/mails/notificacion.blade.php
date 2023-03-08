@@ -119,7 +119,7 @@
             </div>
             
             <div class="contenedorlink">
-                <a href="{{ url('http://127.0.0.1:8000/soporte') }}" class="link" style="color: black">Realizar soporte</a>
+                <a href="{{ url('http://46.183.112.214/soporte') }}" class="link" style="color: black">Realizar soporte</a>
             </div>
         </div>
 
