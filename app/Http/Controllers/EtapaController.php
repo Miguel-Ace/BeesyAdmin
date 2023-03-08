@@ -46,7 +46,7 @@ class EtapaController extends Controller
 
         $datos = $request->except('_token');
         Etapa::insert($datos);
-        return redirect('/etapas');
+        return redirect('/etapas')->with('success','GUARDADO CON ÉXITO');
     }
 
     /**
@@ -83,7 +83,7 @@ class EtapaController extends Controller
     {
         $datos = $request->except('_token','_method');
         Etapa::where('id','=',$id)->update($datos);
-        return redirect('/etapas');
+        return redirect('/etapas')->with('success','INFORMACIÓN ACTUALIZADA');
     }
 
     /**
@@ -95,6 +95,6 @@ class EtapaController extends Controller
     public function destroy($id)
     {
         Etapa::destroy($id);
-        return redirect('/etapas');
+        return redirect('/etapas')->with('danger','ELMINADO CON ÉXITO');
     }
 }

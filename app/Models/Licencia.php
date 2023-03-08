@@ -12,11 +12,11 @@ class Licencia extends Model
     public $timestamps = false;
     protected $fillable = ['id','id_cliente','id_software','cantidad','fechaInicio','fechaFinal'];
 
-    function clientes(){
-        return $this->belongsTo(Cliente::class, 'id_cliente');
-    }
+    // function clientes(){
+    //     return $this->belongsTo(Cliente::class, 'id_cliente');
+    // }
 
-    function softwares(){
-        return $this->belongsTo(Software::class, 'id_software');
-    }
+    // function softwares(){
+    //     return $this->belongsTo(Software::class, 'id_software');
+    // }
 }

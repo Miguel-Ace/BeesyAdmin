@@ -16,15 +16,17 @@ return new class extends Migration
         Schema::create('licencias', function (Blueprint $table) {
             $table->engine='InnoDB';
             $table->id();
-            $table->bigInteger('id_cliente')->unsigned();
-            $table->bigInteger('id_software')->unsigned();
+            // $table->bigInteger('id_cliente')->unsigned();
+            $table->string('id_cliente');
+            // $table->bigInteger('id_software')->unsigned();
+            $table->string('id_software');
             $table->string('cantidad');
             $table->string('fechaInicio');
             $table->string('fechaFinal');
             $table->timestamps();
 
-            $table->foreign('id_cliente')->references('id')->on('clientes')->onDelete('cascade');
-            $table->foreign('id_software')->references('id')->on('software')->onDelete('cascade');
+            // $table->foreign('id_cliente')->references('id')->on('clientes')->onDelete('cascade');
+            // $table->foreign('id_software')->references('id')->on('software')->onDelete('cascade');
         });
     }
 

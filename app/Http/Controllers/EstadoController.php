@@ -46,7 +46,7 @@ class EstadoController extends Controller
 
         $datos = $request->except('_token');
         Estado::insert($datos);
-        return redirect('/estados');
+        return redirect('/estados')->with('success','GUARDADO CON ÉXITO');
     }
 
     /**
@@ -83,7 +83,7 @@ class EstadoController extends Controller
     {
         $datos = $request->except('_token','_method');
         Estado::where('id','=',$id)->update($datos);
-        return redirect('/estados');
+        return redirect('/estados')->with('success','INFORMACIÓN ACTUALIZADA');
     }
 
     /**
@@ -95,6 +95,6 @@ class EstadoController extends Controller
     public function destroy($id)
     {
         Estado::destroy($id);
-        return redirect('/estados');
+        return redirect('/estados')->with('danger','ELMINADO CON ÉXITO');
     }
 }

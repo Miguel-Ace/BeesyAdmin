@@ -54,6 +54,7 @@ class PlantillaDetalleProyectoController extends Controller
         request()->validate([
             'id_proyecto' => 'required|unique:detalle_proyectos',
             'num_actividad' => 'required|min:1',
+            'nombre_actividad' => 'required',
             'fecha_inicio' => 'required',
             'fecha_fin' => 'required',
             'horas_propuestas' => 'required|min:1',
@@ -65,11 +66,12 @@ class PlantillaDetalleProyectoController extends Controller
             'rendimiento' => 'required',
             'id_estado' => 'required',
             'id_etapa' => 'required',
+            'select_plantilla' => 'required',
         ]);
 
         $datos = $request->except('_token');
         DetalleProyecto::insert($datos);
-        return redirect('/plantilla_detalle_proyectos?buscar='.$obtenerId);
+        return redirect('/plantilla_detalle_proyectos?buscar='.$obtenerId)->with('success','GUARDADO CON ÉXITO');
     }
 
     /**
@@ -125,6 +127,6 @@ class PlantillaDetalleProyectoController extends Controller
     public function destroy($id)
     {
         DetalleProyecto::destroy($id);
-        return redirect('/plantilla_detalle_proyecto');
+        return redirect('/plantilla_detalle_proyecto')->with('danger','ELMINADO CON ÉXITO');
     }
 }

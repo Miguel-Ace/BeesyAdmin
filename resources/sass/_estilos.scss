@@ -3,10 +3,72 @@ html{
     padding: 0;
     box-sizing: border-box;
 }
+*,*::before,*::after{
+    box-sizing: inherit;
+}
 
 body{
     background: #EAF2F8;
     font-family: 'Poppins', sans-serif;
+}
+// Dashboard
+.contadores{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin: 1rem 0;
+    @media (min-width: 768px) {
+        grid-template-columns: repeat(2,1fr);
+    }
+    @media (min-width: 992px) {
+        grid-template-columns: repeat(4,1fr);
+    }
+    div{
+        // background-color: white;
+        font-size: 1.1rem;
+        padding: .5rem;
+        &.uno{
+            background: linear-gradient(to bottom, #ABEBC6, #ffffff);
+            box-shadow: 2px 1px 10px 1px rgba(0, 0, 0, 0.2);
+        }
+        &.dos{
+            background: linear-gradient(to bottom, #FAD7A0, #ffffff);
+            box-shadow: 2px 1px 10px 1px rgba(0, 0, 0, 0.2);
+        }
+        &.tres{
+            background: linear-gradient(to bottom, #F5B7B1, #ffffff);
+            box-shadow: 2px 1px 10px 1px rgba(0, 0, 0, 0.2);
+        }
+        &.cuatro{
+            background: linear-gradient(to bottom, #D2B4DE, #ffffff);
+            box-shadow: 2px 1px 10px 1px rgba(0, 0, 0, 0.2);
+        }
+        div{
+            display: flex;
+            justify-content: space-between;
+            
+            .borde-icon{
+                border: 1px solid gray;
+                border-radius: 1.7rem;
+                font-size: 1.6rem;
+                padding: .8rem;
+            }
+        }
+    }
+}
+.graficos{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    @media (min-width: 992px){
+        grid-template-columns: repeat(3,1fr);
+    }
+    .grafos{
+        background-color: white;
+        font-size: 1.1rem;
+        padding: .5rem;
+        box-shadow: 2px 1px 10px 1px rgba(0, 0, 0, 0.2);
+    }
 }
 .mostrar{
     display: none;
@@ -33,6 +95,7 @@ body{
     }
     &:hover{
         background: rgba(33, 101, 197, .9);
+        color: white;
     }
 }
 .negritaSpan{
@@ -85,14 +148,24 @@ body{
 
 // Contenido Principal
 .contenedor{
-    display: flex;
-    justify-content: space-between;
+    // display: flex;
+    // justify-content: space-between;
+    // grid-template-columns: 1fr 6fr;
     min-height: 100vh;
+    @media (min-width: 992px){
+        display: grid;
+        grid-template-columns: 1fr 5fr;
+    }
     .asidebar{
-        flex: 0 0 calc(18%);
+        // flex: 0 0 calc(18%);
+        display: flex;
+        justify-content: space-between;
+        align-items: start;
         background: white;
         box-shadow: 2px 2px 10px 1px rgba(0, 0, 0, .1);
-
+        @media (min-width: 992px){
+            display: block;
+        }
         .usuario{
             display: flex;
             justify-content: center;
@@ -101,22 +174,65 @@ body{
             p{
                 font-size: 1.1rem;
                 font-weight: bold;
+                display: none;
+                @media (min-width: 992px){
+                    display: block;
+                }
             }
             img{
                 border-radius: 50%;
+                padding: .5rem;
+                @media (min-width: 992px){
+                    padding: none;
+                }
             }
         }
 
         // Trabajando con los catálogos
         .menu{
+            position: relative;
+            @media (min-width: 992px){
+                position: unset;
+            }
             p{
                 padding: 0 1.5rem;
                 opacity: .5;
                 text-transform: uppercase;
+                display: none;
+                @media (min-width: 992px){
+                    display: block;
+                }
+            }
+            .ico-drop{
+                font-size: 4rem;
+                margin: 1rem 2rem;
+                cursor: pointer;
+                @media (min-width: 992px){
+                    display: none;
+                }
             }
             .catalogos{
-                display: flex;
-                flex-direction: column;
+                // display: none;
+                // flex-direction: column;
+                position: absolute;
+                top: 70%;
+                right: 5%;
+                background: white;
+                box-shadow: 2px 2px 10px 10px rgba(0, 0, 0, .1);
+                transition: 3s ease;
+                &.activo{
+                    display: none;
+                    @media (min-width: 992px){
+                        display: unset;
+                    }
+                }
+                @media (min-width: 992px){
+                    box-shadow: unset;
+                    background: unset;
+                    position: unset;
+                    border-bottom: unset;
+                    // display: unset;
+                }
                 a{
                     padding: 1rem 1.5rem;
                     text-decoration: none;
@@ -124,10 +240,24 @@ body{
                     font-size: 1rem;
                     display: flex;
                     align-items: center;
+                    border-bottom: 1px solid rgb(223, 223, 223);
+                    @media (min-width: 992px){
+                        border-bottom: unset;
+                    }
+                    span{
+                        // display: none;
+                        @media (min-width: 992px){
+                            display: block;
+                        }
+                    }
                     ion-icon{
                         font-size: 1.8rem;
                         transition: .3s ease;
                         margin-right: .5rem;
+                        display: none;
+                        @media (min-width: 992px){
+                            display: block;
+                        }
                     }
                     &:hover{
                         background-color: #2980B9;
@@ -144,7 +274,7 @@ body{
 
     // tranajando vistas
     .contenido{
-        flex: 0 0 calc(82% - 2px);
+        // flex: 0 0 calc(82% - 2px);
         .subheader{
             height: 4.5rem;
             background-color: white;
@@ -153,7 +283,7 @@ body{
             align-items: center;
             font-size: 1.4rem;
             text-transform: uppercase;
-            font-weight: lighter;
+            font-weight: bold;
             padding: 0 2rem;
             font-family: 'Secular One', sans-serif;
         }
@@ -170,21 +300,31 @@ body{
                 font-family: 'Secular One', sans-serif;
                 text-transform: uppercase;
                 padding: 0 2rem;
+                box-shadow: 2px 1px 10px 1px rgba(0, 0, 0, 0.2);
                 span{
                     display: flex;
+                    align-items: center;
                     justify-content: space-between;
                     flex: 1;
                 }
             }
             .form{
+                // background: #EAF2F8;
+                margin-left: 0;
+                margin-right: 0;
+                padding-left: 0;
                 margin-bottom: 2rem;
+                box-shadow: 2px 1px 10px 1px rgba(0, 0, 0, 0.2);
                 form{
                     padding: 1rem;
                     background: white;
                     margin: 0;
+                    &.btnAbajo{
+                        flex-direction: column;
+                    }
                     .enviar{
                         width: 120px;
-                        margin: 1rem;
+                        margin: 1rem .6rem 1rem;
                         background: rgb(33, 33, 197);
                         color: white;
                         border-radius: .5rem;
@@ -220,6 +360,43 @@ body{
             }
             .color{
                 background: white;
+                // @media (min-width: 992px){
+                    //     overflow: unset;
+                    // }
+                div{
+                    overflow: scroll;
+                    max-width: 1150px;
+                    table{
+                        min-width: 768px;
+                    }
+                    .grande{
+                        min-width: 1200px;
+                    }
+                }
+                @media (min-width: 768px){
+                    div{
+                        overflow: scroll;
+                        max-width: 1020px;
+                    }
+                }
+                @media (min-width: 1200px){
+                    div{
+                        overflow: scroll;
+                        max-width: 1150px;
+                    }
+                }
+                div .tablagrande{
+                    min-width: 126rem;
+                }
+                // tbody tr td:last-child{
+                //     display: grid;
+                //     grid-template-columns: 1fr;
+                //     justify-items: center;
+                //     @media (min-width: 992px){
+                //         display: unset;
+                //         border: unset;
+                //     }
+                // }
             }
         }
     }
@@ -251,5 +428,58 @@ body{
         &:hover{
             color: black;
         }
+    }
+}
+
+// Roles
+.update-rol{
+    width: 15rem;
+    display: flex;
+    form:first-child{
+        display: flex;
+        button{
+            padding: 0 .3rem;
+            background: #2980B9;
+            color: white;
+            border-radius: .5rem;
+            transition: all .3s ease;
+            &:hover{
+                background: #226fa2;
+            }
+            ion-icon{
+                font-size: 2rem;
+                margin-top: .2rem;
+                // margin-right: .1rem;
+            }
+        }
+    }
+    .delete-rol{
+        min-height: 100%;
+        padding: .2rem .4rem;
+            background: #CD6155;
+            color: white;
+            border-radius: .5rem;
+            transition: all .3s ease;
+            &:hover{
+                background: #c3473a;
+            }
+            ion-icon{
+                font-size: 1.5rem;
+                margin-top: .2rem;
+                margin-right: .1rem;
+            }
+    }
+}
+
+// boton exportar excell
+.botnExportar{
+    color: white;
+    background-color: #138D75;
+    padding: .3rem 1rem;
+    border-radius: .2rem;
+    transition: .3s ease;
+    &:hover{
+        color: white;
+        background-color: #0f6f5c;
     }
 }

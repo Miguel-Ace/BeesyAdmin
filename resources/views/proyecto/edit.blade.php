@@ -21,10 +21,10 @@ Actualizar Proyecto
           </div>
 
           <div class="col-md-3">
-            <label for="id_cliente" class="form-label">id Cliente</label>
+            <label for="id_cliente" class="form-label">Cliente</label>
               <select class="form-select" name="id_cliente">
                 @foreach ($clientes as $cliente)
-                    @if ($cliente->id === $datos->clientes->id)
+                    @if ($cliente->id == $datos->clientes->id)
                         <option value="{{$cliente->id}}" selected>{{$cliente->nombre}}</option>
                     @else
                         <option value="{{$cliente->id}}">{{$cliente->nombre}}</option>
@@ -32,6 +32,20 @@ Actualizar Proyecto
                 @endforeach
               </select>
           </div>
+
+          <div class="col-md-3">
+            <label for="user_de_cliente" class="form-label">Usuario del Cliente</label>
+            <select class="form-select" name="user_de_cliente" @error("user_de_cliente")style="border: solid 2px red"@enderror>
+                <option value="">Selecciona usuario del cliente</option>
+                @foreach ($userdeclientes as $userdecliente)
+                  @if ($userdecliente->id == $datos->user_de_cliente)
+                      <option value="{{$userdecliente->id}}" selected>{{$userdecliente->name}}</option>
+                    @else
+                      <option value="{{$userdecliente->id}}">{{$userdecliente->name}}</option>
+                  @endif
+                @endforeach
+            </select>
+        </div>
 
           <div class="col-md-3">
             <div class="mb-3">
@@ -55,10 +69,10 @@ Actualizar Proyecto
           </div>
 
           <div class="col-md-3">
-            <label for="id_usuario" class="form-label">id Usuario</label>
+            <label for="id_usuario" class="form-label">Usuario</label>
               <select class="form-select" name="id_usuario">
                 @foreach ($usuarios as $usuario)
-                    <option value="{{$usuario->id}}">{{$usuario->nombre}}</option>
+                    <option value="{{$usuario->id}}">{{$usuario->name}}</option>
                 @endforeach
               </select>
           </div>
@@ -83,9 +97,6 @@ Actualizar Proyecto
       Guardar
     </button>
 
-    <button class="boton regresar">
-        <ion-icon name="arrow-back-outline"></ion-icon>
-        <a href="{{url('/proyectos')}}">Regresar</a>
-      </button>
+    <a href="{{url('/proyectos')}}" class="boton regresar"><ion-icon name="arrow-back-outline"></ion-icon>Regresar</a>
 </form>
 @endsection

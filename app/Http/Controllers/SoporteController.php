@@ -6,7 +6,10 @@ use App\Models\Cliente;
 use App\Models\Soporte;
 use App\Models\Software;
 use App\Mail\notificaciones;
-
+use App\Mail\notificacionesFinal;
+use App\Mail\notificacionesCliente;
+use App\Mail\notificacionesProceso;
+use App\Models\UserCliente;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -27,9 +30,10 @@ class SoporteController extends Controller
         $datos = Soporte::all();
         $clientes = Cliente::all();
         $softwares = Software::all();
+        $usuarioclientes = UserCliente::all();
         $cantidad = Soporte::count();
         // $cantidad = Soporte::lastest()->paginate(1);
-        return view('soporte.index', compact('datos','clientes','softwares','cantidad'));
+        return view('soporte.index', compact('datos','clientes','softwares','cantidad','usuarioclientes'));
     }
 
     /**
@@ -51,34 +55,43 @@ class SoporteController extends Controller
     public function store(Request $request)
     {
         $message = request()->validate([
-            'sticker' => 'required',
+            'ticker' => 'required',
             'colaborador' => 'required',
             'numLaboral' => 'required',
             'fechaHoraInicio' => 'required',
-            'fechaHoraFinal' => 'required',
+            // 'fechaHoraFinal' => 'required',
             'id_cliente' => 'required',
+            'correo_cliente' => 'required',
             'id_software' => 'required',
             'numLaboral' => 'required',
-            'problema' => 'required',
-            'solucion' => 'required',
-            'observaciones' => 'required',
+            'problema' => 'nullable',
+            'solucion' => 'nullable',
+            'observaciones' => 'nullable',
+            'prioridad' => 'required',
+            'estado' => 'required',
         ]);
 
         $datos = $request->except('_token');
         Soporte::insert($datos);
 
+        $correo = new notificacionesCliente($message);
 
+        // Mensaje a los clientes
+        // ======================
+        $email = $request->input('correo_cliente');
+        Mail::to($email)->send($correo);
+
+        // Mensaje a soporte
+        // =================
         $correo = new notificaciones($message);
-        $emails = ['acevedo51198@gmail.com','acevedomac@gmail.com'];
-
-        foreach ($emails as $email) {
-            Mail::to($email)->send($correo);
-        }
-
-        // Mail::to('acevedo51198@gmail.com')->queue($correo);
+        $emails = DB::table('users')->pluck('email');
+        Mail::to($emails)->send($correo);
+        
+        // $emails = ['acevedo51198mac@gmail.com','juego55miguel@gmail.com','juego2miguel@gmail.com	'];
         // Mail::to('acevedomac@gmail.com')->queue($correo);
+        // Mail::to('acevedo51198mac@gmail.com')->queue($correo);
 
-        return redirect('/soporte');
+        return redirect('/soporte')->with('success','GUARDADO CON ÉXITO');
     }
 
     /**
@@ -103,7 +116,8 @@ class SoporteController extends Controller
         $datos = Soporte::find($id);
         $clientes = Cliente::all();
         $softwares = Software::all();
-        return view('soporte.edit', compact('datos','clientes','softwares'));
+        $usuarioclientes = UserCliente::all();
+        return view('soporte.edit', compact('datos','clientes','softwares','usuarioclientes'));
     }
 
     /**
@@ -115,9 +129,45 @@ class SoporteController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $message = request()->validate([
+            'ticker' => 'required',
+            'colaborador' => 'required',
+            'numLaboral' => 'required',
+            'fechaHoraInicio' => 'required',
+            'fechaHoraFinal' => 'nullable',
+            'id_cliente' => 'required',
+            'id_software' => 'required',
+            'numLaboral' => 'required',
+            'problema' => 'nullable',
+            'solucion' => 'nullable',
+            'observaciones' => 'nullable',
+            'prioridad' => 'required',
+            'estado' => 'required',
+        ]);
+
         $datos = $request->except('_token','_method');
         Soporte::where('id','=',$id)->update($datos);
-        return redirect('/soporte');
+
+        $estado = $request->input('estado');
+
+        if ($estado == 'Completo') {
+            // Aqui hagarro el correo que se pasó al input
+            $correo = new notificacionesFinal($message);
+            $email = $request->input('correo_cliente');
+            Mail::to($email)->send($correo);
+            
+            $correo = new notificacionesFinal($message);
+            $emails = DB::table('users')->pluck('email');
+            Mail::to($emails)->send($correo);
+        }else{
+            // Aqui recorro todos los email sin necesidad de foreach
+            $correo = new notificacionesProceso($message);
+            $emails = DB::table('users')->pluck('email');
+            Mail::to($emails)->send($correo);
+        }
+        
+
+        return redirect('/soporte')->with('success','INFORMACIÓN ACTUALIZADA');
     }
 
     /**
@@ -129,6 +179,6 @@ class SoporteController extends Controller
     public function destroy($id)
     {
         Soporte::destroy($id);
-        return redirect('/soporte');
+        return redirect('/soporte')->with('danger','ELMINADO CON ÉXITO');
     }
 }

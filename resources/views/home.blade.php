@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>BeêsyAdmin</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    @vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/js/menutoggle.js'])
 </head>
 <body>
     {{-- Header --}}
@@ -37,13 +37,14 @@
     <div class="contenedor">
         <div class="asidebar">
             <div class="usuario">
-                <img src="{{asset('img/avatar-1.jpg')}}" alt="avatar">
+                <img src="{{asset('img/avatar-2.png')}}" alt="avatar">
                 <p>{{ Auth::user()->name }}</p>
             </div>
             <hr>
             <div class="menu">
                 <p>Menú principal</p>
-                <div class="catalogos">
+                <ion-icon class="ico-drop" id="ico-drop" name="menu-outline"></ion-icon>
+                <div class="catalogos activo" id="catalogos">
                     <a href="{{url('/dashboard')}}"><ion-icon name="home-outline"></ion-icon> <span>Dashboard</span></a>
                     <a href="{{url('/usuarios')}}"><ion-icon name="people-outline"></ion-icon> <span>Usuarios</span></a>
                     <a href="{{url('/software')}}"><ion-icon name="aperture-outline"></ion-icon> <span>Software</span></a>

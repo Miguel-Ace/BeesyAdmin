@@ -46,7 +46,7 @@ class SoftwareController extends Controller
 
         $datos = $request->except('_token');
         Software::insert($datos);
-        return redirect('/software');
+        return redirect('/software')->with('success','GUARDADO CON ÉXITO');
     }
 
     /**
@@ -83,7 +83,7 @@ class SoftwareController extends Controller
     {
         $datos = $request->except('_token','_method');
         Software::where('id','=',$id)->update($datos);
-        return redirect('/software');
+        return redirect('/software')->with('success','INFORMACIÓN ACTUALIZADA');
     }
 
     /**
@@ -95,6 +95,6 @@ class SoftwareController extends Controller
     public function destroy($id)
     {
         Software::destroy($id);
-        return redirect('/software');
+        return redirect('/software')->with('danger','ELMINADO CON ÉXITO');
     }
 }

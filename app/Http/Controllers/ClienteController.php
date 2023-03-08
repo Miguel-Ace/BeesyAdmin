@@ -42,6 +42,7 @@ class ClienteController extends Controller
     {
         request()->validate([
             'cedula' => 'required',
+            'pais' => 'required',
             'nombre' => 'required',
             'contacto' => 'required',
             'correo' => 'required|email',
@@ -49,7 +50,7 @@ class ClienteController extends Controller
         ]);
         $datos = $request->except('_token');
         Cliente::insert($datos);
-        return redirect('/clientes');
+        return redirect('/clientes')->with('success','GUARDADO CON ÉXITO');
     }
 
     /**
@@ -86,7 +87,7 @@ class ClienteController extends Controller
     {
         $datos = $request->except('_token','_method');
         Cliente::where('id','=',$id)->update($datos);
-        return redirect('/clientes');
+        return redirect('/clientes')->with('success','INFORMACIÓN ACTUALIZADA');
     }
 
     /**
@@ -98,6 +99,6 @@ class ClienteController extends Controller
     public function destroy($id)
     {
         Cliente::destroy($id);
-        return redirect('/clientes');
+        return redirect('/clientes')->with('danger','ELMINADO CON ÉXITO');
     }
 }

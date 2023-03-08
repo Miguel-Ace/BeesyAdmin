@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Usuario;
+use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+
 
 class UsuarioController extends Controller
 {
@@ -19,7 +21,7 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        $datos = Usuario::all();
+        $datos = User::all();
         $random = Str::random(8);
         return view('usuario.index', compact('datos','random'));
     }
@@ -43,13 +45,20 @@ class UsuarioController extends Controller
     public function store(Request $request)
     {
         request()->validate([
-            'nombre' => 'required',
-            'correo' => 'required|email',
+            'name' => 'required',
+            'email' => 'required|email',
+            'password' => 'required',
         ]);
 
         $datos = $request->except('_token');
-        Usuario::insert($datos);
-        return redirect('/usuarios');
+        // User::insert($datos);
+        User::create([
+            'name' => $datos['name'],
+            'email' => $datos['email'],
+            'password' => Hash::make($datos['password']),
+        ]);
+        return redirect('/usuarios')->with('success','GUARDADO CON ÉXITO');
+
     }
 
     /**
@@ -58,7 +67,7 @@ class UsuarioController extends Controller
      * @param  \App\Models\Usuario  $usuario
      * @return \Illuminate\Http\Response
      */
-    public function show(Usuario $usuario)
+    public function show(User $usuario)
     {
         //
     }
@@ -71,7 +80,7 @@ class UsuarioController extends Controller
      */
     public function edit($id)
     {
-        $datos = Usuario::find($id);
+        $datos = User::find($id);
         $random = Str::random(8);
         return view('usuario.edit', compact('random','datos'));
     }
@@ -85,9 +94,21 @@ class UsuarioController extends Controller
      */
     public function update(Request $request, $id)
     {
+        request()->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
         $datos = $request->except('_token','_method');
-        Usuario::where('id','=',$id)->update($datos);
-        return redirect('/usuarios');
+        // User::where('id','=',$id)->update($datos);
+        $datos = User::find($id);
+
+        $datos->name = $request->input('name');
+        $datos->email = $request->input('email');
+        $datos->password = Hash::make($request->input('password'));
+        $datos->save();
+
+        return redirect('/usuarios')->with('success','INFORMACIÓN ACTUALIZADA');
 
     }
 
@@ -99,7 +120,7 @@ class UsuarioController extends Controller
      */
     public function destroy($id)
     {
-        Usuario::destroy($id);
-        return redirect('/usuarios');
+        User::destroy($id);
+        return redirect('/usuarios')->with('danger','ELMINADO CON ÉXITO');
     }
 }

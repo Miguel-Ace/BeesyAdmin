@@ -16,41 +16,58 @@ Agregar Licencias
         @endforeach
     </ul>
 @endif
+
+@if (session('success'))
+    <div>
+        <p style="background: rgb(64, 129, 64); color: white;text-align: center">{{session('success')}}</p>
+    </div>
+@endif
+
+@if (session('danger'))
+    <div>
+        <p style="background: rgb(243, 61, 37); color: white;text-align: center">{{session('danger')}}</p>
+    </div>
+@endif
+
 <form action="{{url('/licencias')}}" class="" method="post">
     @csrf
     <div class="row">
     <div class="col-md-4">
         <label for="id_cliente" class="form-label">Cliente</label>
-        <select class="form-select" name="id_cliente">
+        <select class="form-select" name="id_cliente" @error("id_cliente") style="border: 1px solid red" @enderror>
+            <option value="" selected disabled>Selecciona un cliente</option>
             @foreach ($clientes as $cliente)
-                <option value="{{$cliente->id}}">{{$cliente->nombre}}</option>
+                <option {{ old('id_cliente') == $cliente->nombre ? 'selected' : '' }} value="{{$cliente->nombre}}">{{$cliente->nombre}}</option>
             @endforeach
         </select>
-      </div>
+    </div>
+
     <div class="col-md-4">
         <label for="id_software" class="form-label">Software</label>
-        <select class="form-select" name="id_software">
+        <select class="form-select" name="id_software" @error("id_software") style="border: 1px solid red" @enderror>
+            <option value="" selected disabled>Selecciona el software</option>
             @foreach ($softwares as $software)
-                <option value="{{$software->id}}">{{$software->software}}</option>
+                <option {{ old('id_software') == $software->software ? 'selected' : '' }} value="{{$software->software}}">{{$software->software}}</option>
             @endforeach
         </select>
-      </div>
+    </div>
+    
     <div class="col-md-4">
         <div class="mb-3">
             <label for="cantidad" class="form-label">Cantidad</label>
-            <input type="number" min="1" class="form-control" id="cantidad" name="cantidad" value="{{old('cantidad')}}">
+            <input type="number" min="1" class="form-control" id="cantidad" name="cantidad" @error("cantidad") style="border: 1px solid red" @enderror value="{{old('cantidad')}}">
           </div>
       </div>
     <div class="col-md-4">
         <div class="mb-3">
             <label for="fechaInicio" class="form-label">Fecha de Inicio</label>
-            <input type="date" class="form-control" id="fechaInicio" name="fechaInicio" value="{{old('fechaInicio')}}">
+            <input type="date" class="form-control" id="fechaInicio" name="fechaInicio" @error("fechaInicio") style="border: 1px solid red" @enderror value="{{old('fechaInicio')}}">
           </div>
       </div>
     <div class="col-md-4">
         <div class="mb-3">
             <label for="fechaFinal" class="form-label">Fecha Final</label>
-            <input type="date" class="form-control" id="fechaFinal" name="fechaFinal" value="{{old('fechaFinal')}}">
+            <input type="date" class="form-control" id="fechaFinal" name="fechaFinal" @error("fechaFinal") style="border: 1px solid red" @enderror value="{{old('fechaFinal')}}">
           </div>
       </div>
     </div>
@@ -83,8 +100,8 @@ Lista de Licencias
             @foreach ($datos as $dato )
                 <tr>
                     <td>{{$dato->id}}</td>
-                    <td>{{$dato->clientes->nombre}}</td>
-                    <td>{{$dato->softwares->software}}</td>
+                    <td>{{$dato->id_cliente}}</td>
+                    <td>{{$dato->id_software}}</td>
                     <td>{{$dato->cantidad}}</td>
                     <td>{{$dato->fechaInicio}}</td>
                     <td>{{$dato->fechaFinal}}</td>

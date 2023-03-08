@@ -97,9 +97,6 @@ Actualizar CLIENTES
       Guardar
     </button>
 
-    <button class="boton regresar">
-        <ion-icon name="arrow-back-outline"></ion-icon>
-        <a href="{{url('/clientes')}}">Regresar</a>
-      </button>
+    <a href="{{url('/clientes')}}" class="boton regresar"><ion-icon name="arrow-back-outline"></ion-icon>Regresar</a>
 </form>
 @endsection

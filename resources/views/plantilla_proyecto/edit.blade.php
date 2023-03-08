@@ -83,9 +83,6 @@ Actualizar Proyecto
       Guardar
     </button>
 
-    <button class="boton regresar">
-        <ion-icon name="arrow-back-outline"></ion-icon>
-        <a href="{{url('/plantilla_proyectos')}}">Regresar</a>
-      </button>
+    <a href="{{url('/plantilla_proyectos')}}" class="boton regresar"><ion-icon name="arrow-back-outline"></ion-icon>Regresar</a>
 </form>
 @endsection

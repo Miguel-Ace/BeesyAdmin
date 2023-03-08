@@ -16,8 +16,6 @@ class notificaciones extends Mailable
     public $msg;
     /**
      * Create a new message instance.
-     *
-     * @return void
      */
     public function __construct($message)
     {
@@ -26,10 +24,8 @@ class notificaciones extends Mailable
 
     /**
      * Get the message envelope.
-     *
-     * @return \Illuminate\Mail\Mailables\Envelope
      */
-    public function envelope()
+    public function envelope(): Envelope
     {
         return new Envelope(
             subject: 'Notificación Soporte',
@@ -38,10 +34,8 @@ class notificaciones extends Mailable
 
     /**
      * Get the message content definition.
-     *
-     * @return \Illuminate\Mail\Mailables\Content
      */
-    public function content()
+    public function content(): Content
     {
         return new Content(
             view: 'mails.notificacion',
@@ -51,9 +45,9 @@ class notificaciones extends Mailable
     /**
      * Get the attachments for the message.
      *
-     * @return array
+     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
      */
-    public function attachments()
+    public function attachments(): array
     {
         return [];
     }

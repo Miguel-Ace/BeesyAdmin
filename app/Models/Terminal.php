@@ -12,7 +12,7 @@ class Terminal extends Model
     public $timestamps = false;
     protected $fillable = ['id','id_licencia','serial','nombreEquipo','ultimoAcceso','estado'];
 
-    function clientes(){
-        return $this->belongsTo(Cliente::class, 'id_licencia');
-    }
+    // function clientes(){
+    //     return $this->belongsTo(Cliente::class, 'id_licencia');
+    // }
 }

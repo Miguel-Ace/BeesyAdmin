@@ -16,14 +16,15 @@ return new class extends Migration
         Schema::create('terminals', function (Blueprint $table) {
             $table->engine='InnoDB';
             $table->id();
-            $table->bigInteger('id_licencia')->unsigned();
+            // $table->bigInteger('id_licencia')->unsigned();
+            $table->string('id_licencia');
             $table->string('serial');
             $table->string('nombreEquipo');
             $table->string('ultimoAcceso');
             $table->string('estado');
             $table->timestamps();
 
-            $table->foreign('id_licencia')->references('id')->on('clientes')->onDelete('cascade');
+            // $table->foreign('id_licencia')->references('id')->on('clientes')->onDelete('cascade');
         });
     }
 

@@ -16,20 +16,26 @@ return new class extends Migration
         Schema::create('soportes', function (Blueprint $table) {
             $table->engine='InnoDB';
             $table->id();
-            $table->string('sticker');
+            $table->string('ticker');
             $table->string('colaborador');
             $table->string('fechaHoraInicio');
-            $table->string('fechaHoraFinal');
-            $table->bigInteger('id_cliente')->unsigned();
-            $table->bigInteger('id_software')->unsigned();
-            $table->string('problema');
-            $table->string('solucion');
+            $table->string('fechaHoraFinal')->nullable();
+            // $table->bigInteger('id_cliente')->unsigned();
+            $table->string('id_cliente');
+            // $table->bigInteger('id_software')->unsigned();
+            $table->string('id_software');
+            $table->string('problema')->nullable();
+            $table->string('solucion')->nullable();
+            $table->string('observaciones')->nullable();
             $table->string('numLaboral');
-            $table->string('observaciones');
+            // $table->string('usuario');
+            $table->string('prioridad');
+            $table->string('estado');
+            $table->string('correo_cliente');
             $table->timestamps();
 
-            $table->foreign('id_cliente')->references('id')->on('clientes')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('id_software')->references('id')->on('software')->onDelete('cascade')->onUpdate('cascade');
+            // $table->foreign('id_cliente')->references('id')->on('clientes')->onDelete('cascade')->onUpdate('cascade');
+            // $table->foreign('id_software')->references('id')->on('software')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

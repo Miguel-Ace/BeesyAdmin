@@ -30,10 +30,11 @@ return new class extends Migration
             $table->bigInteger('id_estado')->unsigned();
             $table->bigInteger('id_etapa')->unsigned();
             $table->string('notas')->nullable();
+            $table->string('select_plantilla')->nullable();
             $table->timestamps();
 
             $table->foreign('id_proyecto')->references('id')->on('proyectos')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('id_usuario')->references('id')->on('usuarios')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('id_usuario')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('id_estado')->references('id')->on('estados')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('id_etapa')->references('id')->on('etapas')->onDelete('cascade')->onUpdate('cascade');
         });

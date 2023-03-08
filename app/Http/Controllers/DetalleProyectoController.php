@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Etapa;
 use App\Models\Estado;
-use App\Models\Usuario;
+// use App\Models\Usuario;
 use App\Models\Proyecto;
 use Illuminate\Http\Request;
 use App\Models\DetalleProyecto;
+use App\Models\User;
 
 class DetalleProyectoController extends Controller
 {
@@ -26,11 +27,12 @@ class DetalleProyectoController extends Controller
         $busqueda = $request->buscar;
         $datos = DetalleProyecto::where('id_proyecto','like','%'.$busqueda.'%')->paginate();
         $proyectos = Proyecto::all();
-        $usuarios = Usuario::all();
+        $usuarios = User::all();
         $estados = Estado::all();
         $etapas = Etapa::all();
+        $datalleproyectos = DetalleProyecto::all();
         $valor = 0;
-        return view('detalle_proyecto.index', compact('datos','busqueda','obtenerId','proyectos','usuarios','estados','etapas','valor'));
+        return view('detalle_proyecto.index', compact('datos','datalleproyectos','busqueda','obtenerId','proyectos','usuarios','estados','etapas','valor'));
     }
 
     /**
@@ -54,6 +56,7 @@ class DetalleProyectoController extends Controller
         request()->validate([
             'id_proyecto' => 'required|unique:detalle_proyectos',
             'num_actividad' => 'required|min:1',
+            'nombre_actividad' => 'required',
             'fecha_inicio' => 'required',
             'fecha_fin' => 'required',
             'horas_propuestas' => 'required|min:1',
@@ -69,7 +72,7 @@ class DetalleProyectoController extends Controller
 
         $datos = $request->except('_token');
         DetalleProyecto::insert($datos);
-        return redirect('/detalle_proyectos?buscar='.$obtenerId);
+        return redirect('/detalle_proyectos?buscar='.$obtenerId)->with('success','GUARDADO CON ÉXITO');
     }
 
     /**
@@ -81,8 +84,9 @@ class DetalleProyectoController extends Controller
     public function show($id, $obtenerId)
     {
         $proyectos = Proyecto::all();
+        $usuarios = User::all();
         $datos = DetalleProyecto::find($id);
-        return view('detalle_proyecto.show', compact('datos','obtenerId','proyectos'));
+        return view('detalle_proyecto.show', compact('datos','obtenerId','proyectos','usuarios'));
     }
 
     /**
@@ -95,7 +99,7 @@ class DetalleProyectoController extends Controller
     {
         $datos = DetalleProyecto::find($id);
         $proyectos = Proyecto::all();
-        $usuarios = Usuario::all();
+        $usuarios = User::all();
         $estados = Estado::all();
         $etapas = Etapa::all();
         $valor = 0;
@@ -125,6 +129,6 @@ class DetalleProyectoController extends Controller
     public function destroy($id)
     {
         DetalleProyecto::destroy($id);
-        return redirect('/detalle_proyectos');
+        return redirect('/detalle_proyectos')->with('danger','ELMINADO CON ÉXITO');
     }
 }

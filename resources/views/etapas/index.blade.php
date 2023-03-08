@@ -16,10 +16,23 @@ Agregar Etapa
         @endforeach
     </ul>
 @endif
-<form action="{{url('/etapas')}}" class="row" method="post">
+
+@if (session('success'))
+    <div>
+        <p style="background: rgb(64, 129, 64); color: white;text-align: center">{{session('success')}}</p>
+    </div>
+@endif
+
+@if (session('danger'))
+    <div>
+        <p style="background: rgb(243, 61, 37); color: white;text-align: center">{{session('danger')}}</p>
+    </div>
+@endif
+
+<form action="{{url('/etapas')}}" class="row btnAbajo" method="post">
     @csrf
-    <div class="col-md-12 row">
-        <div class="mb-3 col-4">
+    <div class="col-md-4 row">
+        <div class="mb-3 col-12">
             <label for="etapa" class="form-label">Etapa</label>
             <input type="text" class="form-control" id="etapa" name="etapa">
           </div>

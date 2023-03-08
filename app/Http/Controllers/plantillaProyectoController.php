@@ -7,6 +7,7 @@ use App\Models\Usuario;
 use App\Models\Proyecto;
 use Illuminate\Http\Request;
 use App\Models\DetalleProyecto;
+use App\Models\User;
 
 class plantillaProyectoController extends Controller
 {
@@ -26,7 +27,7 @@ class plantillaProyectoController extends Controller
         ->orwhere('nombre','like','%'.$busqueda.'%')
         ->paginate();
         $clientes = Cliente::all();
-        $usuarios = Usuario::all();
+        $usuarios = User::all();
         $proyectos = Proyecto::all();
         $detalleProyectos = DetalleProyecto::all();
         $valor = 0;
@@ -65,7 +66,7 @@ class plantillaProyectoController extends Controller
 
         $datos = $request->except('_token');
         Proyecto::insert($datos);
-        return redirect('/plantilla_proyectos');
+        return redirect('/plantilla_proyectos')->with('success','GUARDADO CON ÉXITO');
     }
 
     /**
@@ -89,7 +90,7 @@ class plantillaProyectoController extends Controller
     {
         $datos = Proyecto::find($id);
         $clientes = Cliente::all();
-        $usuarios = Usuario::all();
+        $usuarios = User::all();
         $valor = 0;
         return view('plantilla_proyecto.edit', compact('datos','clientes','usuarios','valor'));
     }
@@ -105,7 +106,7 @@ class plantillaProyectoController extends Controller
     {
         $datos = $request->except('_token','_method');
         Proyecto::where('id','=',$id)->update($datos);
-        return redirect('/plantilla_proyectos');
+        return redirect('/plantilla_proyectos')->with('success','INFORMACIÓN ACTUALIZADA');
     }
 
     /**
@@ -117,6 +118,6 @@ class plantillaProyectoController extends Controller
     public function destroy($id)
     {
         Proyecto::destroy($id);
-        return redirect('/plantilla_proyectos');
+        return redirect('/plantilla_proyectos')->with('danger','ELMINADO CON ÉXITO');
     }
 }

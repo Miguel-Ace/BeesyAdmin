@@ -46,11 +46,17 @@ Ver Detalle del Proyecto
         </div>
 
         <div class="col-3 mb-3">
-            <p><span class="negritaSpan">Meta de hora optima:</span> {{$datos->meta_hrs_optimas}}</p>
+            <p><span class="negritaSpan">Meta de hora optima:</span>{{$datos->meta_hrs_optimas}}</p>
         </div>
 
         <div class="col-3 mb-3">
-            <p><span class="negritaSpan">Usuario:</span> {{$datos->usuarios->nombre}}</p>
+            <p><span class="negritaSpan">Usuario:</span> 
+                @foreach ($usuarios as $usuario)
+                    @if ($usuario->id == $datos->id_usuario)
+                        {{$usuario->name}}
+                    @endif
+                @endforeach
+            </p>
         </div>
 
         <div class="col-3 mb-3">
@@ -77,15 +83,11 @@ Ver Detalle del Proyecto
             <p><span class="negritaSpan">Notas:</span> {{$datos->notas}}</p>
         </div>
 
-        <button class="boton regresar2 text-left mb-3 col-12">
-            <ion-icon name="arrow-back-outline"></ion-icon>
-            <a href="{{url('/detalle_proyectos?buscar='.$obtenerId)}}">Regresar</a>
-          </button>
-
-        <button class="boton regresar2 text-left mb-3 col-12">
-            <ion-icon name="arrow-back-outline"></ion-icon>
-            <a href="{{url('detalle_proyectos/'.$datos->id.'/'.'edit/'.$obtenerId)}}">Editar</a>
-          </button>
+        
+        <a href="{{url('detalle_proyectos/'.$datos->id.'/'.'edit/'.$obtenerId)}}" class="boton regresar2 text-left mb-3" style="width: 7rem"><ion-icon name="arrow-back-outline"></ion-icon>Editar</a>
+        
+        
+        <a href="{{url('/detalle_proyectos?buscar='.$obtenerId)}}" class="boton regresar2 text-left mb-3" style="width: 7rem"><ion-icon name="arrow-back-outline"></ion-icon>Regresar</a>
           
     </div>
 @endsection

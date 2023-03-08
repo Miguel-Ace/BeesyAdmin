@@ -16,14 +16,28 @@ Agregar Terminal
         @endforeach
     </ul>
 @endif
+
+@if (session('success'))
+    <div>
+        <p style="background: rgb(64, 129, 64); color: white;text-align: center">{{session('success')}}</p>
+    </div>
+@endif
+
+@if (session('danger'))
+    <div>
+        <p style="background: rgb(243, 61, 37); color: white;text-align: center">{{session('danger')}}</p>
+    </div>
+@endif
+
 <form action="{{url('/terminales')}}" class="" method="post">
     @csrf
     <div class="row">
         <div class="col-md-4">
             <label for="id_licencia" class="form-label">Licencia</label>
             <select class="form-select" name="id_licencia">
+                <option value="" selected disabled>Seleccione Licencia</option>
                 @foreach ($clientes as $cliente)
-                    <option value="{{$cliente->id}}">{{$cliente->nombre}}</option>
+                    <option {{ old('id_licencia') == $cliente->nombre ? 'selected' : '' }} value="{{$cliente->nombre}}">{{$cliente->nombre}}</option>
                 @endforeach
             </select>
           </div>
@@ -48,8 +62,8 @@ Agregar Terminal
           <div class="col-md-4">
             <label for="ultimoAcceso" class="form-label">Estado</label>
             <select class="form-select" name="estado">
-                <option value="activo">Activo</option>
-                <option value="inactivo">Inactivo</option>
+                <option {{ old('estado') == 'activo' ? 'selected' : '' }} value="activo">Activo</option>
+                <option {{ old('estado') == 'inactivo' ? 'selected' : '' }} value="inactivo">Inactivo</option>
             </select>
           </div>
     </div>

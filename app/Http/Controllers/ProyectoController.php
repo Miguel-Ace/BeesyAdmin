@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Cliente;
 use App\Models\DetalleProyecto;
 use App\Models\Proyecto;
+use App\Models\User;
+use App\Models\UserCliente;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
 
@@ -26,11 +28,12 @@ class ProyectoController extends Controller
         ->orwhere('nombre','like','%'.$busqueda.'%')
         ->paginate();
         $clientes = Cliente::all();
-        $usuarios = Usuario::all();
+        $usuarios = User::all();
         $proyectos = Proyecto::all();
         $detalleProyectos = DetalleProyecto::all();
+        $userdeclientes = UserCliente::all();
         $valor = 0;
-        return view('proyecto.index', compact('proyectos','datos','busqueda','clientes','usuarios','valor','detalleProyectos'));
+        return view('proyecto.index', compact('proyectos','datos','busqueda','clientes','usuarios','valor','detalleProyectos','userdeclientes'));
     }
 
     /**
@@ -54,6 +57,7 @@ class ProyectoController extends Controller
         request()->validate([
             'nombre' => 'required',
             'id_cliente' => 'required|unique:proyectos',
+            'user_de_cliente' => 'required',
             'responsable_cliente' => 'required|string|min:3',
             'email_responsable' => 'required|email',
             'telefono_responsable' => 'required|min:8|max:8',
@@ -65,7 +69,7 @@ class ProyectoController extends Controller
 
         $datos = $request->except('_token');
         Proyecto::insert($datos);
-        return redirect('/proyectos');
+        return redirect('/proyectos')->with('success','GUARDADO CON ÉXITO');
     }
 
     /**
@@ -89,9 +93,10 @@ class ProyectoController extends Controller
     {
         $datos = Proyecto::find($id);
         $clientes = Cliente::all();
-        $usuarios = Usuario::all();
+        $usuarios = User::all();
+        $userdeclientes = UserCliente::all();
         $valor = 0;
-        return view('proyecto.edit', compact('datos','clientes','usuarios','valor'));
+        return view('proyecto.edit', compact('datos','clientes','usuarios','valor','userdeclientes'));
     }
 
     /**
@@ -105,7 +110,7 @@ class ProyectoController extends Controller
     {
         $datos = $request->except('_token','_method');
         Proyecto::where('id','=',$id)->update($datos);
-        return redirect('/proyectos');
+        return redirect('/proyectos')->with('success','INFORMACIÓN ACTUALIZADA');
     }
 
     /**
@@ -117,6 +122,6 @@ class ProyectoController extends Controller
     public function destroy($id)
     {
         Proyecto::destroy($id);
-        return redirect('/proyectos');
+        return redirect('/proyectos')->with('danger','ELMINADO CON ÉXITO');
     }
 }

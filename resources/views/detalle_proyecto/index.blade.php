@@ -29,6 +29,11 @@ Agregar Detalle a Este Proyectos
     </div>
 @endif
 
+@if (session('danger'))
+    <div>
+        <p style="background: rgb(243, 61, 37); color: white;text-align: center">{{session('danger')}}</p>
+    </div>
+@endif
 
 <form action="{{url('/detalle_proyectos'.'/'.$obtenerId)}}" class="" method="post">
     @csrf
@@ -45,64 +50,65 @@ Agregar Detalle a Este Proyectos
           <div class="col-md-3 d-none">
             <div class="mb-3">
                 <label for="id_proyecto" class="form-label">ID Proyecto</label>
-                <input type="text" class="form-control" id="id_proyecto" name="id_proyecto" value="{{$obtenerId}}">
+                <input type="text" class="form-control" id="id_proyecto" name="id_proyecto" @error("id_proyecto") style="border: 1px solid red" @enderror value="{{$obtenerId}}">
               </div>
           </div>
 
           <div class="col-md-3">
             <div class="mb-3">
                 <label for="num_actividad" class="form-label">Num-Actividad</label>
-                <input type="number" class="form-control" min="0" id="num_actividad" name="num_actividad" value="{{old('num_actividad')}}">
+                <input type="number" class="form-control" min="0" id="num_actividad" name="num_actividad" @error("num_actividad") style="border: 1px solid red" @enderror value="{{old('num_actividad')}}">
               </div>
           </div>
 
-          <div class="col-md-3">
-            <div class="mb-3">
-                <label for="nombre_actividad" class="form-label">Nombre Actividad</label>
-                <input type="text" class="form-control" id="nombre_actividad" name="nombre_actividad" value="{{old('nombre_actividad')}}">
-              </div>
-          </div>
-
+            <div class="col-md-3">
+              <div class="mb-3">
+                  <label for="nombre_actividad" class="form-label">Nombre Actividad</label>
+                  <input type="text" class="form-control" id="nombre_actividad" name="nombre_actividad" @error("nombre_actividad") style="border: 1px solid red" @enderror value="{{old('nombre_actividad')}}">
+                </div>
+            </div>
+            
           <div class="col-md-3">
             <div class="mb-3">
                 <label for="fecha_inicio" class="form-label">Fecha Inicio</label>
-                <input type="datetime-local" class="form-control" id="fecha_inicio" name="fecha_inicio" value="{{old('fecha_inicio')}}">
+                <input type="datetime-local" class="form-control" id="fecha_inicio" name="fecha_inicio" @error("fecha_inicio") style="border: 1px solid red" @enderror value="{{old('fecha_inicio')}}">
               </div>
           </div>
 
         <div class="col-md-3">
             <div class="mb-3">
                 <label for="fecha_fin" class="form-label">Fecha Final</label>
-                <input type="datetime-local" class="form-control" id="fecha_fin" name="fecha_fin" value="{{old('fecha_fin')}}">
+                <input type="datetime-local" class="form-control" id="fecha_fin" name="fecha_fin" @error("fecha_fin") style="border: 1px solid red" @enderror value="{{old('fecha_fin')}}">
             </div>
         </div>
 
           <div class="col-md-3">
             <div class="mb-3">
                 <label for="horas_propuestas" class="form-label">Horas Propuestas</label>
-                <input type="number" class="form-control" min="0" id="horas_propuestas" name="horas_propuestas" value="{{old('horas_propuestas')}}">
+                <input type="number" class="form-control" min="0" id="horas_propuestas" name="horas_propuestas" @error("horas_propuestas") style="border: 1px solid red" @enderror value="{{old('horas_propuestas')}}">
               </div>
           </div>
 
           <div class="col-md-3">
             <div class="mb-3">
                 <label for="horas_reales" class="form-label">Horas Reales</label>
-                <input type="number" class="form-control" min="0" id="horas_reales" name="horas_reales" value="{{old('horas_reales')}}">
+                <input type="number" class="form-control" min="0" id="horas_reales" name="horas_reales" @error("horas_reales") style="border: 1px solid red" @enderror value="{{old('horas_reales')}}">
               </div>
           </div>
 
           <div class="col-md-3">
             <div class="mb-3">
                 <label for="meta_hrs_optimas" class="form-label">Meta horas optimas</label>
-                <input type="number" class="form-control" min="0" id="meta_hrs_optimas" name="meta_hrs_optimas" value="{{old('meta_hrs_optimas')}}">
+                <input type="number" class="form-control" min="0" id="meta_hrs_optimas" name="meta_hrs_optimas" @error("meta_hrs_optimas") style="border: 1px solid red" @enderror value="{{old('meta_hrs_optimas')}}">
               </div>
           </div>
 
           <div class="col-md-3">
             <label for="id_usuario" class="form-label">Usuario</label>
-              <select class="form-select" name="id_usuario">
+              <select class="form-select" name="id_usuario" id="id_usuario" @error("id_usuario") style="border: 1px solid red" @enderror>
+                <option value="">Selecciona Usuario</option>
                 @foreach ($usuarios as $usuario)
-                    <option value="{{$usuario->id}}">{{$usuario->nombre}}</option>
+                    <option value="{{$usuario->id}}">{{$usuario->name}}</option>
                 @endforeach
               </select>
           </div>
@@ -110,27 +116,28 @@ Agregar Detalle a Este Proyectos
           <div class="col-md-3">
             <div class="mb-3">
                 <label for="ejecutor_cliente" class="form-label">Ejecutor Cliente</label>
-                <input type="text" class="form-control" id="ejecutor_cliente" name="ejecutor_cliente" value="{{old('ejecutor_cliente')}}">
+                <input type="text" class="form-control" id="ejecutor_cliente" name="ejecutor_cliente" @error("ejecutor_cliente") style="border: 1px solid red" @enderror value="{{old('ejecutor_cliente')}}">
               </div>
           </div>
 
           <div class="col-md-3">
             <div class="mb-3">
                 <label for="tipo" class="form-label">Tipo</label>
-                <input type="text" class="form-control" id="tipo" name="tipo" value="{{old('tipo')}}">
+                <input type="text" class="form-control" id="tipo" name="tipo" @error("tipo") style="border: 1px solid red" @enderror value="{{old('tipo')}}">
               </div>
           </div>
 
           <div class="col-md-3 d-none">
             <div class="mb-3">
                 <label for="rendimiento" class="form-label">Rendimiento</label>
-                <input type="text" class="form-control" id="rendimiento" name="rendimiento" value="">
+                <input type="text" class="form-control" id="rendimiento" name="rendimiento" @error("rendimiento") style="border: 1px solid red" @enderror value="">
               </div>
           </div>
 
           <div class="col-md-3">
             <label for="id_usuario" class="form-label">Estado</label>
-              <select class="form-select" name="id_estado">
+              <select class="form-select" name="id_estado" id="id_estado" @error("id_estado") style="border: 1px solid red" @enderror>
+                <option value="">Selecciona Estado</option>
                 @foreach ($estados as $estado)
                     <option value="{{$estado->id}}">{{$estado->estado}}</option>
                 @endforeach
@@ -139,14 +146,28 @@ Agregar Detalle a Este Proyectos
 
           <div class="col-md-3 mb-3">
             <label for="id_usuario" class="form-label">Etapa</label>
-              <select class="form-select" name="id_etapa">
+              <select class="form-select" name="id_etapa" id="id_etapa" @error("id_etapa") style="border: 1px solid red" @enderror>
+                <option value="">Selecciona Etapa</option>
                 @foreach ($etapas as $etapa)
                     <option value="{{$etapa->id}}">{{$etapa->etapa}}</option>
                 @endforeach
               </select>
           </div>
 
-          <div class="col-md-12">
+          {{-- SELECT PLANTILLA --}}
+          <div class="col-md-3 mb-3">
+            <label for="select_plantilla" class="form-label">Selecciona una Plantilla</label>
+              <select class="form-select" id="select_plantilla" @error("select_plantilla") style="border: 1px solid red" @enderror>
+                <option value="">Selecciona Plantilla</option>
+                @foreach ($datalleproyectos as $datalleproyecto)
+                    <option value="{{$num = $datalleproyecto->id}}">{{$datalleproyecto->select_plantilla}}</option>
+                @endforeach
+              </select>
+          </div>
+
+          <input type="text" id="contenedorid" class="d-none">
+
+          <div class="col-md-9">
             <div class="mb-3">
                 <label for="notas" class="form-label">Notas</label>
                 <input type="text" class="form-control" id="notas" name="notas" value="{{old('notas')}}">
@@ -157,7 +178,7 @@ Agregar Detalle a Este Proyectos
             Guardar
           </button>
 
-          <a href="{{url('/proyectos')}}" class="enviar text-left col-12">
+          <a href="{{url('/proyectos')}}" class="regresar text-left col-12">
               <ion-icon name="arrow-back-outline"></ion-icon>
               Proyectos
           </a>
@@ -171,6 +192,7 @@ Agregar Detalle a Este Proyectos
     </div>
 
 </form>
+
 @endsection
 
 @section('tituloTabla')
@@ -240,4 +262,78 @@ Agregar Detalle a Este Proyectos
     </table>
 </div>
 
+<script>
+  
+  const contenedorid = document.getElementById('contenedorid');
+
+  const numActividad = document.getElementById('num_actividad');
+  const nombreActividad = document.getElementById('nombre_actividad');
+  const fechaInicio = document.getElementById('fecha_inicio');
+  const fechaFin = document.getElementById('fecha_fin');
+  const horasPropuestas = document.getElementById('horas_propuestas');
+  const horasReales = document.getElementById('horas_reales');
+  const metaHrsOptimas = document.getElementById('meta_hrs_optimas');
+  const idUsuario = document.getElementById('id_usuario');
+  const ejecutorCliente = document.getElementById('ejecutor_cliente');
+  const tipos = document.getElementById('tipo');
+  const rendimientos = document.getElementById('rendimiento');
+  const idEstado = document.getElementById('id_estado');
+  const idEtapa = document.getElementById('id_etapa');
+  const notas = document.getElementById('notas');
+
+  // const btnCargarEnviar = document.getElementById('cargarEnviar');
+
+  select.onclick = (e) => {
+      let valor = e.target.value;
+      valorContenedor = contenedorid.value = valor;
+      
+      let datalleproyectos = JSON.parse('{!! json_encode($datalleproyectos) !!}');
+      
+      datalleproyectos.forEach(element => {
+          let idPlantilla = element.id;
+          let numactividad = element.num_actividad;
+          let nombreactividad = element.nombre_actividad;
+          let fechainicio = element.fecha_inicio;
+          let fechafin = element.fecha_fin;
+          let horaspropuesta = element.horas_propuestas;
+          let horasreales = element.horas_reales;
+          let metahrsoptimas = element.meta_hrs_optimas;
+          let idusuario = element.id_usuario;
+          let ejecutorcliente = element.ejecutor_cliente;
+          let tiposs = element.tipo;
+          let rendimiento = element.rendimiento;
+          let idestado = element.id_estado;
+          let idetapa = element.id_etapa;
+          let nota = element.notas;
+          let nombreplantilla = element.select_plantilla;
+          
+          // console.log(tiposs);
+          // console.log(numactividad);
+          // console.log(nombreplantilla);
+          
+          if (idPlantilla == valorContenedor) {
+            // console.log(idusuario);
+
+            numActividad.value = numactividad
+            nombreActividad.value = nombreactividad
+            fechaInicio.value = fechainicio
+            fechaFin.value = fechafin
+            horasPropuestas.value = horaspropuesta
+            horasReales.value = horasreales
+            metaHrsOptimas.value = metahrsoptimas
+            ejecutorCliente.value = ejecutorcliente
+            tipos.value = tiposs
+            rendimientos.value = rendimiento
+            notas.value = nota
+            idUsuario.value = idusuario
+            idEstado.value = idestado
+            idEtapa.value = idetapa
+            notas.value = nota
+            }
+    
+        });
+      }
+
+
+</script>
 @endsection

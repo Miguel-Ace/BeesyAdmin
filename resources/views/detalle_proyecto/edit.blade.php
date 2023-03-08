@@ -93,10 +93,10 @@ Actualizar Detalle del Proyecto
             <label for="id_usuario" class="form-label">Usuario</label>
               <select class="form-select" name="id_usuario">
                 @foreach ($usuarios as $usuario)
-                    @if ($usuario->id === $datos->usuarios->id)
-                        <option value="{{$usuario->id}}" selected>{{$usuario->nombre}}</option>
+                    @if ($usuario->id === $datos->id_usuario)
+                        <option value="{{$usuario->id}}" selected>{{$usuario->name}}</option>
                     @else
-                        <option value="{{$usuario->id}}">{{$usuario->nombre}}</option>
+                        <option value="{{$usuario->id}}">{{$usuario->name}}</option>
                     @endif
                 @endforeach
               </select>
@@ -162,10 +162,7 @@ Actualizar Detalle del Proyecto
       Guardar
     </button>
 
-    <button class="boton regresar">
-        <ion-icon name="arrow-back-outline"></ion-icon>
-        <a href="{{url('/detalle_proyectos'.'/'.$datos->id.'/'.$obtenerId)}}">Regresar</a>
-      </button>
+    <a href="{{url('/detalle_proyectos'.'/'.$datos->id.'/'.$obtenerId)}}" class="boton regresar"><ion-icon name="arrow-back-outline"></ion-icon>Regresar</a>
 
 </form>
 @endsection

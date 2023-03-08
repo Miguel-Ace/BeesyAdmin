@@ -54,7 +54,7 @@ class LicenciaController extends Controller
 
         $datos = $request->except('_token');
         Licencia::insert($datos);
-        return redirect('/licencias');
+        return redirect('/licencias')->with('success','GUARDADO CON ÉXITO');
     }
 
     /**
@@ -93,7 +93,7 @@ class LicenciaController extends Controller
     {
         $datos = $request->except('_token','_method');
         Licencia::where('id','=',$id)->update($datos);
-        return redirect('/licencias');
+        return redirect('/licencias')->with('success','INFORMACIÓN ACTUALIZADA');
     }
 
     /**
@@ -105,6 +105,6 @@ class LicenciaController extends Controller
     public function destroy($id)
     {
         Licencia::destroy($id);
-        return redirect('/licencias');
+        return redirect('/licencias')->with('danger','ELMINADO CON ÉXITO');
     }
 }

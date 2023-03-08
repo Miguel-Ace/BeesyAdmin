@@ -50,7 +50,13 @@ Ver Detalle del Proyecto
         </div>
 
         <div class="col-3 mb-3">
-            <p><span class="negritaSpan">Usuario:</span> {{$datos->usuarios->nombre}}</p>
+            <p><span class="negritaSpan">Usuario:</span>
+                @foreach ($usuarios as $usuario)
+                    @if ($usuario->id == $datos->id_usuario)
+                        {{$usuario->name}}
+                    @endif
+                @endforeach
+            </p>
         </div>
 
         <div class="col-3 mb-3">

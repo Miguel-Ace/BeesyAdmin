@@ -17,6 +17,18 @@ Agregar Plantilla Proyecto
     </ul>
 @endif
 
+@if (session('success'))
+    <div>
+        <p style="background: rgb(64, 129, 64); color: white;text-align: center">{{session('success')}}</p>
+    </div>
+@endif
+
+@if (session('danger'))
+    <div>
+        <p style="background: rgb(243, 61, 37); color: white;text-align: center">{{session('danger')}}</p>
+    </div>
+@endif
+
 <form action="{{url('/plantilla_proyectos')}}" class="" method="post">
     @csrf
 
@@ -24,7 +36,7 @@ Agregar Plantilla Proyecto
         <div class="col-md-3">
             <div class="mb-3">
                 <label for="nombre" class="form-label">Nombre</label>
-                <input type="text" class="form-control" id="nombre" name="nombre" value="{{old('nombre')}}">
+                <input type="text" class="form-control" id="nombre" name="nombre" @error("nombre") style="border: 1px solid red" @enderror value="{{old('nombre')}}">
               </div>
           </div>
 
@@ -51,21 +63,21 @@ Agregar Plantilla Proyecto
           <div class="col-md-3">
             <div class="mb-3">
                 <label for="responsable_cliente" class="form-label">Responsable del Cliente</label>
-                <input type="text" class="form-control" id="responsable_cliente" name="responsable_cliente" value="{{old('responsable_cliente')}}">
+                <input type="text" class="form-control" id="responsable_cliente" name="responsable_cliente" @error("responsable_cliente") style="border: 1px solid red" @enderror value="{{old('responsable_cliente')}}">
               </div>
           </div>
 
           <div class="col-md-3">
             <div class="mb-3">
                 <label for="email_responsable" class="form-label">Email del Responsable</label>
-                <input type="email" class="form-control" id="email_responsable" name="email_responsable" value="{{old('email_responsable')}}">
+                <input type="email" class="form-control" id="email_responsable" name="email_responsable" @error("email_responsable") style="border: 1px solid red" @enderror value="{{old('email_responsable')}}">
               </div>
           </div>
 
           <div class="col-md-3">
             <div class="mb-3">
                 <label for="telefono_responsable" class="form-label">Teléfono del Responsable</label>
-                <input type="number" class="form-control" id="telefono_responsable" name="telefono_responsable" value="{{old('telefono_responsable')}}">
+                <input type="number" class="form-control" id="telefono_responsable" name="telefono_responsable" @error("select_plantilla") style="border: 1px solid red" @enderror value="{{old('telefono_responsable')}}">
               </div>
           </div>
 
@@ -82,14 +94,14 @@ Agregar Plantilla Proyecto
         <div class="col-md-3">
             <div class="mb-3">
                 <label for="fecha_inicio" class="form-label">Fecha Inicio</label>
-                <input type="datetime-local" class="form-control" id="fecha_inicio" name="fecha_inicio" value="{{old('fecha_inicio')}}">
+                <input type="datetime-local" class="form-control" id="fecha_inicio" name="fecha_inicio" @error("fecha_inicio") style="border: 1px solid red" @enderror value="{{old('fecha_inicio')}}">
               </div>
           </div>
 
         <div class="col-md-3">
             <div class="mb-3">
                 <label for="fecha_fin" class="form-label">Fecha Final</label>
-                <input type="datetime-local" class="form-control" id="fecha_fin" name="fecha_fin" value="{{old('fecha_fin')}}">
+                <input type="datetime-local" class="form-control" id="fecha_fin" name="fecha_fin" @error("fecha_fin") style="border: 1px solid red" @enderror value="{{old('fecha_fin')}}">
             </div>
         </div>
 
@@ -149,7 +161,7 @@ Plantillas Creadas
                             @endif
                         <td>{{$dato->fecha_inicio}}</td>
                         <td>{{$dato->fecha_fin}}</td>
-                        <td class="d-flex">
+                        <td class="d-flex justify-content-around">
                             <a href="{{url('/plantilla_detalle_proyectos?buscar='.$dato->id)}}" class="show"><ion-icon name="add-circle-outline"></ion-icon></a>
                             |
                             <a href="{{url('plantilla_proyectos/'.$dato->id.'/edit')}}" class="edit"><ion-icon name="pencil-outline"></ion-icon></a>

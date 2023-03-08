@@ -51,7 +51,7 @@ class TerminalController extends Controller
 
         $datos = $request->except('_token');
         Terminal::insert($datos);
-        return redirect('/terminales');
+        return redirect('/terminales')->with('success','GUARDADO CON ÉXITO');
     }
 
     /**
@@ -89,7 +89,7 @@ class TerminalController extends Controller
     {
         $datos = $request->except('_token','_method');
         Terminal::where('id','=',$id)->update($datos);
-        return redirect('/terminales');
+        return redirect('/terminales')->with('success','INFORMACIÓN ACTUALIZADA');
     }
 
     /**
@@ -101,6 +101,6 @@ class TerminalController extends Controller
     public function destroy($id)
     {
         Terminal::destroy($id);
-        return redirect('/terminales');
+        return redirect('/terminales')->with('danger','ELMINADO CON ÉXITO');
     }
 }

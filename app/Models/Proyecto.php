@@ -9,11 +9,11 @@ class Proyecto extends Model
 {
     use HasFactory;
 
-    function clientes(){
-        return $this->belongsTo(Cliente::class, 'id_cliente');
-    }
+    // function clientes(){
+    //     return $this->belongsTo(Cliente::class, 'id_cliente');
+    // }
 
-    function usuarios(){
-        return $this->belongsTo(Usuario::class, 'id_usuario');
-    }
+    // function usuarios(){
+    //     return $this->belongsTo(User::class, 'id_usuario');
+    // }
 }

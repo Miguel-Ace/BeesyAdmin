@@ -9,11 +9,11 @@ Actualizar Estado
 @endsection
 
 @section('creacion')
-<form action="{{url('estados/'.$datos->id)}}" class="row" method="post">
+<form action="{{url('estados/'.$datos->id)}}" class="row btnAbajo" method="post">
     @csrf
     {{method_field('PATCH')}}
-    <div class="col-md-12 row">
-        <div class="mb-3 col-4">
+    <div class="col-md-4 row">
+        <div class="mb-3 col-12">
             <label for="estado" class="form-label">Estado</label>
             <input type="text" class="form-control" id="estado" name="estado" value="{{$datos->estado}}">
           </div>
@@ -24,9 +24,6 @@ Actualizar Estado
       Guardar
     </button>
 
-    <button class="boton regresar">
-        <ion-icon name="arrow-back-outline"></ion-icon>
-        <a href="{{url('/software')}}">Regresar</a>
-      </button>
+    <a href="{{url('/software')}}" class="boton regresar"><ion-icon name="arrow-back-outline"></ion-icon>Regresar</a>
 </form>
 @endsection

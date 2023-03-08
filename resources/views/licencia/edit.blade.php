@@ -17,10 +17,10 @@ Actualizar Licencias
             <label for="id_cliente" class="form-label">Cliente</label>
             <select class="form-select" name="id_cliente">
                 @foreach ($clientes as $cliente)
-                    @if ($cliente->id === $datos->clientes->id)
-                        <option value="{{$cliente->id}}" selected>{{$cliente->nombre}}</option>
+                    @if ($cliente->nombre === $datos->id_cliente)
+                        <option value="{{$cliente->nombre}}" selected>{{$cliente->nombre}}</option>
                     @else
-                        <option value="{{$cliente->id}}">{{$cliente->nombre}}</option>
+                        <option value="{{$cliente->nombre}}">{{$cliente->nombre}}</option>
                     @endif
                 @endforeach
             </select>
@@ -29,10 +29,10 @@ Actualizar Licencias
             <label for="id_software" class="form-label">Software</label>
             <select class="form-select" name="id_software">
                 @foreach ($softwares as $software)
-                    @if ($software->id === $datos->softwares->id)
-                        <option value="{{$software->id}}" selected>{{$software->software}}</option>
+                    @if ($software->software === $datos->id_software)
+                        <option value="{{$software->software}}" selected>{{$software->software}}</option>
                     @else
-                        <option value="{{$software->id}}">{{$software->software}}</option>
+                        <option value="{{$software->software}}">{{$software->software}}</option>
                     @endif
 
                 @endforeach
@@ -63,9 +63,6 @@ Actualizar Licencias
       Guardar
     </button>
 
-    <button class="boton regresar">
-        <ion-icon name="arrow-back-outline"></ion-icon>
-        <a href="{{url('/licencias')}}">Regresar</a>
-      </button>
+    <a href="{{url('/licencias')}}" class="boton regresar"><ion-icon name="arrow-back-outline"></ion-icon>Regresar</a>
 </form>
 @endsection

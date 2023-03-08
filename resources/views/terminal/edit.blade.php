@@ -61,9 +61,6 @@ Actualizar Terminal
       Guardar
     </button>
 
-    <button class="boton regresar">
-        <ion-icon name="arrow-back-outline"></ion-icon>
-        <a href="{{url('/terminales')}}">Regresar</a>
-      </button>
+    <a href="{{url('/terminales')}}" class="boton regresar"><ion-icon name="arrow-back-outline"></ion-icon>Regresar</a>
 </form>
 @endsection

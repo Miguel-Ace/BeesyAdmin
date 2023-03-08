@@ -10,5 +10,6 @@ class Cliente extends Model
     use HasFactory;
 
     public $timestamps = false;
+    // protected $table = 'clientes';
     protected $fillable = ['id','cedula','nombre','contacto','correo','telefono','pais'];
 }

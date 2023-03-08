@@ -9,25 +9,35 @@ Actualizar Usuario
 @endsection
 
 @section('creacion')
+@if ($errors->any())
+    <ul class="bg-white text-danger p-2">
+        @foreach ($errors->all() as $error)
+        <li>{{$error}}</li>
+        @endforeach
+    </ul>
+@endif
+
 <form action="{{url('usuarios/'.$datos->id)}}" class="row" method="post">
     @csrf
     {{method_field('PATCH')}}
     <div class="col-md-4">
         <div class="mb-3">
-            <label for="nombre" class="form-label">Nombre</label>
-            <input type="text" class="form-control" id="nombre" name="nombre" value="{{$datos->nombre}}">
+            <label for="name" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="name" name="name" @error("name") style="border: 1px solid red" @enderror value="{{$datos->name}}">
           </div>
       </div>
+
     <div class="col-md-4">
         <div class="mb-3">
-            <label for="correo" class="form-label">Email</label>
-            <input type="email" class="form-control" id="correo" name="correo" value="{{$datos->correo}}">
+            <label for="email" class="form-label">Correo</label>
+            <input type="email" class="form-control" id="email" name="email" @error("email") style="border: 1px solid red" @enderror value="{{$datos->email}}">
           </div>
       </div>
+
     <div class="col-md-4">
         <div class="mb-3">
-            <label for="contrasena" class="form-label">Contraseña</label>
-            <input type="text" class="form-control" id="contrasena" name="contrasena" value="{{$datos->contrasena}}">
+            <label for="password" class="form-label">Contraseña</label>
+            <input type="text" class="form-control" id="password" name="password" @error("password") style="border: 1px solid red" @enderror value="">
           </div>
       </div>
 
@@ -36,9 +46,6 @@ Actualizar Usuario
       Guardar
     </button>
 
-    <button class="boton regresar">
-      <ion-icon name="arrow-back-outline"></ion-icon>
-      <a href="{{url('/usuarios')}}">Regresar</a>
-    </button>
+    <a href="{{url('/usuarios')}}" class="boton regresar"><ion-icon name="arrow-back-outline"></ion-icon>Regresar</a>
 </form>
 @endsection

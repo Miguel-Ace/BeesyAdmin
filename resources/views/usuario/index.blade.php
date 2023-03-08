@@ -4,8 +4,9 @@
 Usuarios
 @endsection
 
+{{-- @role('admin') --}}
 @section('tituloForm')
-Agregar Usuario
+Registra Usuario
 @endsection
 
 @section('creacion')
@@ -16,24 +17,37 @@ Agregar Usuario
         @endforeach
     </ul>
 @endif
+
+@if (session('success'))
+    <div>
+        <p style="background: rgb(64, 129, 64); color: white;text-align: center">{{session('success')}}</p>
+    </div>
+@endif
+
+@if (session('danger'))
+    <div>
+        <p style="background: rgb(243, 61, 37); color: white;text-align: center">{{session('danger')}}</p>
+    </div>
+@endif
+
 <form action="{{url('/usuarios')}}" class="row" method="post">
     @csrf
     <div class="col-md-4">
         <div class="mb-3">
-            <label for="nombre" class="form-label">Nombre</label>
-            <input type="text" class="form-control" id="nombre" name="nombre" value="{{old('nombre')}}">
+            <label for="name" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="name" name="name" @error("name") style="border: 1px solid red" @enderror value="{{old('name')}}">
           </div>
       </div>
     <div class="col-md-4">
         <div class="mb-3">
-            <label for="correo" class="form-label">Correo</label>
-            <input type="email" class="form-control" id="correo" name="correo" value="{{old('correo')}}">
+            <label for="email" class="form-label">Correo</label>
+            <input type="email" class="form-control" id="email" name="email" @error("email") style="border: 1px solid red" @enderror value="{{old('email')}}">
           </div>
       </div>
     <div class="col-md-4">
         <div class="mb-3">
-            <label for="contrasena" class="form-label">Contraseña</label>
-            <input type="text" class="form-control" id="contrasena" name="contrasena" value="{{ $random }}">
+            <label for="password" class="form-label">Contraseña</label>
+            <input type="text" class="form-control" id="password" name="password" @error("password") style="border: 1px solid red" @enderror value="{{ $random }}">
           </div>
       </div>
 
@@ -54,9 +68,9 @@ Lista de usuarios
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Nombre</th>
+                <th scope="col">name</th>
                 <th scope="col">Email</th>
-                <th scope="col">Contraseña</th>
+                {{-- <th scope="col">Contraseña</th> --}}
                 <th scope="col">Acciones</th>
             </tr>
         </thead>
@@ -64,9 +78,9 @@ Lista de usuarios
             @foreach ($datos as $dato )
                 <tr>
                     <td>{{$dato->id}}</td>
-                    <td>{{$dato->nombre}}</td>
-                    <td>{{$dato->correo}}</td>
-                    <td>{{$dato->contrasena}}</td>
+                    <td>{{$dato->name}}</td>
+                    <td>{{$dato->email}}</td>
+                    {{-- <td>{{$dato->password}}</td> --}}
                     <td>
                         <a href="{{url('usuarios/'.$dato->id.'/edit')}}" class="edit"><ion-icon name="pencil-outline"></ion-icon></a>
                         |
@@ -83,3 +97,4 @@ Lista de usuarios
 </div>
 
 @endsection
+{{-- @endrole --}}
