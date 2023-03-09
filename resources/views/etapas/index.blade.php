@@ -29,6 +29,7 @@ Agregar Etapa
     </div>
 @endif
 
+@role('admin')
 <form action="{{url('/etapas')}}" class="row btnAbajo" method="post">
     @csrf
     <div class="col-md-4 row">
@@ -42,6 +43,22 @@ Agregar Etapa
       Guardar
     </button>
 </form>
+@endrole
+@role('escritor')
+<form action="{{url('/etapas')}}" class="row btnAbajo" method="post">
+    @csrf
+    <div class="col-md-4 row">
+        <div class="mb-3 col-12">
+            <label for="etapa" class="form-label">Etapa</label>
+            <input type="text" class="form-control" id="etapa" name="etapa">
+          </div>
+      </div>
+    <button type="submit" class="enviar">
+      <ion-icon name="save-outline"></ion-icon>
+      Guardar
+    </button>
+</form>
+@endrole
 @endsection
 
 @section('tituloTabla')
@@ -52,10 +69,15 @@ Lista de Etapas
 <div class="col-md-12 fs-6">
     <table class="table table-bordered table-hover">
         <thead>
-            <tr>
+            <tr class="text-center">
                 <th scope="col">#</th>
                 <th scope="col">Etapa</th>
+                @role('admin')
                 <th scope="col">Acciones</th>
+                @endrole
+                @role('editor')
+                <th scope="col">Acciones</th>
+                @endrole
             </tr>
         </thead>
         <tbody class="text-center">
@@ -63,6 +85,7 @@ Lista de Etapas
                 <tr>
                     <td>{{$dato->id}}</td>
                     <td>{{$dato->etapa}}</td>
+                    @role('admin')
                     <td>
                         <a href="{{url('etapas/'.$dato->id.'/edit')}}" class="edit"><ion-icon name="pencil-outline"></ion-icon></a>
                         |
@@ -72,6 +95,18 @@ Lista de Etapas
                             <button type="submit"><ion-icon name="beaker-outline"></ion-icon></button>
                         </form>
                     </td>
+                    @endrole
+                    @role('editor')
+                    <td>
+                        <a href="{{url('etapas/'.$dato->id.'/edit')}}" class="edit"><ion-icon name="pencil-outline"></ion-icon></a>
+                        |
+                        <form action="{{url('etapas/'.$dato->id)}}" method="POST" class="delete">
+                            @csrf
+                            {{method_field('DELETE')}}
+                            <button type="submit"><ion-icon name="beaker-outline"></ion-icon></button>
+                        </form>
+                    </td>
+                    @endrole
                 </tr>
             @endforeach
         </tbody>

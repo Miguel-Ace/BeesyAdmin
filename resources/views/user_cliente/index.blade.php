@@ -40,6 +40,7 @@ Registra Usuario Del CLiente:
     </div>
 @endif
 
+@role('admin')
 <form action="{{url('/user_cliente'.'/'.$obtenerId)}}" class="row" method="post">
     @csrf
     <div class="col-md-6">
@@ -68,6 +69,37 @@ Registra Usuario Del CLiente:
 
     <a href="{{ url('/clientes') }}" class="regresar"><ion-icon name="arrow-back-outline"></ion-icon>Regresar</a>
 </form>
+@endrole
+@role('escritor')
+<form action="{{url('/user_cliente'.'/'.$obtenerId)}}" class="row" method="post">
+    @csrf
+    <div class="col-md-6">
+        <div class="mb-3">
+            <label for="name" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="name" name="name" @error("name") style="border: 1px solid red" @enderror value="{{old('name')}}">
+          </div>
+      </div>
+    <div class="col-md-6">
+        <div class="mb-3">
+            <label for="email" class="form-label">Correo</label>
+            <input type="email" class="form-control" id="email" name="email" @error("email") style="border: 1px solid red" @enderror value="{{old('email')}}">
+          </div>
+      </div>
+    <div class="col-md-4 d-none">
+        <div class="mb-3">
+            <label for="cliente" class="form-label">Cliente</label>
+            <input type="number" class="form-control" id="cliente" name="cliente" @error("cliente") style="border: 1px solid red" @enderror value="{{ $obtenerId }}">
+          </div>
+      </div>
+
+    <button type="submit" class="enviar">
+      <ion-icon name="save-outline"></ion-icon>
+      Guardar
+    </button>
+
+    <a href="{{ url('/clientes') }}" class="regresar"><ion-icon name="arrow-back-outline"></ion-icon>Regresar</a>
+</form>
+@endrole
 @endsection
 
 @section('tituloTabla')
@@ -83,7 +115,12 @@ Lista de usuarios
                 <th scope="col">Nombre</th>
                 <th scope="col">Correo</th>
                 <th scope="col">Cliente</th>
+                @role('admin')
                 <th scope="col">Acciones</th>
+                @endrole
+                @role('editor')
+                <th scope="col">Acciones</th>
+                @endrole
             </tr>
         </thead>
         <tbody class="text-center">
@@ -100,6 +137,7 @@ Lista de usuarios
                         <td>{{$dato->name}}</td>
                         <td>{{$dato->email}}</td>
                         <td>{{$valornombre}}</td>
+                        @role('admin')
                         <td>
                             <a href="{{url('user_cliente/'.$dato->id.'/edit'.'/'.$obtenerId)}}" class="edit"><ion-icon name="pencil-outline"></ion-icon></a>
                             |
@@ -109,6 +147,18 @@ Lista de usuarios
                                 <button type="submit"><ion-icon name="beaker-outline"></ion-icon></button>
                             </form>
                         </td>
+                        @endrole
+                        @role('editor')
+                        <td>
+                            <a href="{{url('user_cliente/'.$dato->id.'/edit'.'/'.$obtenerId)}}" class="edit"><ion-icon name="pencil-outline"></ion-icon></a>
+                            |
+                            <form action="{{url('user_cliente/'.$dato->id)}}" method="POST" class="delete">
+                                @csrf
+                                {{method_field('DELETE')}}
+                                <button type="submit"><ion-icon name="beaker-outline"></ion-icon></button>
+                            </form>
+                        </td>
+                        @endrole
                     </tr>
                 @endif
             @endforeach

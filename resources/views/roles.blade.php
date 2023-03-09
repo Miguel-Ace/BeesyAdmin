@@ -5,7 +5,7 @@ Roles
 @endsection
 
 @section('tituloForm')
-Agregar Rol
+{{-- Agregar Rol --}}
 @endsection
 
 @section('creacion')
@@ -22,7 +22,7 @@ Agregar Rol
     </div>
 @endif
 
-    <form action="{{ url('/assign') }}" class="row" method="post">
+    <form action="{{ url('/assign') }}" class="row d-none" method="post">
         @csrf
         <div class="col-md-4">
             <label for="user_id" class="form-label">Usuario</label>
@@ -49,7 +49,9 @@ Agregar Rol
         <button type="submit" class="enviar">
             <ion-icon name="save-outline"></ion-icon>
             Guardar
-          </button>
+        </button>
+
+        <a href="{{url('/usuarios')}}" class="boton regresar"><ion-icon name="arrow-back-outline"></ion-icon>Regresar</a>
     </form>
 @endsection
 
@@ -60,7 +62,7 @@ Lista de Roles Asignados
 @section('tablas')
     <table class="table table-bordered table-hover">
         <thead>
-            <tr>
+            <tr class="text-center">
                 <th>Usuario</th>
                 <th>Rol</th>
                 <th style="width: 15rem">Acciones</th>
@@ -73,6 +75,7 @@ Lista de Roles Asignados
 
                     <td style="color: green" class="text-center  font-bold fs-5">{{ implode(', ', $user->roles()->get()->pluck('name')->toArray()) }}</td>
 
+                    @if (auth()->user()->id == 1)
                     <td class="update-rol">
                         <form action="{{ route('role.update', $user->id) }}" method="post">
                             @csrf
@@ -85,12 +88,54 @@ Lista de Roles Asignados
                             <button type="submit" class=" ml-2"><ion-icon name="add-circle-outline"></ion-icon></button>
                         </form>
 
-                        <form action="{{ route('role.destroy', $user->id) }}" class="" method="post">
+                        {{-- <form action="{{ route('role.destroy', $user->id) }}" class="" method="post">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="ml-2 delete-rol"><ion-icon name="beaker-outline"></ion-icon></button>
-                        </form>
+                        </form> --}}
                     </td>
+                    @else
+                    @role('admin')
+                    <td class="update-rol">
+                        <form action="{{ route('role.update', $user->id) }}" method="post">
+                            @csrf
+                            @method('PUT')
+                            <select name="role" id="role" class="form-control">
+                                @foreach ($roles as $role)
+                                    <option value="{{ $role->name }}" {{ $user->hasRole($role) ? 'selected' : '' }}>{{ $role->name }}</option>
+                                @endforeach
+                            </select>
+                            <button type="submit" class=" ml-2"><ion-icon name="add-circle-outline"></ion-icon></button>
+                        </form>
+
+                        {{-- <form action="{{ route('role.destroy', $user->id) }}" class="" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="ml-2 delete-rol"><ion-icon name="beaker-outline"></ion-icon></button>
+                        </form> --}}
+                    </td>
+                    @endrole
+                    @role('editor')
+                    <td class="update-rol">
+                        <form action="{{ route('role.update', $user->id) }}" method="post">
+                            @csrf
+                            @method('PUT')
+                            <select name="role" id="role" class="form-control">
+                                @foreach ($roles as $role)
+                                    <option value="{{ $role->name }}" {{ $user->hasRole($role) ? 'selected' : '' }}>{{ $role->name }}</option>
+                                @endforeach
+                            </select>
+                            <button type="submit" class=" ml-2"><ion-icon name="add-circle-outline"></ion-icon></button>
+                        </form>
+
+                        {{-- <form action="{{ route('role.destroy', $user->id) }}" class="" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="ml-2 delete-rol"><ion-icon name="beaker-outline"></ion-icon></button>
+                        </form> --}}
+                    </td>
+                    @endrole
+                    @endif
                 </tr>
             @endforeach
         </tbody>

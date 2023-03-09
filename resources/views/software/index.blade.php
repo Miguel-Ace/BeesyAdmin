@@ -29,6 +29,7 @@ Agregar Software
     </div>
 @endif
 
+@role('admin')
 <form action="{{url('/software')}}" class="row btnAbajo" method="post">
     @csrf
     <div class="col-md-4 row">
@@ -43,6 +44,23 @@ Agregar Software
       Guardar
     </button>
 </form>
+@endrole
+@role('escritor')
+<form action="{{url('/software')}}" class="row btnAbajo" method="post">
+    @csrf
+    <div class="col-md-4 row">
+        <div class="mb-3 col-12">
+            <label for="software" class="form-label">Software</label>
+            <input type="text" class="form-control" id="software" name="software" @error("software") style="border: 1px solid red" @enderror>
+        </div>
+    </div>
+    
+    <button type="submit" class="enviar">
+      <ion-icon name="save-outline"></ion-icon>
+      Guardar
+    </button>
+</form>
+@endrole
 @endsection
 
 @section('tituloTabla')
@@ -53,10 +71,15 @@ Lista de Software
 <div class="col-md-12 fs-6">
     <table class="table table-bordered table-hover">
         <thead>
-            <tr>
+            <tr class="text-center">
                 <th scope="col">#</th>
                 <th scope="col">Software</th>
+                @role('admin')
                 <th scope="col">Acciones</th>
+                @endrole
+                @role('editor')
+                <th scope="col">Acciones</th>
+                @endrole
             </tr>
         </thead>
         <tbody class="text-center">
@@ -64,6 +87,7 @@ Lista de Software
                 <tr>
                     <td>{{$dato->id}}</td>
                     <td>{{$dato->software}}</td>
+                    @role('admin')
                     <td>
                         <a href="{{url('software/'.$dato->id.'/edit')}}" class="edit"><ion-icon name="pencil-outline"></ion-icon></a>
                         |
@@ -73,6 +97,18 @@ Lista de Software
                             <button type="submit"><ion-icon name="beaker-outline"></ion-icon></button>
                         </form>
                     </td>
+                    @endrole
+                    @role('editor')
+                    <td>
+                        <a href="{{url('software/'.$dato->id.'/edit')}}" class="edit"><ion-icon name="pencil-outline"></ion-icon></a>
+                        |
+                        <form action="{{url('software/'.$dato->id)}}" method="POST" class="delete">
+                            @csrf
+                            {{method_field('DELETE')}}
+                            <button type="submit"><ion-icon name="beaker-outline"></ion-icon></button>
+                        </form>
+                    </td>
+                    @endrole
                 </tr>
             @endforeach
         </tbody>

@@ -29,6 +29,7 @@ Agregar soporte
     </div>
 @endif
 
+@role('admin')
 <form action="{{url('/soporte')}}" class="" method="post">
     @csrf
 
@@ -157,6 +158,137 @@ Agregar soporte
       Guardar
     </button>
 </form>
+@endrole
+@role('escritor')
+<form action="{{url('/soporte')}}" class="" method="post">
+    @csrf
+
+    <div class="row">
+        <div class="col-md-3 d-none">
+            <div class="mb-3">
+                <label for="ticker" class="form-label">Ticket (Auto Generado)</label>
+                <input type="number" class="form-control" min="{{$cantidad + 1}}" max="{{$cantidad + 1}}" id="ticker" name="ticker"  value="{{$cantidad + 1}}">
+              </div>
+          </div>
+
+        <div class="col-md-4">
+            <label for="colaborador" class="mb-2">Colaborador</label>
+              <select class="form-select" name="colaborador" @error("colaborador")style="border: solid 2px red"@enderror>
+                <option value="" selected disabled>Selecciona un Colaborador</option>
+                <option {{ old('colaborador') == 'Roxana Baez' ? 'selected' : '' }} value="Roxana Baez">Roxana Baez</option>
+                <option {{ old('colaborador') == 'Norman Logo' ? 'selected' : '' }} value="Norman Logo">Norman Logo</option>
+                <option {{ old('colaborador') == 'Edwin Torres' ? 'selected' : '' }} value="Edwin Torres">Edwin Torres</option>
+                <option {{ old('colaborador') == 'Jasson Ulloa' ? 'selected' : '' }} value="Jasson Ulloa">Jasson Ulloa</option>
+              </select>
+          </div>
+
+        <div class="col-md-4">
+            <div class="mb-3">
+                <label for="fechaHoraInicio" class="form-label">Fecha Inicio</label>
+                <input type="datetime-local" class="form-control" id="fechaHoraInicio" name="fechaHoraInicio" value="{{old('fechaHoraInicio')}}" @error("fechaHoraInicio")style="border: solid 2px red"@enderror>
+              </div>
+          </div>
+
+        {{-- <div class="col-md-4">
+            <div class="mb-3">
+                <label for="fechaHoraFinal" class="form-label">Fecha Final</label>
+                <input type="datetime-local" class="form-control" id="fechaHoraFinal" name="fechaHoraFinal" value="{{old('fechaHoraFinal')}}" @error("fechaHoraFinal")style="border: solid 2px red"@enderror>
+              </div>
+          </div> --}}
+
+          <div class="col-md-4">
+            <label for="id_cliente" class="form-label">Cliente</label>
+            <select class="form-select" name="id_cliente" id="id_cliente" @error("id_cliente")style="border: solid 2px red"@enderror>
+              <option value="" selected disabled>Selecciona un Cliente</option>
+              @foreach ($clientes as $cliente)
+                <option {{ old('id_cliente') == $cliente->contacto ? 'selected' : '' }} value="{{$cliente->contacto}}">{{$cliente->contacto}}</option>
+              @endforeach
+            </select>
+          </div>
+
+          <div class="col-md-4">
+            <label for="id_software" class="form-label">Software</label>
+              <select class="form-select" name="id_software" @error("id_software")style="border: solid 2px red"@enderror>
+                <option value="" selected disabled>Selecciona un Software</option>
+                @foreach ($softwares as $software)
+                    <option {{ old('id_software') == $software->software ? 'selected' : '' }} value="{{$software->software}}">{{$software->software}}</option>
+                @endforeach
+              </select>
+          </div>
+
+        <div class="col-md-4">
+            <div class="mb-3">
+                <label for="numLaboral" class="form-label">NumLaboral</label>
+                <input type="number" min="0" class="form-control" id="numLaboral" name="numLaboral" value="{{old('numLaboral')}}" @error("numLaboral")style="border: solid 2px red"@enderror>
+              </div>
+          </div>
+          {{--  --}}
+          <div class="col-md-4">
+            <label for="prioridad" class="form-label">Prioridad</label>
+              <select class="form-select" name="prioridad" @error("prioridad")style="border: solid 2px red"@enderror>
+                  <option value="Grave" selected disabled>Selccione una prioridad</option>
+                  <option {{ old('prioridad') == 'Leve' ? 'selected' : '' }} value="Leve">Leve</option>
+                  <option {{ old('prioridad') == 'Moderado' ? 'selected' : '' }} value="Moderado">Moderado</option>
+                  <option {{ old('prioridad') == 'Grave' ? 'selected' : '' }} value="Grave">Grave</option>
+              </select>
+          </div>
+          
+          <div class="col-md-4">
+            <label for="estado" class="form-label">Estado</label>
+              <select class="form-select" name="estado" @error("estado")style="border: solid 2px red"@enderror>
+                  {{-- <option value="Asignado" selected disabled>Selccione un estado</option> --}}
+                  <option value="Asignado">Asignado</option>
+                  {{-- <option value="En Proceso">En proceso</option>
+                  <option value="Completo">Completo</option> --}}
+              </select>
+          </div>
+
+          {{-- <div class="col-md-4">
+            <label for="usuario" class="form-label">Usuario</label>
+              <select class="form-select" name="usuario" @error("usuario")style="border: solid 2px red"@enderror>
+                  <option value="Asignado" selected disabled>Selccione un estado</option>
+                  @foreach ($usuarioclientes as $usuariocliente)
+                    <option value="{{ $usuariocliente->name }}">{{ $usuariocliente->name }}</option>  
+                  @endforeach
+              </select>
+          </div> --}}
+
+          <div class="col-md-4 d-none">
+            <div class="mb-3">
+                <label for="correo_cliente" class="form-label">Correo Cliente</label>
+                <input type="text" class="form-control" id="correo_cliente" name="correo_cliente" value="{{old('correo_cliente')}}" @error("correo_cliente")style="border: solid 2px red"@enderror>
+              </div>
+          </div>
+          {{--  --}}
+
+          <div class="col-md-8">
+            <div class="mb-3">
+                <label for="problema" class="form-label">Problema</label>
+                <input type="text" class="form-control" id="problema" name="problema" value="{{old('problema')}}" @error("problema")style="border: solid 2px red"@enderror>
+              </div>
+          </div>
+
+        <div class="col-md-6">
+            <div class="mb-3">
+                <label for="solucion" class="form-label">Solución</label>
+                <input type="text" class="form-control" id="solucion" name="solucion" value="{{old('solucion')}}" @error("solucion")style="border: solid 2px red"@enderror>
+              </div>
+          </div>
+
+        <div class="col-md-6">
+            <div class="mb-3">
+                <label for="observaciones" class="form-label">Observaciones</label>
+                <input type="text" class="form-control" id="observaciones" name="observaciones" value="{{old('observaciones')}}">
+              </div>
+          </div>
+
+    </div>
+    <button type="submit" class="enviar">
+      <ion-icon name="save-outline"></ion-icon>
+      Guardar
+    </button>
+</form>
+@endrole
 @endsection
 
 @section('tituloTabla')
@@ -169,7 +301,7 @@ Lista de soporte
 <div class="col-md-12 fs-6">
     <table class="table table-bordered table-hover tablagrande">
         <thead>
-            <tr>
+            <tr class="text-center">
                 <th scope="col">Ticker</th>
                 <th scope="col">Colaborador</th>
                 <th scope="col">Fecha Inicial</th>
@@ -183,7 +315,12 @@ Lista de soporte
                 <th scope="col">Estado</th>
                 <th scope="col">Soluciòn</th>
                 <th scope="col">Observaciones</th>
+                @role('admin')
                 <th scope="col">Acciones</th>
+                @endrole
+                @role('editor')
+                <th scope="col">Acciones</th>
+                @endrole
             </tr>
         </thead>
         <tbody class="text-center">
@@ -217,6 +354,7 @@ Lista de soporte
                     <td>{{$dato->solucion}}</td>
                     <td>{{$dato->observaciones}}</td>
 
+                    @role('admin')
                     <td class="">
                         <a href="{{url('soporte/'.$dato->id.'/edit')}}" class="edit"><ion-icon name="pencil-outline"></ion-icon></a>
                         {{-- |
@@ -226,6 +364,18 @@ Lista de soporte
                             <button type="submit"><ion-icon name="beaker-outline"></ion-icon></button>
                         </form> --}}
                     </td>
+                    @endrole
+                    @role('editor')
+                    <td class="">
+                        <a href="{{url('soporte/'.$dato->id.'/edit')}}" class="edit"><ion-icon name="pencil-outline"></ion-icon></a>
+                        {{-- |
+                        <form action="{{url('soporte/'.$dato->id)}}" method="POST" class="delete">
+                            @csrf
+                            {{method_field('DELETE')}}
+                            <button type="submit"><ion-icon name="beaker-outline"></ion-icon></button>
+                        </form> --}}
+                    </td>
+                    @endrole
                 </tr>
             @endforeach
         </tbody>

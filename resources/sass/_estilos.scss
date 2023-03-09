@@ -435,8 +435,10 @@ body{
 .update-rol{
     width: 15rem;
     display: flex;
+    justify-content: center;
     form:first-child{
         display: flex;
+        flex: 1;
         button{
             padding: 0 .3rem;
             background: #2980B9;
