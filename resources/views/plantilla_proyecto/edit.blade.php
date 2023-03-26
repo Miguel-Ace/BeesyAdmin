@@ -1,7 +1,7 @@
 @extends('home')
 
 @section('titulo')
-Proyecto
+Plantilla Proyecto
 @endsection
 
 @section('tituloForm')

@@ -24,10 +24,10 @@ Actualizar Proyecto
             <label for="id_cliente" class="form-label">Cliente</label>
               <select class="form-select" name="id_cliente">
                 @foreach ($clientes as $cliente)
-                    @if ($cliente->id == $datos->clientes->id)
-                        <option value="{{$cliente->id}}" selected>{{$cliente->nombre}}</option>
+                    @if ($cliente->id == $datos->cliente)
+                        <option value="{{$cliente->nombre}}" selected>{{$cliente->nombre}}</option>
                     @else
-                        <option value="{{$cliente->id}}">{{$cliente->nombre}}</option>
+                        <option value="{{$cliente->nombre}}">{{$cliente->nombre}}</option>
                     @endif
                 @endforeach
               </select>
@@ -38,10 +38,10 @@ Actualizar Proyecto
             <select class="form-select" name="user_de_cliente" @error("user_de_cliente")style="border: solid 2px red"@enderror>
                 <option value="">Selecciona usuario del cliente</option>
                 @foreach ($userdeclientes as $userdecliente)
-                  @if ($userdecliente->id == $datos->user_de_cliente)
-                      <option value="{{$userdecliente->id}}" selected>{{$userdecliente->name}}</option>
+                  @if ($userdecliente->name == $datos->user_de_cliente)
+                      <option value="{{$userdecliente->name}}" selected>{{$userdecliente->name}}</option>
                     @else
-                      <option value="{{$userdecliente->id}}">{{$userdecliente->name}}</option>
+                      <option value="{{$userdecliente->name}}">{{$userdecliente->name}}</option>
                   @endif
                 @endforeach
             </select>

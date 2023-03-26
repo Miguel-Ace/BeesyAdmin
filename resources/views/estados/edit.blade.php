@@ -19,11 +19,13 @@ Actualizar Estado
           </div>
       </div>
 
-    <button type="submit" class="enviar">
-      <ion-icon name="save-outline"></ion-icon>
-      Guardar
-    </button>
-
-    <a href="{{url('/software')}}" class="boton regresar"><ion-icon name="arrow-back-outline"></ion-icon>Regresar</a>
+      <div class="d-flex">
+        <button type="submit" class="enviar">
+          <ion-icon name="save-outline"></ion-icon>
+          Guardar
+        </button>
+    
+        <a href="{{url('/estados')}}" class="boton regresar"><ion-icon name="arrow-back-outline"></ion-icon>Regresar</a>
+      </div>
 </form>
 @endsection

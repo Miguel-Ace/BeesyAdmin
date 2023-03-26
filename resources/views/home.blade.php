@@ -43,19 +43,33 @@
             <hr>
             <div class="menu">
                 <p>Menú principal</p>
-                <ion-icon class="ico-drop" id="ico-drop" name="menu-outline"></ion-icon>
+                <ion-icon class=
+                "ico-drop" id="ico-drop" name="menu-outline"></ion-icon>
                 <div class="catalogos activo" id="catalogos">
+                    @if (auth()->user()->id == 1)
+                        <a href="{{url('/usuarios')}}"><ion-icon name="people-outline"></ion-icon> <span>Usuarios</span></a>
+                    @endif
+                    @role('admin')
                     <a href="{{url('/dashboard')}}"><ion-icon name="home-outline"></ion-icon> <span>Dashboard</span></a>
                     <a href="{{url('/usuarios')}}"><ion-icon name="people-outline"></ion-icon> <span>Usuarios</span></a>
                     <a href="{{url('/software')}}"><ion-icon name="aperture-outline"></ion-icon> <span>Software</span></a>
                     <a href="{{url('/clientes')}}"><ion-icon name="person-add-outline"></ion-icon> <span>Clientes</span></a>
                     <a href="{{url('/licencias')}}"><ion-icon name="expand-outline"></ion-icon> <span>Licencias</span></a>
                     <a href="{{url('/terminales')}}"><ion-icon name="document-attach-outline"></ion-icon> <span>Terminales</span></a>
+                    @endrole
+
+                    @role('soporte')
+                    <a href="{{url('/soporte')}}"><ion-icon name="apps-outline"></ion-icon> <span>Soporte</span></a>
+                    <a href="{{url('/ejecucion_proyectos')}}"><ion-icon name="file-tray-full-outline"></ion-icon> <span>Ejecución Proyectos</span></a>
+                    @endrole
+                    
+                    @role('admin')
                     <a href="{{url('/soporte')}}"><ion-icon name="apps-outline"></ion-icon> <span>Soporte</span></a>
                     <a href="{{url('/estados')}}"><ion-icon name="barcode-outline"></ion-icon> <span>Estado</span></a>
                     <a href="{{url('/etapas')}}"><ion-icon name="copy-outline"></ion-icon> <span>Etapa</span></a>
                     <a href="{{url('/proyectos')}}"><ion-icon name="file-tray-stacked-outline"></ion-icon> <span>Proyectos</span></a>
                     <a href="{{url('/plantilla_proyectos')}}"><ion-icon name="create-outline"></ion-icon> <span>Plantilla Proyectos</span></a>
+                    @endrole
                 </div>
             </div>
         </div>

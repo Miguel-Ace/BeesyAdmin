@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('nombre');
             // $table->bigInteger('id_cliente')->unsigned()->nullable();
             $table->string('id_cliente')->nullable();
-            $table->string('user_de_cliente');
+            $table->string('user_de_cliente')->nullable();
             $table->string('responsable_cliente');
             $table->string('email_responsable');
             $table->string('telefono_responsable');

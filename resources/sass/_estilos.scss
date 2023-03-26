@@ -367,7 +367,7 @@ body{
                     overflow: scroll;
                     max-width: 1150px;
                     table{
-                        min-width: 768px;
+                        min-width: 72rem;
                     }
                     .grande{
                         min-width: 1200px;
@@ -382,7 +382,7 @@ body{
                 @media (min-width: 1200px){
                     div{
                         overflow: scroll;
-                        max-width: 1150px;
+                        min-width: 100%;
                     }
                 }
                 div .tablagrande{
@@ -483,5 +483,26 @@ body{
     &:hover{
         color: white;
         background-color: #0f6f5c;
+    }
+}
+
+// boton regresar
+.regresarproyecto{
+    width: 120px;
+    margin: 1rem 0;
+    background: rgb(33, 101, 197);
+    color: white;
+    border-radius: .5rem;
+    padding: .5rem 1rem ;
+    display: flex;
+    align-items: center;
+    a{
+        text-decoration: none;
+        // color: white;
+    }
+    &:hover{
+        background: rgba(33, 101, 197, .9);
+        color: white;
+
     }
 }

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Etapa;
 use App\Models\Estado;
-use App\Models\Usuario;
+use App\Models\User;
 use App\Models\Proyecto;
 use Illuminate\Http\Request;
 use App\Models\DetalleProyecto;
@@ -26,7 +26,7 @@ class PlantillaDetalleProyectoController extends Controller
         $busqueda = $request->buscar;
         $datos = DetalleProyecto::where('id_proyecto','like','%'.$busqueda.'%')->paginate();
         $proyectos = Proyecto::all();
-        $usuarios = Usuario::all();
+        $usuarios = User::all();
         $estados = Estado::all();
         $etapas = Etapa::all();
         $valor = 0;
@@ -97,7 +97,7 @@ class PlantillaDetalleProyectoController extends Controller
     {
         $datos = DetalleProyecto::find($id);
         $proyectos = Proyecto::all();
-        $usuarios = Usuario::all();
+        $usuarios = User::all();
         $estados = Estado::all();
         $etapas = Etapa::all();
         $valor = 0;

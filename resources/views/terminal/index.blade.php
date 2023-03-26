@@ -150,7 +150,7 @@ Lista de Terminal
                     <td>{{$dato->id}}</td>
                     <td>{{$dato->nombreEquipo}}</td>
                     <td>{{$dato->serial}}</td>
-                    <td>{{$dato->clientes->nombre}}</td>
+                    <td>{{$dato->id_licencia}}</td>
                     <td>{{$dato->ultimoAcceso}}</td>
                     @if ($dato->estado === 'activo')
                         <td class="bg-green-100 text-green-800 text-x font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">{{$dato->estado}}</td>
@@ -158,7 +158,6 @@ Lista de Terminal
                         <td class="bg-green-100 text-red-800 text-x font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900">{{$dato->estado}}</td>
                     @endif
 
-                    @role('admin')
                     <td>
                         <a href="{{url('terminales/'.$dato->id.'/edit')}}" class="edit"><ion-icon name="pencil-outline"></ion-icon></a>
                         |
@@ -168,18 +167,6 @@ Lista de Terminal
                             <button type="submit"><ion-icon name="beaker-outline"></ion-icon></button>
                         </form>
                     </td>
-                    @endrole
-                    @role('editor')
-                    <td>
-                        <a href="{{url('terminales/'.$dato->id.'/edit')}}" class="edit"><ion-icon name="pencil-outline"></ion-icon></a>
-                        |
-                        <form action="{{url('terminales/'.$dato->id)}}" method="POST" class="delete">
-                            @csrf
-                            {{method_field('DELETE')}}
-                            <button type="submit"><ion-icon name="beaker-outline"></ion-icon></button>
-                        </form>
-                    </td>
-                    @endrole
                 </tr>
             @endforeach
         </tbody>

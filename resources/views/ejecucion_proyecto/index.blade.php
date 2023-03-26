@@ -5,14 +5,13 @@ Proyecto
 @endsection
 
 @section('tituloForm')
-@role('admin')
 Agregar Proyecto
-@endrole
 @endsection
 
 @section('creacion')
 
 {{-- FOREACH INICIO --}}
+@role('admin')
 @if ($busqueda == NULL)
     @if ($busqueda == "")
 
@@ -51,7 +50,7 @@ Agregar Proyecto
                         <label for="id_cliente" class="form-label">Cliente</label>
                         <select class="form-select" name="id_cliente" @error("id_cliente")style="border: solid 2px red"@enderror>
                             <option value="">Selecciona un cliente</option>
-                            {{-- @foreach ($clientes as $cliente)
+                            @foreach ($clientes as $cliente)
                                 @foreach ($datos as $dato)
                                     @if ($cliente->nombre == $dato->id_cliente)
                                     {{$valor = $cliente->id}}
@@ -63,9 +62,6 @@ Agregar Proyecto
                                 @else
                                     <option value="">{{$cliente->nombre}} - ya utilzado</option>
                                 @endif
-                            @endforeach --}}
-                            @foreach ($clientes as $cliente)
-                                <option {{ old('id_cliente') == $cliente->nombre ? 'selected' : '' }} value="{{$cliente->nombre}}">{{$cliente->nombre}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -115,7 +111,7 @@ Agregar Proyecto
                         <select class="form-select" name="id_usuario" @error("id_usuario")style="border: solid 2px red"@enderror>
                             <option value="">Selecciona un usuario</option>
                             @foreach ($usuarios as $usuario)
-                                {{-- @foreach ($datos as $dato)
+                                @foreach ($datos as $dato)
                                     @if ($usuario->name == $dato->id_usuario)
                                     {{$valor = $usuario->id}}
                                     @endif
@@ -125,8 +121,8 @@ Agregar Proyecto
                                     <option {{ old('id_usuario') == $usuario->name ? 'selected' : '' }} value="{{$usuario->name}}">{{$usuario->name}}</option>
                                 @else
                                     <option value="">{{$usuario->name}} - ya utilzado</option>
-                                @endif --}}
-                                <option {{ old('id_usuario') == $usuario->name ? 'selected' : '' }} value="{{$usuario->name}}">{{$usuario->name}}</option>
+                                @endif
+                                {{-- <option value="{{$usuario->id}}">{{$usuario->name}}</option> --}}
                             @endforeach
                         </select>
                     </div>
@@ -213,44 +209,22 @@ Agregar Proyecto
                 <label for="id_cliente" class="form-label">Cliente</label>
                 <select class="form-select" name="id_cliente" @error("id_cliente")style="border: solid 2px red"@enderror>
                     <option value="">Selecciona un cliente</option>
-                    {{-- @foreach ($clientes as $cliente)
+                    @foreach ($clientes as $cliente)
                         @foreach ($proyectos as $proyecto)
-                            @if ($cliente->nombre == $proyecto->id_cliente)
-                            {{$valor = $cliente->nombre}}
+                            @if ($cliente->id == $proyecto->id_cliente)
+                            {{$valor = $cliente->id}}
                             @endif
                         @endforeach
 
-                        @if ($valor !== $cliente->nombre)
-                            <option value="{{$cliente->nombre}}">{{$cliente->nombre}}</option>
+                        @if ($valor !== $cliente->id)
+                            <option value="{{$cliente->id}}">{{$cliente->nombre}}</option>
                         @else
                             <option value="">{{$cliente->nombre}} - ya utilzado</option>
                         @endif
-                    @endforeach --}}
-                    @foreach ($clientes as $cliente)
-                        <option {{ old('id_cliente') == $cliente->nombre ? 'selected' : '' }} value="{{$cliente->nombre}}">{{$cliente->nombre}}</option>
                     @endforeach
                 </select>
             </div>
 
-            <div class="col-md-3">
-                <label for="user_de_cliente" class="form-label">Usuario del Cliente</label>
-                <select class="form-select" name="user_de_cliente" @error("user_de_cliente")style="border: solid 2px red"@enderror>
-                    <option value="">Selecciona usuario del cliente</option>
-                    @foreach ($userdeclientes as $userdecliente)
-                        {{-- @foreach ($clientes as $cliente)
-                            @if ($userdecliente->cliente == $cliente->id)
-                                {{ $valor = $userdecliente->cliente}}
-                            @endif
-                        @endforeach
-
-                        @if ($valor == $userdecliente->cliente)
-                            <option value="{{$userdecliente->id}}">{{$userdecliente->name}}</option>
-                        @endif --}}
-                            <option {{ old('user_de_cliente') == $userdecliente->name ? 'selected' : '' }} value="{{$userdecliente->name}}">{{$userdecliente->name}}</option>
-                    @endforeach
-                </select>
-            </div>
-            
             <div class="col-md-3">
                 <div class="mb-3">
                     <label for="responsable_cliente" class="form-label">Responsable del Cliente</label>
@@ -272,26 +246,25 @@ Agregar Proyecto
                 </div>
             </div>
 
-            <div class="col-md-3">
+            {{-- <div class="col-md-3">
                 <label for="id_usuario" class="form-label">Usuario</label>
                 <select class="form-select" name="id_usuario" @error("id_usuario")style="border: solid 2px red"@enderror>
                     <option value="">Selecciona un usuario</option>
                     @foreach ($usuarios as $usuario)
-                        {{-- @foreach ($datos as $dato)
-                            @if ($usuario->name == $dato->id_usuario)
+                        @foreach ($proyectos as $proyecto)
+                            @if ($usuario->id == $proyecto->id_usuario)
                             {{$valor = $usuario->id}}
                             @endif
                         @endforeach
 
                         @if ($valor != $usuario->id)
-                            <option {{ old('id_usuario') == $usuario->name ? 'selected' : '' }} value="{{$usuario->name}}">{{$usuario->name}}</option>
+                            <option value="{{$usuario->id}}">{{$usuario->name}}</option>
                         @else
                             <option value="">{{$usuario->name}} - ya utilzado</option>
-                        @endif --}}
-                        <option {{ old('id_usuario') == $usuario->name ? 'selected' : '' }} value="{{$usuario->name}}">{{$usuario->name}}</option>
+                        @endif
                     @endforeach
                 </select>
-            </div>
+            </div> --}}
 
             <div class="col-md-3">
                 <div class="mb-3">
@@ -336,7 +309,7 @@ Agregar Proyecto
 
     @endforeach
 @endif
-
+@endrole
 {{-- FOREACH FIN --}}
 
 @endsection
@@ -386,29 +359,11 @@ Lista de Proyectos
                         <td>{{$proyecto->id_usuario}}</td>
                         <td>{{$proyecto->fecha_inicio}}</td>
                         <td>{{$proyecto->fecha_fin}}</td>
-                        @role('admin')
-                        <td class="justify-content-around">
-                            {{-- @foreach ($detalleProyectos as $detalleProyecto)
-                                {{$valor = $detalleProyecto->id}}
-                            @endforeach --}}
-                            <a href="{{url('/detalle_proyectos?buscar='.$proyecto->id)}}" class="show"><ion-icon name="add-circle-outline"></ion-icon></a>
-                            |
-                            <a href="{{url('proyectos/'.$proyecto->id.'/edit')}}" class="edit"><ion-icon name="pencil-outline"></ion-icon></a>
-                            {{-- |
-                            <form action="{{url('proyectos/'.$dato->id)}}" method="POST" class="delete">
-                                @csrf
-                                {{method_field('DELETE')}}
-                                <button type="submit"><ion-icon name="beaker-outline"></ion-icon></button>
-                            </form> --}}
-                        </td>
-                        @endrole
-                        @role('soporte')
                         <td class="justify-content-around">
                             <a href="{{url('/detalle_proyectos?buscar='.$proyecto->id)}}" class="show"><ion-icon name="add-circle-outline"></ion-icon></a>
                             {{-- |
                             <a href="{{url('proyectos/'.$proyecto->id.'/edit')}}" class="edit"><ion-icon name="pencil-outline"></ion-icon></a> --}}
                         </td>
-                        @endrole
                     </tr>
                 @endif
             @endforeach

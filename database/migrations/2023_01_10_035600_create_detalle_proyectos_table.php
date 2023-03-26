@@ -21,13 +21,14 @@ return new class extends Migration
             $table->string('fecha_inicio');
             $table->string('fecha_fin');
             $table->string('horas_propuestas');
-            $table->string('horas_reales');
-            $table->string('meta_hrs_optimas');
+            $table->string('horas_reales')->nullable();
+            $table->string('meta_hrs_optimas')->nullable();
             $table->bigInteger('id_usuario')->unsigned();
             $table->string('ejecutor_cliente');
             $table->string('tipo');
             $table->string('rendimiento');
-            $table->bigInteger('id_estado')->unsigned();
+            // $table->bigInteger('id_estado')->unsigned()->nullable();
+            $table->string('id_estado')->nullable();
             $table->bigInteger('id_etapa')->unsigned();
             $table->string('notas')->nullable();
             $table->string('select_plantilla')->nullable();
@@ -35,7 +36,7 @@ return new class extends Migration
 
             $table->foreign('id_proyecto')->references('id')->on('proyectos')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('id_usuario')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('id_estado')->references('id')->on('estados')->onDelete('cascade')->onUpdate('cascade');
+            // $table->foreign('id_estado')->references('id')->on('estados')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('id_etapa')->references('id')->on('etapas')->onDelete('cascade')->onUpdate('cascade');
         });
     }

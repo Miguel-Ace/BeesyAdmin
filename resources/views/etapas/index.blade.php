@@ -29,7 +29,6 @@ Agregar Etapa
     </div>
 @endif
 
-@role('admin')
 <form action="{{url('/etapas')}}" class="row btnAbajo" method="post">
     @csrf
     <div class="col-md-4 row">
@@ -43,22 +42,7 @@ Agregar Etapa
       Guardar
     </button>
 </form>
-@endrole
-@role('escritor')
-<form action="{{url('/etapas')}}" class="row btnAbajo" method="post">
-    @csrf
-    <div class="col-md-4 row">
-        <div class="mb-3 col-12">
-            <label for="etapa" class="form-label">Etapa</label>
-            <input type="text" class="form-control" id="etapa" name="etapa">
-          </div>
-      </div>
-    <button type="submit" class="enviar">
-      <ion-icon name="save-outline"></ion-icon>
-      Guardar
-    </button>
-</form>
-@endrole
+
 @endsection
 
 @section('tituloTabla')

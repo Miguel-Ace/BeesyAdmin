@@ -56,7 +56,8 @@ class ProyectoController extends Controller
     {
         request()->validate([
             'nombre' => 'required',
-            'id_cliente' => 'required|unique:proyectos',
+            // 'id_cliente' => 'required|unique:proyectos',
+            'id_cliente' => 'required',
             'user_de_cliente' => 'required',
             'responsable_cliente' => 'required|string|min:3',
             'email_responsable' => 'required|email',

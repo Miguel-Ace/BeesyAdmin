@@ -17,9 +17,9 @@ class DetalleProyecto extends Model
         return $this->belongsTo(User::class, 'id_usuario');
     }
 
-    function estados(){
-        return $this->belongsTo(Estado::class, 'id_estado');
-    }
+    // function estados(){
+    //     return $this->belongsTo(Estado::class, 'id_estado');
+    // }
 
     function etapas(){
         return $this->belongsTo(Etapa::class, 'id_etapa');

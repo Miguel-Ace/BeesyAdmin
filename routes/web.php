@@ -20,6 +20,7 @@ use App\Http\Controllers\UserClienteController;
 use App\Http\Controllers\SoporteExportController;
 
 use App\Http\Controllers\DetalleProyectoController;
+use App\Http\Controllers\EjecucionProyectoController;
 use App\Http\Controllers\plantillaProyectoController;
 use App\Http\Controllers\PlantillaDetalleProyectoController;
 /*
@@ -59,6 +60,7 @@ Route::get('/user_cliente/{id}/{obtenerId}', [UserClienteController::class, 'sho
 
 
 Route::resource('/proyectos',ProyectoController::class);
+Route::resource('/ejecucion_proyectos',EjecucionProyectoController::class);
 Route::resource('/plantilla_proyectos',PlantillaProyectoController::class);
 // Route::resource('/detalle_proyectos',DetalleProyectoController::class);
 Route::get('/detalle_proyectos', [DetalleProyectoController::class, 'index']);
