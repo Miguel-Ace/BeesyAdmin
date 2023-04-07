@@ -8,12 +8,10 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create('detalle_proyectos', function (Blueprint $table) {
+        Schema::create('prueba_detalle_proyectos', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('id_proyecto')->unsigned()->nullable();
             $table->string('num_actividad')->nullable();
@@ -35,21 +33,14 @@ return new class extends Migration
             $table->string('notas')->nullable();
             $table->string('select_plantilla')->nullable();
             $table->timestamps();
-
-            // $table->foreign('id_proyecto')->references('id')->on('proyectos')->onDelete('cascade')->onUpdate('cascade');
-            // $table->foreign('id_usuario')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
-            // $table->foreign('id_estado')->references('id')->on('estados')->onDelete('cascade')->onUpdate('cascade');
-            // $table->foreign('id_etapa')->references('id')->on('etapas')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
-    public function down()
+    public function down(): void
     {
-        Schema::dropIfExists('detalle_proyectos');
+        Schema::dropIfExists('prueba_detalle_proyectos');
     }
 };

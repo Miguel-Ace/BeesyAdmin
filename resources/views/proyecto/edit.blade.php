@@ -72,7 +72,7 @@ Actualizar Proyecto
             <label for="id_usuario" class="form-label">Usuario</label>
               <select class="form-select" name="id_usuario">
                 @foreach ($usuarios as $usuario)
-                    <option value="{{$usuario->id}}">{{$usuario->name}}</option>
+                    <option value="{{$usuario->name}}">{{$usuario->name}}</option>
                 @endforeach
               </select>
           </div>

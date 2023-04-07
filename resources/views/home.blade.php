@@ -57,8 +57,9 @@
                     <a href="{{url('/licencias')}}"><ion-icon name="expand-outline"></ion-icon> <span>Licencias</span></a>
                     <a href="{{url('/terminales')}}"><ion-icon name="document-attach-outline"></ion-icon> <span>Terminales</span></a>
                     @endrole
-
+                    
                     @role('soporte')
+                    <a href="{{url('/dashboard')}}"><ion-icon name="home-outline"></ion-icon> <span>Dashboard</span></a>
                     <a href="{{url('/soporte')}}"><ion-icon name="apps-outline"></ion-icon> <span>Soporte</span></a>
                     <a href="{{url('/ejecucion_proyectos')}}"><ion-icon name="file-tray-full-outline"></ion-icon> <span>Ejecución Proyectos</span></a>
                     @endrole

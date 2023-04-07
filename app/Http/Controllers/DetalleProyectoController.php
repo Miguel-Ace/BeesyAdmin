@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Models\DetalleProyecto;
 use App\Mail\notificacionesProyecto;
 use App\Models\Cliente;
+use App\Models\PruebaDetalleProyecto;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
@@ -35,8 +36,10 @@ class DetalleProyectoController extends Controller
         $estados = Estado::all();
         $etapas = Etapa::all();
         $datalleproyectos = DetalleProyecto::all();
+        $datalleproyectosdos = PruebaDetalleProyecto::all();
         $valor = 0;
-        return view('detalle_proyecto.index', compact('datos','datalleproyectos','busqueda','obtenerId','proyectos','usuarios','estados','etapas','valor'));
+        $proyectoplantilla = NULL;
+        return view('detalle_proyecto.index', compact('proyectoplantilla','datos','datalleproyectos','datalleproyectosdos','busqueda','obtenerId','proyectos','usuarios','estados','etapas','valor'));
     }
 
     /**
@@ -103,7 +106,8 @@ class DetalleProyectoController extends Controller
      */
     public function edit($id, $obtenerId)
     {
-        $datos = DetalleProyecto::find($id);
+        // $datos = DetalleProyecto::find($id);
+        $datos = PruebaDetalleProyecto::find($id);
         $proyectos = Proyecto::all();
         $usuarios = User::all();
         $estados = Estado::all();
@@ -158,9 +162,44 @@ class DetalleProyectoController extends Controller
         $correo = new notificacionesProyecto($message);
         $email = $emailResponsable;
         Mail::to($email)->send($correo);
+
+        // $correo = new notificacionesProyecto($message);
+        // $email = 'jasson.ulloa@beesys.net';
+        // Mail::to($email)->send($correo);
+
+        // $correo = new notificacionesProyecto($message);
+        // $email = 'edwin.torres@beesys.net';
+        // Mail::to($email)->send($correo);
+        
+        // $correo = new notificacionesProyecto($message);
+        // $email = 'roxana.baez@beesys.net';
+        // Mail::to($email)->send($correo);
         
         $datos = $request->except('_token','_method');
+        // DetalleProyecto::insert($datos);
         DetalleProyecto::where('id','=',$id)->update($datos);
+
+        // $nombreplantilla = $request->input('select_plantilla');
+        // $pruebaDetalleProyectos = PruebaDetalleProyecto::all();
+
+        // foreach ($pruebaDetalleProyectos as $pruebaDetalleProyecto) {
+        //     $idplantilla = $pruebaDetalleProyecto->id_proyecto;
+        //     $fechaplantilla = $pruebaDetalleProyecto->fecha_inicio;
+        // }
+
+        // if ($idplantilla == $obtenerId) {
+        //     // foreach ($pruebaDetalleProyectos as $pruebaDetalleProyecto) {
+        //     //     if ($idplantilla == $obtenerId && $pruebaDetalleProyecto->fecha_inicio != NULL) {
+        //     //     }
+        //     // }
+        //     PruebaDetalleProyecto::where('id','=',$id)->update($datos);
+        // }else{
+        //     // foreach ($pruebaDetalleProyectos as $pruebaDetalleProyecto) {
+        //     //     if ($pruebaDetalleProyecto->select_plantilla == $nombreplantilla && $pruebaDetalleProyecto->fecha_inicio == NULL){
+        //     //     }
+        //     // }
+        //     PruebaDetalleProyecto::insert($datos);
+        // }
         return redirect('/detalle_proyectos?buscar='.$obtenerId)->with('success','INFORMACIÓN ACTUALIZADA');
     }
 

@@ -65,6 +65,7 @@ class ProyectoController extends Controller
             'id_usuario' => 'required',
             'fecha_inicio' => 'required',
             'fecha_fin' => 'required',
+            'select_plantilla' => 'required',
 
         ]);
 

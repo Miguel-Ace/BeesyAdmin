@@ -35,7 +35,7 @@ Agregar Detalle a Este Proyectos
     </div>
 @endif
 
-<form action="{{url('/detalle_proyectos'.'/'.$obtenerId)}}" class="" method="post">
+<form action="{{url('/detalle_proyectos'.'/'.$obtenerId)}}" class="d-none" method="post">
     @csrf
     <div class="row mt-4">
           {{-- <div class="col-md-3">
@@ -182,8 +182,8 @@ Agregar Detalle a Este Proyectos
               <ion-icon name="arrow-back-outline"></ion-icon>
               Proyectos
           </a>
-{{-- 
-          @foreach ($datos as $dato)
+
+        {{-- @foreach ($datos as $dato)
             <a href="{{url('detalle_proyectos/'.$dato->id.'/'.$obtenerId)}}" class="enviar text-left col-12">
                 <ion-icon name="eye-outline"></ion-icon>
                 Ver
@@ -208,6 +208,7 @@ Agregar Detalle a Este Proyectos
     <input type="text" name="buscar" id="buscar" placeholder="Buscar" value="{{$busqueda}}">
     <input type="submit" value="Buscar">
 </form>
+
 @endsection
 
 @section('tablas')
@@ -234,34 +235,103 @@ Agregar Detalle a Este Proyectos
             </tr>
         </thead>
         <tbody class="text-center">
-            @foreach ($datos as $dato)
-                <tr>
-                    {{-- <td>{{$dato->proyectos->nombre}}</td> --}}
-                    <td>{{$dato->num_actividad}}</td>
-                    <td>{{$dato->nombre_actividad}}</td>
-                    <td>{{$dato->fecha_inicio}}</td>
-                    <td>{{$dato->fecha_fin}}</td>
-                    <td>{{$dato->horas_propuestas}}</td>
-                    <td style="color: green">{{$dato->horas_reales}}</td>
-                    <td style="color: green">{{$dato->meta_hrs_optimas}}</td>
-                    {{-- <td>{{$dato->rendimiento}}</td> --}}
-                    <td>{{$dato->usuarios->name}}</td>
-                    <td>{{$dato->ejecutor_cliente}}</td>
-                    <td>{{$dato->tipo}}</td>
-                    <td style="color: green">{{$dato->id_estado}}</td>
-                    <td>{{$dato->etapas->etapa}}</td>
-                    <td style="color: green">{{$dato->notas}}</td>
-                    <td class="">
-                        {{-- <a href="{{url('detalle_proyectos/'.$dato->id.'/'.$obtenerId)}}" class="show"><ion-icon name="eye-outline"></ion-icon></a>
-                        | --}}
-                        <a href="{{url('detalle_proyectos/'.$dato->id.'/'.'edit/'.$obtenerId)}}" class="edit"><ion-icon name="pencil-outline"></ion-icon></a>
-                    </td>
-                </tr>
-            @endforeach
+          @foreach ($datalleproyectos as $datalleproyecto)
+          <tr>
+            <td>{{$datalleproyecto->num_actividad}}</td>
+            <td>{{$datalleproyecto->nombre_actividad}}</td>
+            <td>{{$datalleproyecto->fecha_inicio}}</td>
+            <td>{{$datalleproyecto->fecha_fin}}</td>
+            <td>{{$datalleproyecto->horas_propuestas}}</td>
+            <td style="color: green">{{$datalleproyecto->horas_reales}}</td>
+            <td style="color: green">{{$datalleproyecto->meta_hrs_optimas}}</td>
+            <td>{{$datalleproyecto->id_usuario}}</td>
+            <td>{{$datalleproyecto->ejecutor_cliente}}</td>
+            <td>{{$datalleproyecto->tipo}}</td>
+            <td style="color: green">{{$datalleproyecto->id_estado}}</td>
+            <td>{{$datalleproyecto->id_etapa}}</td>
+            <td style="color: green">{{$datalleproyecto->notas}}</td>
+            <td class="">
+              <a href="{{url('detalle_proyectos/'.$datalleproyecto->id.'/'.'edit/'.$obtenerId)}}" class="edit">
+                <ion-icon name="pencil-outline"></ion-icon>
+              </a>
+            </td>
+          </tr>
+          @endforeach
+          {{-- @foreach ($proyectos as $proyecto)
+            @if ($obtenerId == $proyecto->id)
+              <span class="d-none">{{$nombreplantilla = $proyecto->select_plantilla}}</span>
+              <span class="d-none">{{$usuarioplantilla = $proyecto->id_usuario}}</span>
+            @endif
+          @endforeach
+
+          @foreach ($datalleproyectos as $datalleproyecto)
+              @if ($nombreplantilla == $datalleproyecto->select_plantilla && $datalleproyecto->fecha_inicio != NULL)
+                <span class="d-none">{{$actividadplantilla = $datalleproyecto->nombre_actividad}}</span>
+              @endif
+          @endforeach
+
+          @php
+            $actividades = [];
+          @endphp
+
+          @foreach ($datalleproyectos as $datalleproyecto)
+            @if ($nombreplantilla == $datalleproyecto->select_plantilla && $datalleproyecto->fecha_inicio != NULL)
+              @php
+                array_push($actividades, $datalleproyecto->nombre_actividad);
+              @endphp
+            @endif
+          @endforeach
+
+          @foreach ($datalleproyectos as $datalleproyecto)
+            @if ($datalleproyecto->id_proyecto == $obtenerId && $usuarioplantilla == $datalleproyecto->id_usuario)
+              <tr>
+                <td>{{$datalleproyecto->num_actividad}}</td>
+                <td>{{$datalleproyecto->nombre_actividad}}</td>
+                <td>{{$datalleproyecto->fecha_inicio}}</td>
+                <td>{{$datalleproyecto->fecha_fin}}</td>
+                <td>{{$datalleproyecto->horas_propuestas}}</td>
+                <td style="color: green">{{$datalleproyecto->horas_reales}}</td>
+                <td style="color: green">{{$datalleproyecto->meta_hrs_optimas}}</td>
+                <td>{{$datalleproyecto->id_usuario}}</td>
+                <td>{{$datalleproyecto->ejecutor_cliente}}</td>
+                <td>{{$datalleproyecto->tipo}}</td>
+                <td style="color: green">{{$datalleproyecto->id_estado}}</td>
+                <td>{{$datalleproyecto->id_etapa}}</td>
+                <td style="color: green">{{$datalleproyecto->notas}}</td>
+                <td class="">
+                  <a href="{{url('detalle_proyectos/'.$datalleproyecto->id.'/'.'edit/'.$obtenerId)}}" class="edit">
+                    <ion-icon name="pencil-outline"></ion-icon>
+                  </a>
+                </td>
+              </tr>
+            @elseif ($datalleproyecto->id_proyecto != $obtenerId && $datalleproyecto->select_plantilla == $nombreplantilla && $datalleproyecto->id_usuario == NULL)
+              <tr>
+                <td>{{$datalleproyecto->num_actividad}}</td>
+                <td>{{$datalleproyecto->nombre_actividad}}</td>
+                <td>{{$datalleproyecto->fecha_inicio}}</td>
+                <td>{{$datalleproyecto->fecha_fin}}</td>
+                <td>{{$datalleproyecto->horas_propuestas}}</td>
+                <td style="color: green">{{$datalleproyecto->horas_reales}}</td>
+                <td style="color: green">{{$datalleproyecto->meta_hrs_optimas}}</td>
+                <td>{{$datalleproyecto->id_usuario}}</td>
+                <td>{{$datalleproyecto->ejecutor_cliente}}</td>
+                <td>{{$datalleproyecto->tipo}}</td>
+                <td style="color: green">{{$datalleproyecto->id_estado}}</td>
+                <td>{{$datalleproyecto->id_etapa}}</td>
+                <td style="color: green">{{$datalleproyecto->notas}}</td>
+                <td class="">
+                  <a href="{{url('detalle_proyectos/'.$datalleproyecto->id.'/'.'edit/'.$obtenerId)}}" class="edit">
+                    <ion-icon name="pencil-outline"></ion-icon>
+                  </a>
+                </td>
+              </tr>
+            @endif
+          @endforeach --}}
         </tbody>
     </table>
 </div>
 
+@endsection
 <script>
   
   const contenedorid = document.getElementById('contenedorid');
@@ -336,4 +406,3 @@ Agregar Detalle a Este Proyectos
 
 
 </script>
-@endsection

@@ -53,14 +53,14 @@ class plantillaProyectoController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nombre' => 'required',
+            // 'nombre' => 'required',
             // 'id_cliente' => 'required|unique:proyectos',
-            'responsable_cliente' => 'required|string|min:3',
-            'email_responsable' => 'required|email',
-            'telefono_responsable' => 'required|min:8|max:8',
+            // 'responsable_cliente' => 'required|string|min:3',
+            // 'email_responsable' => 'required|email',
+            // 'telefono_responsable' => 'required|min:8|max:8',
             // 'id_usuario' => 'required',
-            'fecha_inicio' => 'required',
-            'fecha_fin' => 'required',
+            // 'fecha_inicio' => 'required',
+            // 'fecha_fin' => 'required',
             'select_plantilla' => 'required',
         ]);
 

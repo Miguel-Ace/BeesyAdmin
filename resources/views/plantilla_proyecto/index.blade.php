@@ -34,12 +34,12 @@ Agregar Plantilla Proyecto
     @csrf
 
     <div class="row">
-        <div class="col-md-3">
+        {{-- <div class="col-md-3">
             <div class="mb-3">
                 <label for="nombre" class="form-label">Nombre</label>
                 <input type="text" class="form-control" id="nombre" name="nombre" @error("nombre") style="border: 1px solid red" @enderror value="{{old('nombre')}}">
               </div>
-          </div>
+          </div> --}}
 
           {{-- <div class="col-md-3">
             <label for="id_cliente" class="form-label">Cliente</label>
@@ -61,7 +61,7 @@ Agregar Plantilla Proyecto
               </select>
           </div> --}}
 
-          <div class="col-md-3">
+          {{-- <div class="col-md-3">
             <div class="mb-3">
                 <label for="responsable_cliente" class="form-label">Responsable del Cliente</label>
                 <input type="text" class="form-control" id="responsable_cliente" name="responsable_cliente" @error("responsable_cliente") style="border: 1px solid red" @enderror value="{{old('responsable_cliente')}}">
@@ -80,7 +80,7 @@ Agregar Plantilla Proyecto
                 <label for="telefono_responsable" class="form-label">Teléfono del Responsable</label>
                 <input type="number" class="form-control" id="telefono_responsable" name="telefono_responsable" @error("select_plantilla") style="border: 1px solid red" @enderror value="{{old('telefono_responsable')}}">
               </div>
-          </div>
+          </div> --}}
 
           {{-- <div class="col-md-3">
             <label for="id_usuario" class="form-label">Usuario</label>
@@ -92,7 +92,7 @@ Agregar Plantilla Proyecto
               </select>
           </div> --}}
 
-        <div class="col-md-3">
+        {{-- <div class="col-md-3">
             <div class="mb-3">
                 <label for="fecha_inicio" class="form-label">Fecha Inicio</label>
                 <input type="datetime-local" class="form-control" id="fecha_inicio" name="fecha_inicio" @error("fecha_inicio") style="border: 1px solid red" @enderror value="{{old('fecha_inicio')}}">
@@ -104,7 +104,7 @@ Agregar Plantilla Proyecto
                 <label for="fecha_fin" class="form-label">Fecha Final</label>
                 <input type="datetime-local" class="form-control" id="fecha_fin" name="fecha_fin" @error("fecha_fin") style="border: 1px solid red" @enderror value="{{old('fecha_fin')}}">
             </div>
-        </div>
+        </div> --}}
 
         <div class="col-md-3">
             <div class="mb-3">
@@ -135,14 +135,15 @@ Plantillas Creadas
     <table class="table table-bordered table-hover">
         <thead>
             <tr class="text-center">
-                <th scope="col">Nombre</th>
+                <th scope="col">Nombre de Plantilla</th>
+                {{-- <th scope="col">Nombre</th> --}}
                 {{-- <th scope="col">Cliente</th> --}}
-                <th scope="col">Responsable Cliente</th>
-                <th scope="col">Email Responsable</th>
-                <th scope="col">Teléfono Responsable</th>
+                {{-- <th scope="col">Responsable Cliente</th> --}}
+                {{-- <th scope="col">Email Responsable</th> --}}
+                {{-- <th scope="col">Teléfono Responsable</th> --}}
                 {{-- <th scope="col">Usuario</th> --}}
-                <th scope="col">Fecha Inicio</th>
-                <th scope="col">Fecha Final</th>
+                {{-- <th scope="col">Fecha Inicio</th> --}}
+                {{-- <th scope="col">Fecha Final</th> --}}
                 <th scope="col">Acciones</th>
             </tr>
         </thead>
@@ -151,7 +152,8 @@ Plantillas Creadas
 
                 @if ($dato->id_cliente == "" && $dato->id_usuario == "")
                     <tr>
-                        <td>{{$dato->nombre}}</td>
+                        <td>{{$dato->select_plantilla}}</td>
+                        {{-- <td>{{$dato->nombre}}</td>
                             @if ($dato->id_cliente)
                                 <td>{{$dato->clientes->nombre}}</td>
                             @endif
@@ -162,10 +164,10 @@ Plantillas Creadas
                                 <td>{{$dato->usuarios->nombre}}</td>
                             @endif
                         <td>{{$dato->fecha_inicio}}</td>
-                        <td>{{$dato->fecha_fin}}</td>
-                        <td class="d-flex justify-content-around">
-                            {{-- <a href="{{url('/plantilla_detalle_proyectos?buscar='.$dato->id)}}" class="show"><ion-icon name="add-circle-outline"></ion-icon></a>
-                            | --}}
+                        <td>{{$dato->fecha_fin}}</td> --}}
+                        <td class="">
+                            <a href="{{url('/plantilla_detalle_proyectos?buscar='.$dato->id)}}" class="show"><ion-icon name="add-circle-outline"></ion-icon></a>
+                            |
                             <a href="{{url('plantilla_proyectos/'.$dato->id.'/edit')}}" class="edit"><ion-icon name="pencil-outline"></ion-icon></a>
                             |
                             <form action="{{url('proyectos/'.$dato->id)}}" method="POST" class="delete">

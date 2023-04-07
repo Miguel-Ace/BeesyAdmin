@@ -15,17 +15,17 @@ return new class extends Migration
     {
         Schema::create('proyectos', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
+            $table->string('nombre')->nullable();
             // $table->bigInteger('id_cliente')->unsigned()->nullable();
             $table->string('id_cliente')->nullable();
             $table->string('user_de_cliente')->nullable();
-            $table->string('responsable_cliente');
-            $table->string('email_responsable');
-            $table->string('telefono_responsable');
+            $table->string('responsable_cliente')->nullable();
+            $table->string('email_responsable')->nullable();
+            $table->string('telefono_responsable')->nullable();
             // $table->bigInteger('id_usuario')->unsigned()->nullable();
             $table->string('id_usuario')->nullable();
-            $table->string('fecha_inicio');
-            $table->string('fecha_fin');
+            $table->string('fecha_inicio')->nullable();
+            $table->string('fecha_fin')->nullable();
             $table->string('select_plantilla')->nullable();
             $table->timestamps();
 

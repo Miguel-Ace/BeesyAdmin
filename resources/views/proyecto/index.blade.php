@@ -146,12 +146,15 @@ Agregar Proyecto
                     </div>
 
                     <div class="col-md-3">
-                        <label for="" class="form-label">Selecciona una Plantilla</label>
-                        <select class="form-select" id="select">
-                            <option value="" id="">Seleccione Plantilla</option>
-                            @foreach ($datos as $dato)
-                                @if ($dato->id_cliente == NULL)
-                                    <option value="{{$dato->id}}" id="select_plantilla">{{$dato->select_plantilla}}</option>
+                        <label for="select_plantilla" class="form-label">Selecciona una Plantilla</label>
+                        <select class="form-select" name="select_plantilla" @error("select_plantilla")style="border: solid 2px red"@enderror>
+                            <option value="">Seleccione Plantilla</option>
+                            @foreach ($proyectos as $proyecto)
+                                {{-- @if ($proyecto->id_cliente == NULL)
+                                    <option value="{{$proyecto->id}}" id="select_plantilla">{{$proyecto->select_plantilla}}</option>
+                                @endif --}}
+                                @if ($proyecto->select_plantilla != NULL && $proyecto->fecha_fin == NULL)
+                                    <option {{ old('select_plantilla') == $proyecto->select_plantilla ? 'selected' : '' }} value="{{$proyecto->select_plantilla}}">{{$proyecto->select_plantilla}}</option>
                                 @endif
                             @endforeach
                         </select>
@@ -309,12 +312,13 @@ Agregar Proyecto
 
             <div class="col-md-3">
                 <label for="select_plantilla" class="form-label">Selecciona una Plantilla</label>
-                <select class="form-select" id="select">
-                    <option value="" id="">Seleccione Plantilla</option>
+                <select class="form-select" name="" @error("select_plantilla")style="border: solid 2px red"@enderror>
+                    <option value="">Seleccione Plantilla</option>
                     @foreach ($proyectos as $proyecto)
-                        @if ($proyecto->id_cliente == NULL)
+                        {{-- @if ($proyecto->id_cliente == NULL)
                             <option value="{{$proyecto->id}}" id="select_plantilla">{{$proyecto->select_plantilla}}</option>
-                        @endif
+                        @endif --}}
+                            <option {{ old('select_plantilla') == $proyecto->select_plantilla ? 'selected' : '' }} value="{{$proyecto->select_plantilla}}">{{$proyecto->select_plantilla}}</option>
                     @endforeach
                 </select>
             </div>
@@ -356,7 +360,7 @@ Lista de Proyectos
     <table class="table table-bordered table-hover tablagrande">
         <thead>
             @foreach ($proyectos as $proyecto)
-                @if ($proyecto->id_cliente != NULL && $proyecto->id_usuario != NULL)
+                @if ($proyecto->nombre != NULL && $proyecto->select_plantilla != NULL)
                     <tr  class="titulo-tabla text-center d-none">
                         <th scope="col">Nombre</th>
                         <th scope="col">Cliente</th>
@@ -375,7 +379,7 @@ Lista de Proyectos
         </thead>
         <tbody class="text-center">
             @foreach ($proyectos as $proyecto )
-                @if ($proyecto->id_cliente != NULL && $proyecto->id_usuario != NULL)
+                @if ($proyecto->nombre != NULL && $proyecto->select_plantilla != NULL)
                     <tr>
                         <td>{{$proyecto->nombre}}</td>
                         <td>{{$proyecto->id_cliente}}</td>
@@ -419,18 +423,21 @@ Lista de Proyectos
 <script>
     // const inputs = document.querySelectorAll('input');
     // const formulario = document.querySelector('#form');
-    const btnCargar = document.getElementById('cargar');
-    const btnCargarEnviar = document.getElementById('cargarEnviar');
-    const select = document.getElementById('select');
 
-    select.onclick = (e) => {
-        let valor = e.target.value;
-        console.log(valor);
-        btnCargar.value = valor;
-            if (valor != '') {
-                btnCargarEnviar.click();
-            }
-        }
+    // ¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿
+    // const btnCargar = document.getElementById('cargar');
+    // const btnCargarEnviar = document.getElementById('cargarEnviar');
+    // const select = document.getElementById('select');
+
+    // select.onclick = (e) => {
+    //     let valor = e.target.value;
+    //     console.log(valor);
+    //     btnCargar.value = valor;
+    //         if (valor != '') {
+    //             btnCargarEnviar.click();
+    //         }
+    //     }
+    // ????????????????????????????????????????????????????
 
     // let proyectos = JSON.parse('{!! json_encode($proyectos) !!}');
     // proyectos.forEach(element => {

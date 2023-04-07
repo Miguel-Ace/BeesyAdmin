@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Proyecto;
 use Illuminate\Http\Request;
 use App\Models\DetalleProyecto;
+use App\Models\PruebaDetalleProyecto;
 
 class PlantillaDetalleProyectoController extends Controller
 {
@@ -24,7 +25,7 @@ class PlantillaDetalleProyectoController extends Controller
     {
         $obtenerId = $_GET['buscar'];
         $busqueda = $request->buscar;
-        $datos = DetalleProyecto::where('id_proyecto','like','%'.$busqueda.'%')->paginate();
+        $datos = PruebaDetalleProyecto::where('id_proyecto','like','%'.$busqueda.'%')->paginate();
         $proyectos = Proyecto::all();
         $usuarios = User::all();
         $estados = Estado::all();
@@ -52,24 +53,25 @@ class PlantillaDetalleProyectoController extends Controller
     public function store(Request $request, $obtenerId)
     {
         request()->validate([
-            'id_proyecto' => 'required|unique:detalle_proyectos',
+            'id_proyecto' => 'required',
             'num_actividad' => 'required|min:1',
             'nombre_actividad' => 'required',
-            'fecha_inicio' => 'required',
-            'fecha_fin' => 'required',
+            // 'fecha_inicio' => 'required',
+            // 'fecha_fin' => 'required',
             'horas_propuestas' => 'required|min:1',
-            'horas_reales' => 'required|min:1',
+            // 'horas_reales' => 'required|min:1',
             'meta_hrs_optimas' => 'required|min:1',
-            'id_usuario' => 'required|min:1',
-            'ejecutor_cliente' => 'required',
-            'tipo' => 'required',
-            'rendimiento' => 'required',
+            // 'id_usuario' => 'required|min:1',
+            // 'ejecutor_cliente' => 'required',
+            // 'tipo' => 'required',
+            // 'rendimiento' => 'required',
             'id_estado' => 'required',
             'id_etapa' => 'required',
             'select_plantilla' => 'required',
         ]);
 
         $datos = $request->except('_token');
+        PruebaDetalleProyecto::insert($datos);
         DetalleProyecto::insert($datos);
         return redirect('/plantilla_detalle_proyectos?buscar='.$obtenerId)->with('success','GUARDADO CON ÉXITO');
     }
@@ -114,7 +116,8 @@ class PlantillaDetalleProyectoController extends Controller
     public function update(Request $request, $id, $obtenerId)
     {
         $datos = $request->except('_token','_method');
-        DetalleProyecto::where('id','=',$id)->update($datos);
+        PruebaDetalleProyecto::where('id','=',$id)->update($datos);
+        // DetalleProyecto::where('id','=',$id)->update($datos);
         return redirect('/plantilla_detalle_proyectos?buscar='.$obtenerId)->with('success','INFORMACIÓN ACTUALIZADA');
     }
 
