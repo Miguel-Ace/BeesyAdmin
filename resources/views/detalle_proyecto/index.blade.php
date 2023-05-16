@@ -67,7 +67,7 @@ Agregar Detalle a Este Proyectos
                   <input type="text" class="form-control" id="nombre_actividad" name="nombre_actividad" @error("nombre_actividad") style="border: 1px solid red" @enderror value="{{old('nombre_actividad')}}">
                 </div>
             </div>
-            
+
           <div class="col-md-3">
             <div class="mb-3">
                 <label for="fecha_inicio" class="form-label">Fecha Inicio</label>
@@ -235,105 +235,37 @@ Agregar Detalle a Este Proyectos
             </tr>
         </thead>
         <tbody class="text-center">
-          @foreach ($datalleproyectos as $datalleproyecto)
-          <tr>
-            <td>{{$datalleproyecto->num_actividad}}</td>
-            <td>{{$datalleproyecto->nombre_actividad}}</td>
-            <td>{{$datalleproyecto->fecha_inicio}}</td>
-            <td>{{$datalleproyecto->fecha_fin}}</td>
-            <td>{{$datalleproyecto->horas_propuestas}}</td>
-            <td style="color: green">{{$datalleproyecto->horas_reales}}</td>
-            <td style="color: green">{{$datalleproyecto->meta_hrs_optimas}}</td>
-            <td>{{$datalleproyecto->id_usuario}}</td>
-            <td>{{$datalleproyecto->ejecutor_cliente}}</td>
-            <td>{{$datalleproyecto->tipo}}</td>
-            <td style="color: green">{{$datalleproyecto->id_estado}}</td>
-            <td>{{$datalleproyecto->id_etapa}}</td>
-            <td style="color: green">{{$datalleproyecto->notas}}</td>
-            <td class="">
-              <a href="{{url('detalle_proyectos/'.$datalleproyecto->id.'/'.'edit/'.$obtenerId)}}" class="edit">
-                <ion-icon name="pencil-outline"></ion-icon>
-              </a>
-            </td>
-          </tr>
-          @endforeach
-          {{-- @foreach ($proyectos as $proyecto)
-            @if ($obtenerId == $proyecto->id)
-              <span class="d-none">{{$nombreplantilla = $proyecto->select_plantilla}}</span>
-              <span class="d-none">{{$usuarioplantilla = $proyecto->id_usuario}}</span>
-            @endif
-          @endforeach
-
-          @foreach ($datalleproyectos as $datalleproyecto)
-              @if ($nombreplantilla == $datalleproyecto->select_plantilla && $datalleproyecto->fecha_inicio != NULL)
-                <span class="d-none">{{$actividadplantilla = $datalleproyecto->nombre_actividad}}</span>
-              @endif
-          @endforeach
-
-          @php
-            $actividades = [];
-          @endphp
-
-          @foreach ($datalleproyectos as $datalleproyecto)
-            @if ($nombreplantilla == $datalleproyecto->select_plantilla && $datalleproyecto->fecha_inicio != NULL)
-              @php
-                array_push($actividades, $datalleproyecto->nombre_actividad);
-              @endphp
-            @endif
-          @endforeach
-
-          @foreach ($datalleproyectos as $datalleproyecto)
-            @if ($datalleproyecto->id_proyecto == $obtenerId && $usuarioplantilla == $datalleproyecto->id_usuario)
-              <tr>
-                <td>{{$datalleproyecto->num_actividad}}</td>
-                <td>{{$datalleproyecto->nombre_actividad}}</td>
-                <td>{{$datalleproyecto->fecha_inicio}}</td>
-                <td>{{$datalleproyecto->fecha_fin}}</td>
-                <td>{{$datalleproyecto->horas_propuestas}}</td>
-                <td style="color: green">{{$datalleproyecto->horas_reales}}</td>
-                <td style="color: green">{{$datalleproyecto->meta_hrs_optimas}}</td>
-                <td>{{$datalleproyecto->id_usuario}}</td>
-                <td>{{$datalleproyecto->ejecutor_cliente}}</td>
-                <td>{{$datalleproyecto->tipo}}</td>
-                <td style="color: green">{{$datalleproyecto->id_estado}}</td>
-                <td>{{$datalleproyecto->id_etapa}}</td>
-                <td style="color: green">{{$datalleproyecto->notas}}</td>
-                <td class="">
-                  <a href="{{url('detalle_proyectos/'.$datalleproyecto->id.'/'.'edit/'.$obtenerId)}}" class="edit">
-                    <ion-icon name="pencil-outline"></ion-icon>
-                  </a>
-                </td>
-              </tr>
-            @elseif ($datalleproyecto->id_proyecto != $obtenerId && $datalleproyecto->select_plantilla == $nombreplantilla && $datalleproyecto->id_usuario == NULL)
-              <tr>
-                <td>{{$datalleproyecto->num_actividad}}</td>
-                <td>{{$datalleproyecto->nombre_actividad}}</td>
-                <td>{{$datalleproyecto->fecha_inicio}}</td>
-                <td>{{$datalleproyecto->fecha_fin}}</td>
-                <td>{{$datalleproyecto->horas_propuestas}}</td>
-                <td style="color: green">{{$datalleproyecto->horas_reales}}</td>
-                <td style="color: green">{{$datalleproyecto->meta_hrs_optimas}}</td>
-                <td>{{$datalleproyecto->id_usuario}}</td>
-                <td>{{$datalleproyecto->ejecutor_cliente}}</td>
-                <td>{{$datalleproyecto->tipo}}</td>
-                <td style="color: green">{{$datalleproyecto->id_estado}}</td>
-                <td>{{$datalleproyecto->id_etapa}}</td>
-                <td style="color: green">{{$datalleproyecto->notas}}</td>
-                <td class="">
-                  <a href="{{url('detalle_proyectos/'.$datalleproyecto->id.'/'.'edit/'.$obtenerId)}}" class="edit">
-                    <ion-icon name="pencil-outline"></ion-icon>
-                  </a>
-                </td>
-              </tr>
-            @endif
-          @endforeach --}}
+            @foreach ($datalleproyectos as $datalleproyecto)
+                @if ($datalleproyecto->id_proyecto == $obtenerId)
+                    <tr>
+                        <td>{{$datalleproyecto->num_actividad}}</td>
+                        <td>{{$datalleproyecto->nombre_actividad}}</td>
+                        <td>{{$datalleproyecto->fecha_inicio}}</td>
+                        <td>{{$datalleproyecto->fecha_fin}}</td>
+                        <td>{{$datalleproyecto->horas_propuestas}}</td>
+                        <td style="color: green">{{$datalleproyecto->horas_reales}}</td>
+                        <td style="color: green">{{$datalleproyecto->meta_hrs_optimas}}</td>
+                        <td>{{$datalleproyecto->id_usuario}}</td>
+                        <td>{{$datalleproyecto->ejecutor_cliente}}</td>
+                        <td>{{$datalleproyecto->tipo}}</td>
+                        <td style="color: green">{{$datalleproyecto->id_estado}}</td>
+                        <td>{{$datalleproyecto->id_etapa}}</td>
+                        <td style="color: green">{{$datalleproyecto->notas}}</td>
+                        <td class="">
+                        <a href="{{url('detalle_proyectos/'.$datalleproyecto->id.'/'.'edit/'.$obtenerId)}}" class="edit">
+                            <ion-icon name="pencil-outline"></ion-icon>
+                        </a>
+                        </td>
+                    </tr>
+                @endif
+            @endforeach
         </tbody>
     </table>
 </div>
 
 @endsection
 <script>
-  
+
   const contenedorid = document.getElementById('contenedorid');
 
   const numActividad = document.getElementById('num_actividad');
@@ -356,9 +288,9 @@ Agregar Detalle a Este Proyectos
   select.onclick = (e) => {
       let valor = e.target.value;
       valorContenedor = contenedorid.value = valor;
-      
+
       let datalleproyectos = JSON.parse('{!! json_encode($datalleproyectos) !!}');
-      
+
       datalleproyectos.forEach(element => {
           let idPlantilla = element.id;
           let numactividad = element.num_actividad;
@@ -376,11 +308,11 @@ Agregar Detalle a Este Proyectos
           let idetapa = element.id_etapa;
           let nota = element.notas;
           let nombreplantilla = element.select_plantilla;
-          
+
           // console.log(tiposs);
           // console.log(numactividad);
           // console.log(nombreplantilla);
-          
+
           if (idPlantilla == valorContenedor) {
             // console.log(idusuario);
 
@@ -400,7 +332,7 @@ Agregar Detalle a Este Proyectos
             idEtapa.value = idetapa
             notas.value = nota
             }
-    
+
         });
       }
 

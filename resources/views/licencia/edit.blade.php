@@ -56,6 +56,12 @@ Actualizar Licencias
                 <input type="date" class="form-control" id="fechaFinal" name="fechaFinal" value="{{$datos->fechaFinal}}">
               </div>
           </div>
+          <div class="col-md-4">
+            <div class="mb-3">
+                <label for="ruta" class="form-label">Ruta</label>
+                <input type="text" class="form-control" id="ruta" name="ruta" value="{{$datos->ruta}}">
+              </div>
+          </div>
         </div>
 
     <button type="submit" class="enviar">

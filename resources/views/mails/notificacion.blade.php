@@ -72,7 +72,7 @@
     <div class="contenedor">
 
         <div class="tamano">
-            
+
             <div class="img">
                 <img style="max-width: 100%" src="https://beesys.net/wp-content/uploads/2022/09/logo.png" alt="logo beesy"/>
             </div>
@@ -102,22 +102,22 @@
 
                 @if ($valor == 'Leve')
                     <p style="font-size: .7rem">Nota:: Les recuerdo que siempre debemos brindar soporte a nuestros clientes,<br>
-                                                incluso en casos de baja complejidad. Si reciben una solicitud de soporte<br> 
-                                                de nivel leve, les pido que atiendan el problema de manera oportuna y con la<br> 
+                                                incluso en casos de baja complejidad. Si reciben una solicitud de soporte<br>
+                                                de nivel leve, les pido que atiendan el problema de manera oportuna y con la<br>
                                                 calidad de servicio que nos caracteriza. Agradezco su compromiso con nuestros clientes.</p>
                 @elseif ($valor == 'Moderado')
                     <p style="font-size: .7rem">Nota:: Les pido que se enfoquen en resolver este problema lo antes posible,<br>
-                                                y que lo hagan con atención al detalle y asegurándose de que el cliente esté<br> 
+                                                y que lo hagan con atención al detalle y asegurándose de que el cliente esté<br>
                                                 satisfecho con la solución. Recuerden que nuestro compromiso con los clientes es <br>
                                                 fundamental para mantener su confianza en nosotros</p>
                 @else
-                    <p style="color: red;font-size: .7rem">Nota:: Tenemos un caso de soporte de nivel grave que ha sido <br>
+                    <p style="color: red;font-size: .7rem">Nota:: Tenemos un caso de soporte de nivel alto que ha sido <br>
                                                              reportado por un cliente. Les pido que den prioridad a este caso <br>
                                                              y trabajen en equipo para resolverlo con la mayor eficiencia posible.</p>
                 @endif
                 {{-- <p class=""><span>Fecha y Hora Final:</span> {{$msg['fechaHoraFinal']}}</p> --}}
             </div>
-            
+
             <div class="contenedorlink">
                 <a href="{{ url('http://46.183.112.214/soporte') }}" class="link" style="color: black">Realizar soporte</a>
             </div>

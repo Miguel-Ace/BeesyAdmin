@@ -37,7 +37,7 @@ Agregar Proyecto
                         @endforeach
                     </ul>
                 @endif
-                
+
                 @csrf
                 <div class="row">
                     <div class="col-md-3">
@@ -175,7 +175,7 @@ Agregar Proyecto
         </div>
 
     @endif
-    
+
 @else
 
     @foreach ($proyectos as $proyecto)
@@ -202,7 +202,7 @@ Agregar Proyecto
                 @endforeach
             </ul>
         @endif
-        
+
         @csrf
         <div class="row">
             <div class="col-md-3">
@@ -253,7 +253,7 @@ Agregar Proyecto
                     @endforeach
                 </select>
             </div>
-            
+
             <div class="col-md-3">
                 <div class="mb-3">
                     <label for="responsable_cliente" class="form-label">Responsable del Cliente</label>
@@ -323,7 +323,7 @@ Agregar Proyecto
                 </select>
             </div>
         </div>
-        
+
         <button type="submit" class="enviar" id="enviar">
         <ion-icon name="save-outline"></ion-icon>
         Guardar

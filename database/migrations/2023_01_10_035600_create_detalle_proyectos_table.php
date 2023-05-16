@@ -33,7 +33,7 @@ return new class extends Migration
             // $table->bigInteger('id_etapa')->unsigned()->nullable();
             $table->string('id_etapa')->nullable();
             $table->string('notas')->nullable();
-            $table->string('select_plantilla')->nullable();
+            // $table->string('select_plantilla')->nullable();
             $table->timestamps();
 
             // $table->foreign('id_proyecto')->references('id')->on('proyectos')->onDelete('cascade')->onUpdate('cascade');

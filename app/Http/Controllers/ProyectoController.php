@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cliente;
 use App\Models\DetalleProyecto;
 use App\Models\Proyecto;
+use App\Models\PruebaDetalleProyecto;
 use App\Models\User;
 use App\Models\UserCliente;
 use App\Models\Usuario;
@@ -16,6 +17,7 @@ class ProyectoController extends Controller
     {
         $this->middleware('auth');
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -33,7 +35,8 @@ class ProyectoController extends Controller
         $detalleProyectos = DetalleProyecto::all();
         $userdeclientes = UserCliente::all();
         $valor = 0;
-        return view('proyecto.index', compact('proyectos','datos','busqueda','clientes','usuarios','valor','detalleProyectos','userdeclientes'));
+        $ultimoId = Proyecto::max('id');
+        return view('proyecto.index', compact('ultimoId','proyectos','datos','busqueda','clientes','usuarios','valor','detalleProyectos','userdeclientes'));
     }
 
     /**
@@ -71,6 +74,26 @@ class ProyectoController extends Controller
 
         $datos = $request->except('_token');
         Proyecto::insert($datos);
+
+        $pruebaDetallProyectos = PruebaDetalleProyecto::all();
+
+        $ultimoId = Proyecto::max('id');
+
+        foreach ($pruebaDetallProyectos as $id => $pruebaDetallProyecto) {
+
+            if ($pruebaDetallProyecto->select_plantilla == $request->input('select_plantilla')) {
+                $detalleItem = new DetalleProyecto();
+                $detalleItem->id_proyecto = $ultimoId;
+                $detalleItem->num_actividad = $pruebaDetallProyecto->num_actividad;
+                $detalleItem->nombre_actividad = $pruebaDetallProyecto->nombre_actividad;
+                $detalleItem->horas_propuestas = $pruebaDetallProyecto->horas_propuestas;
+                $detalleItem->meta_hrs_optimas = $pruebaDetallProyecto->meta_hrs_optimas;
+                $detalleItem->id_estado = $pruebaDetallProyecto->id_estado;
+                $detalleItem->id_etapa = $pruebaDetallProyecto->id_etapa;
+                $detalleItem->save();
+            }
+        }
+
         return redirect('/proyectos')->with('success','GUARDADO CON ÉXITO');
     }
 

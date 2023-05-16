@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('id_cliente');
             // $table->bigInteger('id_software')->unsigned();
             $table->string('id_software');
+            $table->string('ruta');
             $table->string('cantidad');
             $table->string('fechaInicio');
             $table->string('fechaFinal');

@@ -52,7 +52,7 @@ Agregar Licencias
             @endforeach
         </select>
     </div>
-    
+
     <div class="col-md-4">
         <div class="mb-3">
             <label for="cantidad" class="form-label">Cantidad</label>
@@ -69,6 +69,12 @@ Agregar Licencias
         <div class="mb-3">
             <label for="fechaFinal" class="form-label">Fecha Final</label>
             <input type="date" class="form-control" id="fechaFinal" name="fechaFinal" @error("fechaFinal") style="border: 1px solid red" @enderror value="{{old('fechaFinal')}}">
+          </div>
+      </div>
+    <div class="col-md-4">
+        <div class="mb-3">
+            <label for="ruta" class="form-label">Ruta</label>
+            <input type="text" class="form-control" id="ruta" name="ruta" @error("ruta") style="border: 1px solid red" @enderror value="{{old('ruta')}}">
           </div>
       </div>
     </div>
@@ -101,7 +107,7 @@ Agregar Licencias
             @endforeach
         </select>
     </div>
-    
+
     <div class="col-md-4">
         <div class="mb-3">
             <label for="cantidad" class="form-label">Cantidad</label>
@@ -118,6 +124,12 @@ Agregar Licencias
         <div class="mb-3">
             <label for="fechaFinal" class="form-label">Fecha Final</label>
             <input type="date" class="form-control" id="fechaFinal" name="fechaFinal" @error("fechaFinal") style="border: 1px solid red" @enderror value="{{old('fechaFinal')}}">
+          </div>
+      </div>
+      <div class="col-md-4">
+        <div class="mb-3">
+            <label for="ruta" class="form-label">Ruta</label>
+            <input type="text" class="form-control" id="ruta" name="ruta" @error("ruta") style="border: 1px solid red" @enderror value="{{old('ruta')}}">
           </div>
       </div>
     </div>

@@ -18,8 +18,9 @@ return new class extends Migration
             $table->id();
             $table->string('ticker');
             $table->string('colaborador');
-            $table->string('fechaHoraInicio');
-            $table->string('fechaHoraFinal')->nullable();
+            $table->string('fechaCreacionTicke')->nullable();
+            $table->string('fechaInicioAsistencia')->nullable();
+            $table->string('fechaFinalAsistencia')->nullable();
             // $table->bigInteger('id_cliente')->unsigned();
             $table->string('id_cliente');
             // $table->bigInteger('id_software')->unsigned();
@@ -32,6 +33,7 @@ return new class extends Migration
             $table->string('prioridad');
             $table->string('estado');
             $table->string('correo_cliente');
+            $table->string('archivo')->nullable();
             $table->timestamps();
 
             // $table->foreign('id_cliente')->references('id')->on('clientes')->onDelete('cascade')->onUpdate('cascade');

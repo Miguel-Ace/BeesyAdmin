@@ -58,8 +58,8 @@ class SoporteController extends Controller
             'ticker' => 'required',
             'colaborador' => 'required',
             'numLaboral' => 'required',
-            'fechaHoraInicio' => 'required',
-            // 'fechaHoraFinal' => 'required',
+            'fechaInicioAsistencia' => 'required',
+            'fechaCreacionTicke' => 'required',
             'id_cliente' => 'required',
             'correo_cliente' => 'required',
             'id_software' => 'required',
@@ -69,9 +69,14 @@ class SoporteController extends Controller
             'observaciones' => 'nullable',
             'prioridad' => 'required',
             'estado' => 'required',
+            'archivo' => 'required',
         ]);
 
         $datos = $request->except('_token');
+        if ($request->file('archivo')) {
+            // $datos['archivo'] = $request->file('archivo')->store('archivos','public');
+            $datos['archivo'] = $request->file('archivo')->storeAs('archivos', $request->file('archivo')->getClientOriginalName(), 'public');
+        }
         Soporte::insert($datos);
 
         $correo = new notificacionesCliente($message);
@@ -86,7 +91,7 @@ class SoporteController extends Controller
         $correo = new notificaciones($message);
         $emails = DB::table('users')->pluck('email');
         Mail::to($emails)->send($correo);
-        
+
         // $emails = ['acevedo51198mac@gmail.com','juego55miguel@gmail.com','juego2miguel@gmail.com	'];
         // Mail::to('acevedomac@gmail.com')->queue($correo);
         // Mail::to('acevedo51198mac@gmail.com')->queue($correo);
@@ -155,7 +160,7 @@ class SoporteController extends Controller
             $correo = new notificacionesFinal($message);
             $email = $request->input('correo_cliente');
             Mail::to($email)->send($correo);
-            
+
             $correo = new notificacionesFinal($message);
             $emails = DB::table('users')->pluck('email');
             Mail::to($emails)->send($correo);
@@ -165,7 +170,7 @@ class SoporteController extends Controller
             $emails = DB::table('users')->pluck('email');
             Mail::to($emails)->send($correo);
         }
-        
+
 
         return redirect('/soporte')->with('success','INFORMACIÓN ACTUALIZADA');
     }

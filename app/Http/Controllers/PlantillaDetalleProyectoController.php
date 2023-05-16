@@ -72,7 +72,8 @@ class PlantillaDetalleProyectoController extends Controller
 
         $datos = $request->except('_token');
         PruebaDetalleProyecto::insert($datos);
-        DetalleProyecto::insert($datos);
+
+        // DetalleProyecto::insert($datos);
         return redirect('/plantilla_detalle_proyectos?buscar='.$obtenerId)->with('success','GUARDADO CON ÉXITO');
     }
 
@@ -97,7 +98,7 @@ class PlantillaDetalleProyectoController extends Controller
      */
     public function edit($id, $obtenerId)
     {
-        $datos = DetalleProyecto::find($id);
+        $datos = PruebaDetalleProyecto::find($id);
         $proyectos = Proyecto::all();
         $usuarios = User::all();
         $estados = Estado::all();

@@ -19,7 +19,7 @@ Actualizar soporte
 <form action="{{url('soporte/'.$datos->id)}}" class="row" method="post">
     @csrf
     {{method_field('PATCH')}}
-    
+
     <div class="col-md-3 d-none">
       <div class="mb-3">
           <label for="ticker" class="form-label">Ticket (Auto Generado)</label>
@@ -56,17 +56,24 @@ Actualizar soporte
               </select>
           </div>
 
-        <div class="col-md-4 d-none">
+          <div class="col-md-4 d-none">
             <div class="mb-3">
-                <label for="fechaHoraInicio" class="form-label">Fecha Inicio</label>
-                <input type="datetime-local" class="form-control" id="fechaHoraInicio" name="fechaHoraInicio" value="{{$datos->fechaHoraInicio}}">
+                <label for="fechaInicioAsistencia" class="form-label">Fecha y hora de inicio de asistencia</label>
+                <input type="datetime-local" class="form-control" id="fechaInicioAsistencia" name="fechaInicioAsistencia" value="{{$datos->fechaInicioAsistencia}}">
               </div>
           </div>
 
         <div class="col-md-4">
             <div class="mb-3">
-                <label for="fechaHoraFinal" class="form-label">Fecha Final</label>
-                <input type="datetime-local" class="form-control" id="fechaHoraFinal" name="fechaHoraFinal" value="{{$datos->fechaHoraFinal}}" @error("fechaHoraFinal")style="border: solid 2px red"@enderror>
+                <label for="fechaFinalAsistencia" class="form-label">fecha y hora final de asistencia</label>
+                <input type="datetime-local" class="form-control" id="fechaFinalAsistencia" name="fechaFinalAsistencia" value="{{$datos->fechaFinalAsistencia}}">
+              </div>
+          </div>
+
+        <div class="col-md-4 d-none">
+            <div class="mb-3">
+                <label for="fechaCreacionTicke" class="form-label">Fecha Creación de Ticket</label>
+                <input type="datetime-local" class="form-control" id="fechaCreacionTicke" name="fechaCreacionTicke" value="{{$datos->fechaCreacionTicke}}">
               </div>
           </div>
 
@@ -107,19 +114,19 @@ Actualizar soporte
             <label for="prioridad" class="form-label">Prioridad</label>
               <select class="form-select" name="prioridad" @error("prioridad")style="border: solid 2px red"@enderror>
                   <option value="" selected disabled>Selccione una prioridad</option>
-                  
+
                   @if ($datos->prioridad === 'Leve')
                     <option value="Leve" selected>Leve</option>
                     <option value="Moderado">Moderado</option>
-                    <option value="Grave">Grave</option>
+                    <option value="Alta">Alta</option>
                   @elseif ($datos->prioridad === 'Moderado')
                     <option value="Leve">Leve</option>
                     <option value="Moderado" selected>Moderado</option>
-                    <option value="Grave">Grave</option>
+                    <option value="Alta">Alta</option>
                   @elseif ($datos->prioridad === 'Grave')
                     <option value="Leve">Leve</option>
                     <option value="Moderado">Moderado</option>
-                    <option value="Grave" selected>Grave</option>
+                    <option value="Alta" selected>Alta</option>
                   @endif
               </select>
           </div>
@@ -150,9 +157,9 @@ Actualizar soporte
                   <option value="Asignado" selected disabled>Selccione un estado</option>
                   @foreach ($usuarioclientes as $usuariocliente)
                     @if ($datos->usuario == $usuariocliente->id)
-                      <option value="{{ $usuariocliente->id }}" selected>{{ $usuariocliente->name }}</option>  
+                      <option value="{{ $usuariocliente->id }}" selected>{{ $usuariocliente->name }}</option>
                     @else
-                      <option value="{{ $usuariocliente->id }}">{{ $usuariocliente->name }}</option>  
+                      <option value="{{ $usuariocliente->id }}">{{ $usuariocliente->name }}</option>
                     @endif
                   @endforeach
               </select>
