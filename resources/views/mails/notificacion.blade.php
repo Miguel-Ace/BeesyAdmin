@@ -85,7 +85,7 @@
                 <p class=""><span>Ticket:</span> {{$msg['ticker']}}</p>
                 <p class=""><span>Cliente:</span> {{$msg['id_cliente']}}</p>
                 <p class=""><span>Colaborador:</span> {{$msg['colaborador']}}</p>
-                <p class=""><span>Fecha y Hora Inicial:</span> {{$msg['fechaHoraInicio']}}</p>
+                <p class=""><span>Fecha y Hora Inicial:</span> {{$msg['fechaInicioAsistencia']}}</p>
                 <p class=""><span>Problema:</span> {{$msg['problema']}}</p>
 
                 @if ($valor == 'Leve')
@@ -97,7 +97,7 @@
                 @endif
 
                 <p class=""><span>Estado:</span> {{$msg['estado']}}</p>
-                <p class=""><span>Solución:</span> {{$msg['solucion']}}</p>
+                {{-- <p class=""><span>Solución:</span> {{$msg['solucion']}}</p> --}}
                 <p class=""><span>Observaciones:</span> {{$msg['observaciones']}}</p>
 
                 @if ($valor == 'Leve')

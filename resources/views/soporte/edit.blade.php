@@ -70,7 +70,7 @@ Actualizar soporte
               </div>
           </div>
 
-        <div class="col-md-4 d-none">
+        <div class="col-md-4">
             <div class="mb-3">
                 <label for="fechaCreacionTicke" class="form-label">Fecha Creación de Ticket</label>
                 <input type="datetime-local" class="form-control" id="fechaCreacionTicke" name="fechaCreacionTicke" value="{{$datos->fechaCreacionTicke}}">
@@ -110,7 +110,7 @@ Actualizar soporte
               </div>
           </div>
 
-          <div class="col-md-4">
+          <div class="col-md-6">
             <label for="prioridad" class="form-label">Prioridad</label>
               <select class="form-select" name="prioridad" @error("prioridad")style="border: solid 2px red"@enderror>
                   <option value="" selected disabled>Selccione una prioridad</option>
@@ -123,7 +123,7 @@ Actualizar soporte
                     <option value="Leve">Leve</option>
                     <option value="Moderado" selected>Moderado</option>
                     <option value="Alta">Alta</option>
-                  @elseif ($datos->prioridad === 'Grave')
+                  @elseif ($datos->prioridad === 'Alta')
                     <option value="Leve">Leve</option>
                     <option value="Moderado">Moderado</option>
                     <option value="Alta" selected>Alta</option>
@@ -131,7 +131,7 @@ Actualizar soporte
               </select>
           </div>
 
-          <div class="col-md-4">
+          <div class="col-md-6">
             <label for="estado" class="form-label">Estado</label>
               <select class="form-select" name="estado" @error("estado")style="border: solid 2px red"@enderror>
                   <option value="" selected disabled>Selccione un estado</option>
@@ -179,14 +179,14 @@ Actualizar soporte
               </div>
           </div>
 
-        <div class="col-md-8">
+        <div class="col-md-6 mt-4">
             <div class="mb-3">
                 <label for="solucion" class="form-label">Solución</label>
                 <input type="text" class="form-control" id="solucion" name="solucion" value="{{$datos->solucion}}" @error("solucion")style="border: solid 2px red"@enderror>
               </div>
           </div>
 
-        <div class="col-md-12">
+        <div class="col-md-6 mt-4">
             <div class="mb-3">
                 <label for="observaciones" class="form-label">Observaciones</label>
                 <input type="text" class="form-control" id="observaciones" name="observaciones" value="{{$datos->observaciones}}" @error("observaciones")style="border: solid 2px red"@enderror>

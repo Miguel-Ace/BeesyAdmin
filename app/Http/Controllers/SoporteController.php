@@ -59,9 +59,9 @@ class SoporteController extends Controller
             'colaborador' => 'required',
             'numLaboral' => 'required',
             'fechaInicioAsistencia' => 'required',
-            'fechaCreacionTicke' => 'required',
+            'fechaCreacionTicke' => 'nullable',
             'id_cliente' => 'required',
-            'correo_cliente' => 'required',
+            'correo_cliente' => 'nullable',
             'id_software' => 'required',
             'numLaboral' => 'required',
             'problema' => 'nullable',
@@ -69,7 +69,7 @@ class SoporteController extends Controller
             'observaciones' => 'nullable',
             'prioridad' => 'required',
             'estado' => 'required',
-            'archivo' => 'required',
+            'archivo' => 'nullable',
         ]);
 
         $datos = $request->except('_token');
@@ -138,8 +138,9 @@ class SoporteController extends Controller
             'ticker' => 'required',
             'colaborador' => 'required',
             'numLaboral' => 'required',
-            'fechaHoraInicio' => 'required',
-            'fechaHoraFinal' => 'nullable',
+            'fechaInicioAsistencia' => 'required',
+            'fechaFinalAsistencia' => 'nullable',
+            'fechaCreacionTicke' => 'nullable',
             'id_cliente' => 'required',
             'id_software' => 'required',
             'numLaboral' => 'required',

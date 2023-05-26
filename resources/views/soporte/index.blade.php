@@ -68,12 +68,12 @@ Agregar soporte
               </div>
           </div>
 
-        <div class="col-md-4">
+        {{-- <div class="col-md-4">
             <div class="mb-3">
                 <label for="fechaCreacionTicke" class="form-label">Fecha Creación de Ticket</label>
                 <input type="datetime-local" class="form-control" id="fechaCreacionTicke" name="fechaCreacionTicke" value="{{old('fechaCreacionTicke')}}" @error("fechaCreacionTicke")style="border: solid 2px red"@enderror>
               </div>
-          </div>
+          </div> --}}
 
         {{-- <div class="col-md-4">
             <div class="mb-3">
@@ -160,14 +160,14 @@ Agregar soporte
               </div>
           </div>
 
-        <div class="col-md-6">
+        {{-- <div class="col-md-6">
             <div class="mb-3">
                 <label for="solucion" class="form-label">Solución</label>
                 <input type="text" class="form-control" id="solucion" name="solucion" value="{{old('solucion')}}" @error("solucion")style="border: solid 2px red"@enderror>
               </div>
-          </div>
+          </div> --}}
 
-        <div class="col-md-6">
+        <div class="col-md-8">
             <div class="mb-3">
                 <label for="observaciones" class="form-label">Observaciones</label>
                 <input type="text" class="form-control" id="observaciones" name="observaciones" value="{{old('observaciones')}}">
@@ -244,10 +244,12 @@ Lista de soporte
                     <td>{{$dato->solucion}}</td>
                     <td>{{$dato->observaciones}}</td>
                     <td>
-                        @if (Str::contains($dato->archivo, ['.jpg', '.jpeg', '.png', '.gif']))
-                            <img src="{{ asset('storage/' . $dato->archivo) }}" width="100">
-                        @else
-                            <a href="{{ asset('storage/' . $dato->archivo) }}" target="_blank"><ion-icon name="document-outline"></ion-icon></a>
+                        @if ($dato->archivo)
+                            @if (Str::contains($dato->archivo, ['.jpg', '.jpeg', '.png', '.gif']))
+                                <img src="{{ asset('storage/' . $dato->archivo) }}" width="100">
+                            @else
+                                <a href="{{ asset('storage/' . $dato->archivo) }}" target="_blank"><ion-icon name="document-outline"></ion-icon></a>
+                            @endif
                         @endif
                     </td>
 

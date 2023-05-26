@@ -73,7 +73,7 @@
     <div class="contenedor">
 
         <div class="tamano">
-            
+
             <div class="img">
                 <img style="max-width: 100%" src="https://beesys.net/wp-content/uploads/2022/09/logo.png" alt="logo beesy"/>
             </div>
@@ -89,7 +89,7 @@
                     una solución personalizada que se ajuste a sus necesidades.
                 </p>
                 <p>
-                    Le aseguramos que haremos todo lo posible para resolver su problema lo más pronto 
+                    Le aseguramos que haremos todo lo posible para resolver su problema lo más pronto
                     posible y le informaremos cuando tengamos una actualización. Agradecemos su paciencia y
                     confianza en nuestros servicios.
                 </p>
@@ -101,7 +101,7 @@
                     Beêsy
                 </p>
                 <p class=""><span>Ticket:</span> {{$msg['ticker']}}</p>
-                <p class=""><span>Fecha y Hora:</span> {{$msg['fechaHoraInicio']}}</p>
+                <p class=""><span>Fecha y Hora:</span> {{$msg['fechaInicioAsistencia']}}</p>
                 {{-- <p class=""><span>Colaborador:</span> {{$msg['colaborador']}}</p> --}}
                 {{-- <p class=""><span>Fecha y Hora Final:</span> {{$msg['fechaHoraFinal']}}</p> --}}
                 {{-- <p class=""><span>Problema:</span> {{$msg['problema']}}</p>
@@ -110,7 +110,7 @@
                 <p class=""><span>Solución:</span> {{$msg['solucion']}}</p>
                 <p class=""><span>Observaciones:</span> {{$msg['observaciones']}}</p> --}}
             </div>
-            
+
             {{-- <div class="contenedorlink">
                 <a href="{{ url('http://127.0.0.1:8000/soporte') }}" class="link" style="color: black">Realizar soporte</a>
             </div> --}}

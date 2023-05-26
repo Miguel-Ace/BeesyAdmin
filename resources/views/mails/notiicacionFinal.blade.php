@@ -72,7 +72,7 @@
     <div class="contenedor">
 
         <div class="tamano">
-            
+
             <div class="img">
                 <img style="max-width: 100%" src="https://beesys.net/wp-content/uploads/2022/09/logo.png" alt="logo beesy"/>
             </div>
@@ -84,8 +84,8 @@
                 <h4 class="">Soporte Realizado Con Éxito!!</h4>
                 <p class=""><span>Ticket:</span> {{$msg['ticker']}}</p>
                 <p class=""><span>Colaborador:</span> {{$msg['colaborador']}}</p>
-                <p class=""><span>Fecha y Hora Inicial:</span> {{$msg['fechaHoraInicio']}}</p>
-                <p class=""><span>Fecha y Hora Final:</span> {{$msg['fechaHoraFinal']}}</p>
+                <p class=""><span>Fecha y Hora Inicial:</span> {{$msg['fechaInicioAsistencia']}}</p>
+                <p class=""><span>Fecha y Hora Final:</span> {{$msg['fechaFinalAsistencia']}}</p>
                 <p class=""><span>Problema:</span> {{$msg['problema']}}</p>
 
                 @if ($valor2 == 'Leve')
@@ -107,7 +107,7 @@
                 <p class=""><span>Observaciones:</span> {{$msg['observaciones']}}</p>
 
             </div>
-            
+
             {{-- <div class="contenedorlink">
                 <a href="{{ url('http://127.0.0.1:8000/soporte') }}" class="link" style="color: black">Realizar soporte</a>
             </div> --}}

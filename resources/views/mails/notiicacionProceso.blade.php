@@ -72,7 +72,7 @@
     <div class="contenedor">
 
         <div class="tamano">
-            
+
             <div class="img">
                 <img style="max-width: 100%" src="https://beesys.net/wp-content/uploads/2022/09/logo.png" alt="logo beesy"/>
             </div>
@@ -81,9 +81,9 @@
                 <p style="display: none">{{$valor = $msg['prioridad']}}</p>
 
                 <h4 class="">Soporte en Proceso</h4>
-                
+
                 <p class="">
-                    <span style="color: #F39200">{{$msg['colaborador']}}</span> ha tomado el soporte <br> 
+                    <span style="color: #F39200">{{$msg['colaborador']}}</span> ha tomado el soporte <br>
                     cliente <span style="color: #F39200">{{$msg['id_cliente']}}</span>, No.Ticket: {{$msg['ticker']}}
                 </p> <br>
 
@@ -109,7 +109,7 @@
                 <p class=""><span>Solución:</span> {{$msg['solucion']}}</p>
                 <p class=""><span>Observaciones:</span> {{$msg['observaciones']}}</p> --}}
             </div>
-            
+
             {{-- <div class="contenedorlink">
                 <a href="{{ url('http://127.0.0.1:8000/soporte') }}" class="link" style="color: black">Realizar soporte</a>
             </div> --}}
