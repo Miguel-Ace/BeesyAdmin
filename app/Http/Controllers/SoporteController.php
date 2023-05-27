@@ -27,7 +27,7 @@ class SoporteController extends Controller
      */
     public function index()
     {
-        $datos = Soporte::all();
+        $datos = Soporte::orderBy('id','desc')->get();
         $clientes = Cliente::all();
         $softwares = Software::all();
         $usuarioclientes = UserCliente::all();

@@ -46,7 +46,7 @@ body{
         div{
             display: flex;
             justify-content: space-between;
-            
+
             .borde-icon{
                 border: 1px solid gray;
                 border-radius: 1.7rem;
@@ -366,11 +366,12 @@ body{
                 div{
                     overflow: scroll;
                     max-width: 1150px;
+                    max-height: 34.6rem;
                     table{
                         min-width: 72rem;
                     }
                     .grande{
-                        min-width: 1200px;
+                        min-width: 1327px;
                     }
                 }
                 @media (min-width: 768px){
@@ -383,10 +384,11 @@ body{
                     div{
                         overflow: scroll;
                         min-width: 100%;
+                        max-height: 34.6rem;
                     }
                 }
                 div .tablagrande{
-                    min-width: 126rem;
+                    min-width: 158rem;
                 }
                 // tbody tr td:last-child{
                 //     display: grid;

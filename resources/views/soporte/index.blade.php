@@ -102,10 +102,10 @@ Agregar soporte
               </select>
           </div>
 
-        <div class="col-md-4">
+        <div class="col-md-4 d-none">
             <div class="mb-3">
                 <label for="numLaboral" class="form-label">NumLaboral</label>
-                <input type="number" min="0" class="form-control" id="numLaboral" name="numLaboral" value="{{old('numLaboral')}}" @error("numLaboral")style="border: solid 2px red"@enderror>
+                <input type="number" min="0" class="form-control" id="numLaboral" name="numLaboral" value="{{$cantidad + 1}}">
               </div>
           </div>
           {{--  --}}
@@ -153,7 +153,7 @@ Agregar soporte
           </div>
           {{--  --}}
 
-          <div class="col-md-8">
+          <div class="col-md-6">
             <div class="mb-3">
                 <label for="problema" class="form-label">Problema</label>
                 <input type="text" class="form-control" id="problema" name="problema" value="{{old('problema')}}" @error("problema")style="border: solid 2px red"@enderror>
@@ -167,7 +167,7 @@ Agregar soporte
               </div>
           </div> --}}
 
-        <div class="col-md-8">
+        <div class="col-md-6">
             <div class="mb-3">
                 <label for="observaciones" class="form-label">Observaciones</label>
                 <input type="text" class="form-control" id="observaciones" name="observaciones" value="{{old('observaciones')}}">
@@ -268,6 +268,7 @@ Lista de soporte
     </table>
 </div>
 
+{{-- {{ $datos->links() }} --}}
 <script>
     const idClienteSelect = document.querySelector('#id_cliente');
     const correoClienteInput = document.querySelector('#correo_cliente');
