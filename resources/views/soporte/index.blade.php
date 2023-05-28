@@ -86,7 +86,7 @@ Agregar soporte
             <label for="id_cliente" class="form-label">Cliente</label>
             <select class="form-select" name="id_cliente" id="id_cliente" @error("id_cliente")style="border: solid 2px red"@enderror>
               <option value="" selected disabled>Selecciona un Cliente</option>
-              @foreach ($clientes as $cliente)
+              @foreach ($clientes->sortBy('contacto') as $cliente)
                 <option {{ old('id_cliente') == $cliente->contacto ? 'selected' : '' }} value="{{$cliente->contacto}}">{{$cliente->contacto}}</option>
               @endforeach
             </select>
