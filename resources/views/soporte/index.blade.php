@@ -5,9 +5,9 @@ soporte
 @endsection
 
 @section('tituloForm')
-@role('admin')
+{{-- @role('admin')
+@endrole --}}
 Agregar soporte
-@endrole
 @endsection
 
 @section('creacion')
@@ -31,7 +31,6 @@ Agregar soporte
     </div>
 @endif
 
-@role('admin')
 <form action="{{url('/soporte')}}" class="" method="post" enctype="multipart/form-data">
     @csrf
 
@@ -180,7 +179,8 @@ Agregar soporte
       Guardar
     </button>
 </form>
-@endrole
+{{-- @role('admin')
+@endrole --}}
 @endsection
 
 @section('tituloTabla')
