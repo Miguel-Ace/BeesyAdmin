@@ -58,7 +58,7 @@ class SoporteController extends Controller
             'ticker' => 'required',
             'colaborador' => 'required',
             'numLaboral' => 'required',
-            'fechaInicioAsistencia' => 'required',
+            // 'fechaInicioAsistencia' => 'required',
             'fechaCreacionTicke' => 'nullable',
             'id_cliente' => 'required',
             'correo_cliente' => 'nullable',

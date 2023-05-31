@@ -56,21 +56,21 @@ Actualizar soporte
               </select>
           </div>
 
-          <div class="col-md-4 d-none">
+          <div class="col-md-4">
             <div class="mb-3">
-                <label for="fechaInicioAsistencia" class="form-label">Fecha y hora de inicio de asistencia</label>
-                <input type="datetime-local" class="form-control" id="fechaInicioAsistencia" name="fechaInicioAsistencia" value="{{$datos->fechaInicioAsistencia}}">
+                <label for="fechaInicioAsistencia" class="form-label">Fecha y hora inicio de asistencia</label>
+                <input type="datetime-local" class="form-control" id="fechaInicioAsistencia" name="fechaInicioAsistencia" value="{{$datos->fechaInicioAsistencia}}" @error("fechaInicioAsistencia")style="border: solid 2px red"@enderror>
               </div>
           </div>
 
         <div class="col-md-4">
             <div class="mb-3">
                 <label for="fechaFinalAsistencia" class="form-label">fecha y hora final de asistencia</label>
-                <input type="datetime-local" class="form-control" id="fechaFinalAsistencia" name="fechaFinalAsistencia" value="{{$datos->fechaFinalAsistencia}}">
+                <input type="datetime-local" class="form-control" id="fechaFinalAsistencia" name="fechaFinalAsistencia" value="{{$datos->fechaFinalAsistencia}}" @error("fechaFinalAsistencia")style="border: solid 2px red"@enderror>
               </div>
           </div>
 
-        <div class="col-md-4">
+        <div class="col-md-4 d-none">
             <div class="mb-3">
                 <label for="fechaCreacionTicke" class="form-label">Fecha Creación de Ticket</label>
                 <input type="datetime-local" class="form-control" id="fechaCreacionTicke" name="fechaCreacionTicke" value="{{$datos->fechaCreacionTicke}}">
@@ -81,7 +81,7 @@ Actualizar soporte
             <label for="id_cliente" class="form-label">Cliente</label>
               <select class="form-select" name="id_cliente">
                 @foreach ($clientes as $cliente)
-                    @if ($cliente->nombre === $datos->id_cliente)
+                    @if ($cliente->contacto === $datos->id_cliente)
                     <option value="{{$cliente->contacto}}" selected>{{$cliente->contacto}}</option>
                     @else
                     <option value="{{$cliente->contacto}}">{{$cliente->contacto}}</option>
@@ -94,7 +94,7 @@ Actualizar soporte
             <label for="id_software" class="form-label">Software</label>
               <select class="form-select" name="id_software">
                 @foreach ($softwares as $software)
-                    @if ($software->software === $datos->software)
+                    @if ($software->software === $datos->id_software)
                     <option value="{{$software->software}}" selected>{{$software->software}}</option>
                     @else
                     <option value="{{$software->software}}">{{$software->software}}</option>
@@ -110,7 +110,7 @@ Actualizar soporte
               </div>
           </div>
 
-          <div class="col-md-6">
+          <div class="col-md-4 mb-3">
             <label for="prioridad" class="form-label">Prioridad</label>
               <select class="form-select" name="prioridad" @error("prioridad")style="border: solid 2px red"@enderror>
                   <option value="" selected disabled>Selccione una prioridad</option>
@@ -131,7 +131,7 @@ Actualizar soporte
               </select>
           </div>
 
-          <div class="col-md-6">
+          <div class="col-md-4">
             <label for="estado" class="form-label">Estado</label>
               <select class="form-select" name="estado" @error("estado")style="border: solid 2px red"@enderror>
                   <option value="" selected disabled>Selccione un estado</option>
@@ -179,14 +179,14 @@ Actualizar soporte
               </div>
           </div>
 
-        <div class="col-md-6 mt-4">
+        <div class="col-md-6">
             <div class="mb-3">
                 <label for="solucion" class="form-label">Solución</label>
                 <input type="text" class="form-control" id="solucion" name="solucion" value="{{$datos->solucion}}" @error("solucion")style="border: solid 2px red"@enderror>
               </div>
           </div>
 
-        <div class="col-md-6 mt-4">
+        <div class="col-md-6">
             <div class="mb-3">
                 <label for="observaciones" class="form-label">Observaciones</label>
                 <input type="text" class="form-control" id="observaciones" name="observaciones" value="{{$datos->observaciones}}" @error("observaciones")style="border: solid 2px red"@enderror>

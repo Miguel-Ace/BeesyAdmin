@@ -53,11 +53,11 @@ Agregar soporte
               </select>
           </div>
 
-          <div class="col-md-4">
+          <div class="col-md-4 d-none">
             <div class="mb-3">
                 <label for="fechaInicioAsistencia" class="form-label">Fecha y hora de inicio de asistencia</label>
                 <input type="datetime-local" class="form-control" id="fechaInicioAsistencia" name="fechaInicioAsistencia" value="{{old('fechaInicioAsistencia')}}" @error("fechaInicioAsistencia")style="border: solid 2px red"@enderror>
-              </div>
+            </div>
           </div>
 
         <div class="col-md-4 d-none">
@@ -67,12 +67,12 @@ Agregar soporte
               </div>
           </div>
 
-        {{-- <div class="col-md-4">
+        <div class="col-md-4 d-none">
             <div class="mb-3">
                 <label for="fechaCreacionTicke" class="form-label">Fecha Creación de Ticket</label>
-                <input type="datetime-local" class="form-control" id="fechaCreacionTicke" name="fechaCreacionTicke" value="{{old('fechaCreacionTicke')}}" @error("fechaCreacionTicke")style="border: solid 2px red"@enderror>
+                <input type="datetime-local" class="form-control" id="fechaCreacionTicke" name="fechaCreacionTicke" value="{{date('Y-m-d H:i')}}" @error("fechaCreacionTicke")style="border: solid 2px red"@enderror>
               </div>
-          </div> --}}
+          </div>
 
         {{-- <div class="col-md-4">
             <div class="mb-3">
@@ -81,7 +81,7 @@ Agregar soporte
               </div>
           </div> --}}
 
-          <div class="col-md-4">
+          <div class="col-md-4 mb-3">
             <label for="id_cliente" class="form-label">Cliente</label>
             <select class="form-select" name="id_cliente" id="id_cliente" @error("id_cliente")style="border: solid 2px red"@enderror>
               <option value="" selected disabled>Selecciona un Cliente</option>
@@ -196,13 +196,13 @@ Lista de soporte
             <tr class="text-center">
                 <th scope="col">Ticket</th>
                 <th scope="col">Colaborador</th>
-                <th scope="col">Fecha Inicial Ticket</th>
+                <th scope="col">Fecha y hora creacion del Ticket</th>
                 <th scope="col">Fecha Inicial Asistencia</th>
-                <th scope="col">Fecha Final Aistencia</th>
+                <th scope="col">Fecha Final Asistencia</th>
                 <th scope="col">Cliente</th>
                 {{-- <th scope="col">Usuario</th> --}}
                 <th scope="col">Software</th>
-                <th scope="col">NumLaboral</th>
+                {{-- <th scope="col">NumLaboral</th> --}}
                 <th scope="col">Problema</th>
                 <th scope="col">Prioridad</th>
                 <th scope="col">Estado</th>
@@ -223,7 +223,7 @@ Lista de soporte
                     <td>{{$dato->id_cliente}}</td>
                     {{-- <td>{{$dato->usuario}}</td> --}}
                     <td>{{$dato->id_software}}</td>
-                    <td>{{$dato->numLaboral}}</td>
+                    {{-- <td>{{$dato->numLaboral}}</td> --}}
                     <td>{{$dato->problema}}</td>
 
                     @if ($dato->prioridad == 'Leve')

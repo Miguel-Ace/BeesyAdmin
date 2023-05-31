@@ -101,7 +101,7 @@
                     Beêsy
                 </p>
                 <p class=""><span>Ticket:</span> {{$msg['ticker']}}</p>
-                <p class=""><span>Fecha y Hora:</span> {{$msg['fechaInicioAsistencia']}}</p>
+                <p class=""><span>Fecha y Hora:</span> {{$msg['fechaCreacionTicke']}}</p>
                 {{-- <p class=""><span>Colaborador:</span> {{$msg['colaborador']}}</p> --}}
                 {{-- <p class=""><span>Fecha y Hora Final:</span> {{$msg['fechaHoraFinal']}}</p> --}}
                 {{-- <p class=""><span>Problema:</span> {{$msg['problema']}}</p>
