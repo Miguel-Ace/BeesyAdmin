@@ -1,35 +1,40 @@
 <table>
     <thead>
         <tr>
-            <th scope="col">Ticker</th>
-            <th scope="col">Colaborador</th>
-            <th scope="col">Cliente</th>
-            <th scope="col">Fecha Inicial</th>
-            <th scope="col">Fecha Final</th>
-            <th scope="col">Software</th>
-            <th scope="col">NumLaboral</th>
-            <th scope="col">Problema</th>
-            <th scope="col">Prioridad</th>
-            <th scope="col">Estado</th>
-            <th scope="col">Solucion</th>
-            <th scope="col">Observaciones</th>
+            <th scope="col">Fecha</th>
+            <th scope="col">Ticket</th>
+            <th scope="col">Fecha Inicial Asistencia</th>
+            <th scope="col">Fecha Final Asistencia</th>
+            <th scope="col">Total de horas</th>
+            <th scope="col">Usuario</th>
+            <th scope="col">Detalle Asitencia</th>
+            <th scope="col">Asesor</th>
         </tr>
     </thead>
-    <tbody>
+    <tbody id="listaSoporte">
+        @php
+            use Carbon\Carbon;
+        @endphp
         @foreach ($datos as $dato )
             <tr>
+                <td>{{$dato->fechaCreacionTicke}}</td>
                 <td>{{$dato->ticker}}</td>
-                <td>{{$dato->colaborador}}</td>
+                <td>{{$dato->fechaInicioAsistencia}}</td>
+                <td>{{$dato->fechaFinalAsistencia}}</td>
+                <td>
+                    @php
+                        $fechaInicio = Carbon::parse($dato->fechaInicioAsistencia);
+                        $fechaFinal = Carbon::parse($dato->fechaFinalAsistencia);
+                        $diferencia = $fechaFinal->diff($fechaInicio);
+                        $horas = $diferencia->h;
+                        $minutos = $diferencia->i;
+                    @endphp
+                
+                    {{ $horas }} horas {{ $minutos }} minutos
+                </td>
                 <td>{{$dato->id_cliente}}</td>
-                <td>{{$dato->fechaHoraInicio}}</td>
-                <td>{{$dato->fechaHoraFinal}}</td>
-                <td>{{$dato->id_software}}</td>
-                <td>{{$dato->numLaboral}}</td>
                 <td>{{$dato->problema}}</td>
-                <td>{{$dato->prioridad}}</td>
-                <td>{{$dato->estado}}</td>
-                <td>{{$dato->solucion}}</td>
-                <td>{{$dato->observaciones}}</td>
+                <td>{{$dato->colaborador}}</td>
             </tr>
         @endforeach
     </tbody>

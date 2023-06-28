@@ -143,6 +143,8 @@ Agregar Licencias
 
 @section('tituloTabla')
 Lista de Licencias
+
+<a href="{{ route('exportar.licencia') }}" class="botnExportar">Licencia</a>
 @endsection
 
 @section('tablas')

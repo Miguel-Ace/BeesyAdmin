@@ -21,8 +21,10 @@ use App\Http\Controllers\SoporteExportController;
 
 use App\Http\Controllers\DetalleProyectoController;
 use App\Http\Controllers\EjecucionProyectoController;
+use App\Http\Controllers\LicenciaExportController;
 use App\Http\Controllers\plantillaProyectoController;
 use App\Http\Controllers\PlantillaDetalleProyectoController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -78,14 +80,9 @@ Route::get('/plantilla_detalle_proyectos/{id}/{obtenerId}', [PlantillaDetallePro
 Route::resource('/estados',EstadoController::class);
 Route::resource('/etapas',EtapaController::class);
 
+Route::get('/exportar', [SoporteExportController::class, 'vista']);
 Route::get('/exportar-soporte', [SoporteExportController::class, 'exportarSoporte'])->name('exportar.soporte');
-
-// Route::get('/notificacion', function() {
-//     $correo = new notificaciones;
-//     Mail::to('acevedo51198mac@gmail.com')->queue($correo);
-
-//     return "Mensaje Enviado";
-// });
+Route::get('/exportar-licencia', [LicenciaExportController::class, 'exportarLicencia'])->name('exportar.licencia');
 
 Auth::routes();
 

@@ -1,5 +1,5 @@
 @extends('home')
-
+@vite(['resources/js/filtro.js'])
 @section('titulo')
 soporte
 @endsection
@@ -185,8 +185,30 @@ Agregar soporte
 
 @section('tituloTabla')
 Lista de soporte
+{{-- <div>
+    <div>
+        <label for="filtro1">Colaborador:</label>
+        <input type="date" id="filtro1" name="filtro1">
+    </div>
+    <div>
+        <label for="filtro1">Filtro 1:</label>
+        <input type="date" id="filtro1" name="filtro1">
+    </div>
+    <div>
+        <label for="filtro1">Filtro 1:</label>
+        <input type="date" id="filtro1" name="filtro1">
+    </div>
+    <div>
+        <label for="filtro1">Filtro 1:</label>
+        <input type="date" id="filtro1" name="filtro1">
+    </div>
+</div> --}}
 
-<a href="{{ route('exportar.soporte') }}" class="botnExportar">CSV</a>
+{{-- <a href="{{ route('exportar.soporte') }}" class="botnExportar">CSV</a> --}}
+<button class="botnExportar" id="exportarSoporte">Soporte</button>
+{{-- <button class="botnExportar" id="exportarSoporteCliente">Asistencia x cliente</button> --}}
+{{-- <button class="botnExportar" id="exportarSoporteColaborador">Asistencia x colaborador</button> --}}
+{{-- <a href="{{ route('exportar.licencia') }}" class="botnExportar">Licencia</a> --}}
 @endsection
 
 @section('tablas')
@@ -194,11 +216,49 @@ Lista de soporte
     <table class="table table-bordered table-hover tablagrande">
         <thead>
             <tr class="text-center">
+                <th scope="col"></th>
+                <th scope="col">
+                    <select name="colaborador" id="colaborador">
+                        <option value=""></option>
+                        <option value="Roxana Baez">Roxana Baez</option>
+                        <option value="Norman Logo">Norman Logo</option>
+                        <option value="Edwin Torres">Edwin Torres</option>
+                        <option value="Jasson Ulloa">Jasson Ulloa</option>
+                    </select>
+                </th>
+                <th scope="col">
+                    <input type="date" id="fecha1" name="fecha1">
+                    <input type="date" id="fecha2" name="fecha2">
+                </th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col">
+                    <select name="cliente" id="cliente">
+                        <option value=""></option>
+                        @foreach ($clientes as $cliente)
+                            <option value="{{$cliente->contacto}}">{{$cliente->contacto}}</option>
+                        @endforeach
+                    </select>
+                </th>
+                {{-- <th scope="col">Usuario</th> --}}
+                <th scope="col"></th>
+                {{-- <th scope="col">NumLaboral</th> --}}
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+            <tr class="text-center">
                 <th scope="col">Ticket</th>
                 <th scope="col">Colaborador</th>
                 <th scope="col">Fecha y hora creacion del Ticket</th>
                 <th scope="col">Fecha Inicial Asistencia</th>
                 <th scope="col">Fecha Final Asistencia</th>
+                <th scope="col">Total de horas</th>
                 <th scope="col">Cliente</th>
                 {{-- <th scope="col">Usuario</th> --}}
                 <th scope="col">Software</th>
@@ -212,14 +272,28 @@ Lista de soporte
                 <th scope="col">Acciones</th>
             </tr>
         </thead>
-        <tbody class="text-center">
-            @foreach ($datos as $dato )
+        <tbody class="text-center" id="listaSoporte">
+            @php
+                use Carbon\Carbon;
+            @endphp
+            @foreach ($datos as $dato)
                 <tr>
                     <td>{{$dato->ticker}}</td>
                     <td>{{$dato->colaborador}}</td>
                     <td>{{$dato->fechaCreacionTicke}}</td>
                     <td>{{$dato->fechaInicioAsistencia}}</td>
                     <td>{{$dato->fechaFinalAsistencia}}</td>
+                    <td>
+                        @php
+                            $fechaInicio = Carbon::parse($dato->fechaInicioAsistencia);
+                            $fechaFinal = Carbon::parse($dato->fechaFinalAsistencia);
+                            $diferencia = $fechaFinal->diff($fechaInicio);
+                            $horas = $diferencia->h;
+                            $minutos = $diferencia->i;
+                        @endphp
+                    
+                        {{ $horas }} horas {{ $minutos }} minutos
+                    </td>
                     <td>{{$dato->id_cliente}}</td>
                     {{-- <td>{{$dato->usuario}}</td> --}}
                     <td>{{$dato->id_software}}</td>
@@ -269,6 +343,73 @@ Lista de soporte
 </div>
 
 {{-- {{ $datos->links() }} --}}
+<script>
+    function exportarSoporte() {
+
+    // Crear contenido del archivo CSV
+    let csvContent = 'data:text/csv;charset=utf-8,';
+    csvContent += 'Fecha,Ticket,Fecha Inicial Asistencia,Fecha Final Asistencia,Total de horas,Usuario,Detalle Asitencia,Asesor\n'; // Encabezados de las columnas
+
+    const selectColaborador = document.querySelector('#colaborador');
+    const selectCliente = document.querySelector('#cliente');
+    const fecha1 = document.querySelector('#fecha1');
+    const fecha2 = document.querySelector('#fecha2');
+
+    let clienteFiltrado = selectCliente.value;
+    let colaboradorFiltrado = selectColaborador.value;
+    let fecha1valor = fecha1.value;
+    let fecha2valor = fecha2.value;
+
+    // Decodificar un arreglo de laravel a javascript
+    let tablaClientes = JSON.parse('{!! json_encode($datos) !!}');
+
+    tablaClientes.forEach((item) => {
+    const fechaCreacionTicke = item.fechaCreacionTicke;
+    const ticker = item.ticker;
+    const fechaInicioAsistencia = item.fechaInicioAsistencia;
+    const fechaFinalAsistencia = item.fechaFinalAsistencia;
+    // Sacar fecha
+    const fecha1 = new Date(item.fechaInicioAsistencia);
+    const fecha2 = new Date(item.fechaFinalAsistencia);
+    const diff = Math.abs(fecha2 - fecha1); // Obtener la diferencia en milisegundos
+    // Calcular horas y minutos
+    const horas = Math.floor(diff / (1000 * 60 * 60));
+    const minutos = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const totalHoras = `${horas} horas y ${minutos} minutos`
+
+    // Fin sacar fecha
+    const id_cliente = item.id_cliente;
+    const problema = item.problema;
+    const colaborador = item.colaborador;
+
+    const coincideCliente = clienteFiltrado === '' || clienteFiltrado === id_cliente;
+    const coincideColaborador = colaboradorFiltrado === '' || colaboradorFiltrado === colaborador;
+    const coincideFecha1 = fecha1valor == '' || fecha1valor <= fechaCreacionTicke;
+    const coincideFecha2 = fecha2valor == '' || fecha2valor >= fechaCreacionTicke;
+
+    if ((coincideCliente && coincideColaborador) && (coincideFecha1 && coincideFecha2)) {
+        csvContent += `${fechaCreacionTicke},${ticker},${fechaInicioAsistencia},${fechaFinalAsistencia},${totalHoras},${id_cliente},${problema},${colaborador}\n`;
+    }
+    });
+
+    // Crear el enlace de descarga
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement('a');
+    link.setAttribute('href', encodedUri);
+    link.setAttribute('download', 'Soportes.csv');
+
+    // Simular el clic en el enlace para iniciar la descarga
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    }
+
+    // Agregar un botón para iniciar la exportación
+    const exportarButton = document.querySelector('#exportarSoporte');
+    exportarButton.addEventListener('click', exportarSoporte);
+</script>
+
+
 <script>
     const idClienteSelect = document.querySelector('#id_cliente');
     const correoClienteInput = document.querySelector('#correo_cliente');

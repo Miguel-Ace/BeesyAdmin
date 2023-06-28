@@ -483,6 +483,7 @@ body{
     padding: .3rem 1rem;
     border-radius: .2rem;
     transition: .3s ease;
+    text-transform: capitalize;
     &:hover{
         color: white;
         background-color: #0f6f5c;
@@ -508,4 +509,13 @@ body{
         color: white;
 
     }
+}
+
+#colaborador {
+    border: 1px solid green;
+    outline: unset;
+}
+#cliente {
+    border: 1px solid green;
+    outline: unset;
 }
