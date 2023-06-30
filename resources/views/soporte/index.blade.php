@@ -74,12 +74,12 @@ Agregar soporte
               </div>
           </div>
 
-        {{-- <div class="col-md-4">
+        <div class="col-md-4 d-none">
             <div class="mb-3">
-                <label for="fechaHoraFinal" class="form-label">Fecha Final</label>
-                <input type="datetime-local" class="form-control" id="fechaHoraFinal" name="fechaHoraFinal" value="{{old('fechaHoraFinal')}}" @error("fechaHoraFinal")style="border: solid 2px red"@enderror>
+                <label for="empresa" class="form-label">Empresa</label>
+                <input type="text" class="form-control" id="empresa" name="empresa" value="{{old('empresa')}}" @error("empresa")style="border: solid 2px red"@enderror>
               </div>
-          </div> --}}
+          </div>
 
           <div class="col-md-4 mb-3">
             <label for="id_cliente" class="form-label">Cliente</label>
@@ -179,30 +179,10 @@ Agregar soporte
       Guardar
     </button>
 </form>
-{{-- @role('admin')
-@endrole --}}
 @endsection
 
 @section('tituloTabla')
 Lista de soporte
-{{-- <div>
-    <div>
-        <label for="filtro1">Colaborador:</label>
-        <input type="date" id="filtro1" name="filtro1">
-    </div>
-    <div>
-        <label for="filtro1">Filtro 1:</label>
-        <input type="date" id="filtro1" name="filtro1">
-    </div>
-    <div>
-        <label for="filtro1">Filtro 1:</label>
-        <input type="date" id="filtro1" name="filtro1">
-    </div>
-    <div>
-        <label for="filtro1">Filtro 1:</label>
-        <input type="date" id="filtro1" name="filtro1">
-    </div>
-</div> --}}
 
 {{-- <a href="{{ route('exportar.soporte') }}" class="botnExportar">CSV</a> --}}
 <button class="botnExportar" id="exportarSoporte">Soporte</button>
@@ -216,6 +196,7 @@ Lista de soporte
     <table class="table table-bordered table-hover tablagrande">
         <thead>
             <tr class="text-center">
+                <th scope="col"></th>
                 <th scope="col"></th>
                 <th scope="col">
                     <select name="colaborador" id="colaborador">
@@ -254,6 +235,7 @@ Lista de soporte
             </tr>
             <tr class="text-center">
                 <th scope="col">Ticket</th>
+                <th scope="col">Empresa</th>
                 <th scope="col">Colaborador</th>
                 <th scope="col">Fecha y hora creacion del Ticket</th>
                 <th scope="col">Fecha Inicial Asistencia</th>
@@ -279,6 +261,7 @@ Lista de soporte
             @foreach ($datos as $dato)
                 <tr>
                     <td>{{$dato->ticker}}</td>
+                    <td>{{$dato->empresa}}</td>
                     <td>{{$dato->colaborador}}</td>
                     <td>{{$dato->fechaCreacionTicke}}</td>
                     <td>{{$dato->fechaInicioAsistencia}}</td>
@@ -348,8 +331,9 @@ Lista de soporte
 
     // Crear contenido del archivo CSV
     let csvContent = 'data:text/csv;charset=utf-8,';
-    csvContent += 'Fecha,Ticket,Fecha Inicial Asistencia,Fecha Final Asistencia,Total de horas,Usuario,Detalle Asitencia,Asesor\n'; // Encabezados de las columnas
+    csvContent += 'Fecha,Empresa,Ticket,Fecha Inicial Asistencia,Fecha Final Asistencia,Total de horas,Usuario,Detalle Asitencia,Asesor\n'; // Encabezados de las columnas
 
+    // Extrallendo los valores de los inputs
     const selectColaborador = document.querySelector('#colaborador');
     const selectCliente = document.querySelector('#cliente');
     const fecha1 = document.querySelector('#fecha1');
@@ -363,11 +347,15 @@ Lista de soporte
     // Decodificar un arreglo de laravel a javascript
     let tablaClientes = JSON.parse('{!! json_encode($datos) !!}');
 
+    // Recorriendo el arreglo para para entrar a los valores
     tablaClientes.forEach((item) => {
+    // Valor arreglo
     const fechaCreacionTicke = item.fechaCreacionTicke;
+    const empresa = item.empresa;
     const ticker = item.ticker;
     const fechaInicioAsistencia = item.fechaInicioAsistencia;
     const fechaFinalAsistencia = item.fechaFinalAsistencia;
+
     // Sacar fecha
     const fecha1 = new Date(item.fechaInicioAsistencia);
     const fecha2 = new Date(item.fechaFinalAsistencia);
@@ -376,19 +364,22 @@ Lista de soporte
     const horas = Math.floor(diff / (1000 * 60 * 60));
     const minutos = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
     const totalHoras = `${horas} horas y ${minutos} minutos`
-
     // Fin sacar fecha
+
     const id_cliente = item.id_cliente;
     const problema = item.problema;
     const colaborador = item.colaborador;
+    // Fin valor arreglo
 
+    // Haciendo condicionales en variables para un mejor orden con el if
     const coincideCliente = clienteFiltrado === '' || clienteFiltrado === id_cliente;
     const coincideColaborador = colaboradorFiltrado === '' || colaboradorFiltrado === colaborador;
     const coincideFecha1 = fecha1valor == '' || fecha1valor <= fechaCreacionTicke;
     const coincideFecha2 = fecha2valor == '' || fecha2valor >= fechaCreacionTicke;
 
+    // si los datos se cumplen correctamente se mostraran los resultados
     if ((coincideCliente && coincideColaborador) && (coincideFecha1 && coincideFecha2)) {
-        csvContent += `${fechaCreacionTicke},${ticker},${fechaInicioAsistencia},${fechaFinalAsistencia},${totalHoras},${id_cliente},${problema},${colaborador}\n`;
+        csvContent += `${fechaCreacionTicke},${empresa},${ticker},${fechaInicioAsistencia},${fechaFinalAsistencia},${totalHoras},${id_cliente},${problema},${colaborador}\n`;
     }
     });
 
@@ -413,18 +404,21 @@ Lista de soporte
 <script>
     const idClienteSelect = document.querySelector('#id_cliente');
     const correoClienteInput = document.querySelector('#correo_cliente');
+    const empresa = document.querySelector('#empresa');
 
-    idClienteSelect.addEventListener('change', (event) => {
-    const selectedValue = event.target.value;
+    idClienteSelect.addEventListener('change', () => {
+    const selectedValue = idClienteSelect.value;
 
     let tablaClientes = JSON.parse('{!! json_encode($clientes) !!}');
 
     tablaClientes.forEach(element => {
         let nombreCliente = element.contacto;
         let correoCliente = element.correo;
+        let empresaCliente = element.nombre;
 
         if (nombreCliente == selectedValue) {
         correoClienteInput.value = correoCliente;
+        empresa.value = empresaCliente;
         }
     });
     });

@@ -27,14 +27,17 @@ fecha1.addEventListener('change', () => {
 
 fecha2.addEventListener('change', () => {
     fecha2valor = fecha2.value
+    fecha2valor = new Date(fecha2valor)
+    fecha2valor.setDate(fecha2valor.getDate() + 1)
+    fecha2valor = fecha2valor.toISOString().split("T")[0];
     filtrarListaSoporte()
 })
 
 function filtrarListaSoporte() {
   listaSoporte.forEach((item) => {
-    const valorClienteTd = item.querySelector('td:nth-child(7)').textContent;
-    const valorColaboradorTd = item.querySelector('td:nth-child(2)').textContent;
-    const valorFecha = item.querySelector('td:nth-child(3)').textContent;
+    const valorClienteTd = item.querySelector('td:nth-child(8)').textContent;
+    const valorColaboradorTd = item.querySelector('td:nth-child(3)').textContent;
+    const valorFecha = item.querySelector('td:nth-child(4)').textContent;
 
     // Comprobar si el elemento coincide con los filtros activos
     const coincideCliente = clienteFiltrado === '' || clienteFiltrado === valorClienteTd;

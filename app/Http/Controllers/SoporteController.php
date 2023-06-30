@@ -70,6 +70,7 @@ class SoporteController extends Controller
             'prioridad' => 'required',
             'estado' => 'required',
             'archivo' => 'nullable',
+            'empresa' => 'required',
         ]);
 
         $datos = $request->except('_token');

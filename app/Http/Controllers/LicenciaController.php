@@ -50,6 +50,8 @@ class LicenciaController extends Controller
             'cantidad' => 'required',
             'fechaInicio' => 'required',
             'fechaFinal' => 'required',
+            'cantidad_usuario' => 'required',
+            'bee_commerce' => 'nullable',
         ]);
 
         $datos = $request->except('_token');

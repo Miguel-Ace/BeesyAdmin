@@ -10,7 +10,16 @@ class Licencia extends Model
     use HasFactory;
 
     public $timestamps = false;
-    protected $fillable = ['id','id_cliente','id_software','cantidad','fechaInicio','fechaFinal'];
+    protected $fillable = [
+        'id',
+        'id_cliente',
+        'id_software',
+        'cantidad',
+        'fechaInicio',
+        'fechaFinal',
+        'cantidad_usuario',
+        'bee_commerce',
+    ];
 
     // function clientes(){
     //     return $this->belongsTo(Cliente::class, 'id_cliente');

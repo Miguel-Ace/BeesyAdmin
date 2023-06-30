@@ -40,8 +40,14 @@ Actualizar Licencias
           </div>
         <div class="col-md-4">
             <div class="mb-3">
-                <label for="cantidad" class="form-label">Cantidad</label>
+                <label for="cantidad" class="form-label">Cantidad Acceso</label>
                 <input type="number" min="1" class="form-control" id="cantidad" name="cantidad" value="{{$datos->cantidad}}">
+              </div>
+          </div>
+        <div class="col-md-4">
+            <div class="mb-3">
+                <label for="cantidad_usuario" class="form-label">Cantidad Usuario</label>
+                <input type="number" min="1" class="form-control" id="cantidad_usuario" name="cantidad_usuario" value="{{$datos->cantidad_usuario}}">
               </div>
           </div>
         <div class="col-md-4">

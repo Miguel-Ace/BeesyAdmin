@@ -55,8 +55,14 @@ Agregar Licencias
 
     <div class="col-md-4">
         <div class="mb-3">
-            <label for="cantidad" class="form-label">Cantidad</label>
+            <label for="cantidad" class="form-label">Cantidad Acceso</label>
             <input type="number" min="1" class="form-control" id="cantidad" name="cantidad" @error("cantidad") style="border: 1px solid red" @enderror value="{{old('cantidad')}}">
+          </div>
+      </div>
+    <div class="col-md-4">
+        <div class="mb-3">
+            <label for="cantidad_usuario" class="form-label">Cantidad Usuario</label>
+            <input type="number" min="1" class="form-control" id="cantidad_usuario" name="cantidad_usuario" @error("cantidad_usuario") style="border: 1px solid red" @enderror value="{{old('cantidad_usuario')}}">
           </div>
       </div>
     <div class="col-md-4">
@@ -76,6 +82,12 @@ Agregar Licencias
             <label for="ruta" class="form-label">Ruta</label>
             <input type="text" class="form-control" id="ruta" name="ruta" @error("ruta") style="border: 1px solid red" @enderror value="{{old('ruta')}}">
           </div>
+      </div>
+      <div class="col-md-4" style="display:flex;align-items: center">
+          <label for="bee_commerce">
+            <input type="checkbox" id="bee_commerce" name="bee_commerce" value="si">
+            BeeCommerce
+          </label>
       </div>
     </div>
     <button type="submit" class="enviar">
@@ -110,8 +122,14 @@ Agregar Licencias
 
     <div class="col-md-4">
         <div class="mb-3">
-            <label for="cantidad" class="form-label">Cantidad</label>
+            <label for="cantidad" class="form-label">Cantidad Acceso</label>
             <input type="number" min="1" class="form-control" id="cantidad" name="cantidad" @error("cantidad") style="border: 1px solid red" @enderror value="{{old('cantidad')}}">
+          </div>
+      </div>
+    <div class="col-md-4">
+        <div class="mb-3">
+            <label for="cantidad_usuario" class="form-label">Cantidad Usuario</label>
+            <input type="number" min="1" class="form-control" id="cantidad_usuario" name="cantidad_usuario" @error("cantidad_usuario") style="border: 1px solid red" @enderror value="{{old('cantidad_usuario')}}">
           </div>
       </div>
     <div class="col-md-4">
@@ -131,6 +149,12 @@ Agregar Licencias
             <label for="ruta" class="form-label">Ruta</label>
             <input type="text" class="form-control" id="ruta" name="ruta" @error("ruta") style="border: 1px solid red" @enderror value="{{old('ruta')}}">
           </div>
+      </div>
+      <div class="col-md-4" style="display:flex;align-items: center">
+        <label for="bee_commerce">
+          <input type="checkbox" id="bee_commerce" name="bee_commerce" value="si">
+          BeeCommerce
+        </label>
       </div>
     </div>
     <button type="submit" class="enviar">
@@ -155,7 +179,9 @@ Lista de Licencias
                 <th scope="col">#</th>
                 <th scope="col">Cliente</th>
                 <th scope="col">Software</th>
-                <th scope="col">Cantidad</th>
+                <th scope="col">Cantidad Acceso</th>
+                <th scope="col">Cantidad Usuario</th>
+                <th scope="col">BeeCommerce</th>
                 <th scope="col">Fecha de Inicio</th>
                 <th scope="col">Fecha Final</th>
                 @role('admin')
@@ -173,6 +199,8 @@ Lista de Licencias
                     <td>{{$dato->id_cliente}}</td>
                     <td>{{$dato->id_software}}</td>
                     <td>{{$dato->cantidad}}</td>
+                    <td>{{$dato->cantidad_usuario}}</td>
+                    <td>{{$dato->bee_commerce}}</td>
                     <td>{{$dato->fechaInicio}}</td>
                     <td>{{$dato->fechaFinal}}</td>
                     @role('admin')
