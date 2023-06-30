@@ -47,6 +47,7 @@ Agregar Clientes
               <option {{ old('pais') == 'Nicaragua' ? 'selected' : '' }} value="Nicaragua">Nicaragua</option>
               <option {{ old('pais') == 'Costa Rica' ? 'selected' : '' }} value="Costa Rica">Costa Rica</option>
               <option {{ old('pais') == 'Panamá' ? 'selected' : '' }} value="Panamá">Panamá</option>
+              <option {{ old('pais') == 'México' ? 'selected' : '' }} value="México">México</option>
             </select>
         </div>
     <div class="col-md-4">
@@ -99,6 +100,7 @@ Agregar Clientes
               <option {{ old('pais') == 'Nicaragua' ? 'selected' : '' }} value="Nicaragua">Nicaragua</option>
               <option {{ old('pais') == 'Costa Rica' ? 'selected' : '' }} value="Costa Rica">Costa Rica</option>
               <option {{ old('pais') == 'Panamá' ? 'selected' : '' }} value="Panamá">Panamá</option>
+              <option {{ old('pais') == 'México' ? 'selected' : '' }} value="México">México</option>
             </select>
         </div>
     <div class="col-md-4">

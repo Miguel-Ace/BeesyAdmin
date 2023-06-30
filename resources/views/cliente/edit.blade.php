@@ -29,6 +29,7 @@ Actualizar CLIENTES
                 <option value="Nicaragua">Nicaragua</option>
                 <option value="Costa Rica">Costa Rica</option>
                 <option value="Panamá">Panamá</option>
+                <option value="México">México</option>
               @elseif ($datos->pais === 'El Salvador')
                 <option value="Guatemala">Guatemala</option>
                 <option value="El Salvador" selected>El Salvador</option>
@@ -36,6 +37,7 @@ Actualizar CLIENTES
                 <option value="Nicaragua">Nicaragua</option>
                 <option value="Costa Rica">Costa Rica</option>
                 <option value="Panamá">Panamá</option>
+                <option value="México">México</option>
               @elseif ($datos->pais === 'Honduras')
                 <option value="Guatemala">Guatemala</option>
                 <option value="El Salvador">El Salvador</option>
@@ -43,6 +45,7 @@ Actualizar CLIENTES
                 <option value="Nicaragua">Nicaragua</option>
                 <option value="Costa Rica">Costa Rica</option>
                 <option value="Panamá">Panamá</option>
+                <option value="México">México</option>
               @elseif ($datos->pais === 'Nicaragua')
                 <option value="Guatemala">Guatemala</option>
                 <option value="El Salvador">El Salvador</option>
@@ -50,6 +53,7 @@ Actualizar CLIENTES
                 <option value="Nicaragua" selected>Nicaragua</option>
                 <option value="Costa Rica">Costa Rica</option>
                 <option value="Panamá">Panamá</option>
+                <option value="México">México</option>
               @elseif ($datos->pais === 'Costa Rica')
                 <option value="Guatemala">Guatemala</option>
                 <option value="El Salvador">El Salvador</option>
@@ -57,13 +61,23 @@ Actualizar CLIENTES
                 <option value="Nicaragua">Nicaragua</option>
                 <option value="Costa Rica" selected>Costa Rica</option>
                 <option value="Panamá">Panamá</option>
-              @else
+                <option value="México">México</option>
+              @elseif ($datos->pais === 'Panamá')
                 <option value="Guatemala">Guatemala</option>
                 <option value="El Salvador">El Salvador</option>
                 <option value="Honduras">Honduras</option>
                 <option value="Nicaragua">Nicaragua</option>
                 <option value="Costa Rica">Costa Rica</option>
                 <option value="Panamá" selected>Panamá</option>
+                <option value="México">México</option>
+              @else
+                <option value="Guatemala">Guatemala</option>
+                <option value="El Salvador">El Salvador</option>
+                <option value="Honduras">Honduras</option>
+                <option value="Nicaragua">Nicaragua</option>
+                <option value="Costa Rica">Costa Rica</option>
+                <option value="Panamá">Panamá</option>
+                <option value="México" selected>México</option>
               @endif
             </select>
         </div>
