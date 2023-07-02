@@ -14,7 +14,7 @@
 
         <div class="logo">
             <span class="uno"><span class="negrita"></span>BeêsyAdmin</span> <ion-icon name="arrow-undo-outline" class="contraer"></ion-icon>
-            <span class="dos oculto"><span class="negrita">BD</span></span> <ion-icon name="arrow-redo-outline" class="expadir oculto"></ion-icon>
+            <span class="dos oculto"><span class="negrita">BD</span></span>
         </div>
 
         <div class="salir">

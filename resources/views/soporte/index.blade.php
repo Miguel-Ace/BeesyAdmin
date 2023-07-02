@@ -134,6 +134,16 @@ Agregar soporte
                 <input type="file" class="form-control" id="archivo" name="archivo">
               </div>
           </div>
+          
+          <div class="col-md-4">
+              <label for="origen_asistencia" class="form-label">Origen Asistencia</label>
+              <select class="form-select" name="origen_asistencia" @error("origen_asistencia")style="border: solid 2px red"@enderror>
+                  <option value="Grave" selected disabled>Origen Asistencia</option>
+                  <option {{ old('origen_asistencia') == 'Error de usuario' ? 'selected' : '' }} value="Error de usuario">Error de usuario</option>
+                  <option {{ old('origen_asistencia') == 'Error de software' ? 'selected' : '' }} value="Error de software">Error de software</option>
+              </select>
+          </div>
+          
           {{-- <div class="col-md-4">
             <label for="usuario" class="form-label">Usuario</label>
               <select class="form-select" name="usuario" @error("usuario")style="border: solid 2px red"@enderror>
@@ -199,6 +209,14 @@ Lista de soporte
                 <th scope="col"></th>
                 <th scope="col"></th>
                 <th scope="col">
+                    <select name="select_empresa" id="select_empresa">
+                        <option value=""></option>
+                        @foreach ($clientes as $cliente)
+                            <option value="{{$cliente->nombre}}">{{$cliente->nombre}}</option>
+                        @endforeach
+                    </select>
+                </th>
+                <th scope="col">
                     <select name="colaborador" id="colaborador">
                         <option value=""></option>
                         <option value="Roxana Baez">Roxana Baez</option>
@@ -211,9 +229,6 @@ Lista de soporte
                     <input type="date" id="fecha1" name="fecha1">
                     <input type="date" id="fecha2" name="fecha2">
                 </th>
-                <th scope="col"></th>
-                <th scope="col"></th>
-                <th scope="col"></th>
                 <th scope="col">
                     <select name="cliente" id="cliente">
                         <option value=""></option>
@@ -222,36 +237,52 @@ Lista de soporte
                         @endforeach
                     </select>
                 </th>
+                <th scope="col"></th>
+                <th scope="col"></th>
                 {{-- <th scope="col">Usuario</th> --}}
+                <th scope="col">
+                    <select name="estado" id="estado">
+                        <option value=""></option>
+                        <option value="Asignado">Asignado</option>
+                        <option value="En Proceso">En Proceso</option>
+                        <option value="Completo">Completo</option>
+                    </select>
+                </th>
                 <th scope="col"></th>
                 {{-- <th scope="col">NumLaboral</th> --}}
                 <th scope="col"></th>
                 <th scope="col"></th>
-                <th scope="col"></th>
-                <th scope="col"></th>
+                <th scope="col">
+                    <select name="origen_asistencia" id="origen_asistencia">
+                        <option value=""></option>
+                        <option value="Error de usuario">Error de usuario</option>
+                        <option value="Error de software">Error de software</option>
+                    </select>
+                </th>
                 <th scope="col"></th>
                 <th scope="col"></th>
                 <th scope="col"></th>
             </tr>
             <tr class="text-center">
+                <th scope="col">Acciones</th>
                 <th scope="col">Ticket</th>
                 <th scope="col">Empresa</th>
                 <th scope="col">Colaborador</th>
                 <th scope="col">Fecha y hora creacion del Ticket</th>
+                <th scope="col">Cliente</th>
+                <th scope="col">Software</th>
+                <th scope="col">Prioridad</th>
+                <th scope="col">Estado</th>
                 <th scope="col">Fecha Inicial Asistencia</th>
                 <th scope="col">Fecha Final Asistencia</th>
                 <th scope="col">Total de horas</th>
-                <th scope="col">Cliente</th>
                 {{-- <th scope="col">Usuario</th> --}}
-                <th scope="col">Software</th>
                 {{-- <th scope="col">NumLaboral</th> --}}
+                <th scope="col">Origen Asistencia</th>
                 <th scope="col">Problema</th>
-                <th scope="col">Prioridad</th>
-                <th scope="col">Estado</th>
                 <th scope="col">Soluciòn</th>
                 <th scope="col">Observaciones</th>
                 <th scope="col">Archivos</th>
-                <th scope="col">Acciones</th>
             </tr>
         </thead>
         <tbody class="text-center" id="listaSoporte">
@@ -260,28 +291,21 @@ Lista de soporte
             @endphp
             @foreach ($datos as $dato)
                 <tr>
+                    <td style="width: 9rem">
+                        <a href="{{url('soporte/'.$dato->id.'/edit')}}" class="edit"><ion-icon name="pencil-outline"></ion-icon></a>
+                        |
+                        <form action="{{url('soporte/'.$dato->id)}}" method="POST" class="delete">
+                            @csrf
+                            {{method_field('DELETE')}}
+                            <button type="submit"><ion-icon name="beaker-outline"></ion-icon></button>
+                        </form>
+                    </td>
                     <td>{{$dato->ticker}}</td>
                     <td>{{$dato->empresa}}</td>
                     <td>{{$dato->colaborador}}</td>
                     <td>{{$dato->fechaCreacionTicke}}</td>
-                    <td>{{$dato->fechaInicioAsistencia}}</td>
-                    <td>{{$dato->fechaFinalAsistencia}}</td>
-                    <td>
-                        @php
-                            $fechaInicio = Carbon::parse($dato->fechaInicioAsistencia);
-                            $fechaFinal = Carbon::parse($dato->fechaFinalAsistencia);
-                            $diferencia = $fechaFinal->diff($fechaInicio);
-                            $horas = $diferencia->h;
-                            $minutos = $diferencia->i;
-                        @endphp
-                    
-                        {{ $horas }} horas {{ $minutos }} minutos
-                    </td>
                     <td>{{$dato->id_cliente}}</td>
-                    {{-- <td>{{$dato->usuario}}</td> --}}
                     <td>{{$dato->id_software}}</td>
-                    {{-- <td>{{$dato->numLaboral}}</td> --}}
-                    <td>{{$dato->problema}}</td>
 
                     @if ($dato->prioridad == 'Leve')
                         <td style="background: #16A085;color: #D0ECE7;font-weight: bold">{{$dato->prioridad}}</td>
@@ -298,6 +322,24 @@ Lista de soporte
                     @else
                         <td style="background: #16A085;color: #D0ECE7;font-weight: bold">{{$dato->estado}}</td>
                     @endif
+
+                    <td>{{$dato->fechaInicioAsistencia}}</td>
+                    <td>{{$dato->fechaFinalAsistencia}}</td>
+                    <td>
+                        @php
+                            $fechaInicio = Carbon::parse($dato->fechaInicioAsistencia);
+                            $fechaFinal = Carbon::parse($dato->fechaFinalAsistencia);
+                            $diferencia = $fechaFinal->diff($fechaInicio);
+                            $horas = $diferencia->h;
+                            $minutos = $diferencia->i;
+                        @endphp
+                    
+                        {{ $horas }} horas {{ $minutos }} minutos
+                    </td>
+                    {{-- <td>{{$dato->usuario}}</td> --}}
+                    {{-- <td>{{$dato->numLaboral}}</td> --}}
+                    <td>{{$dato->origen_asistencia}}</td>
+                    <td>{{$dato->problema}}</td>
                     <td>{{$dato->solucion}}</td>
                     <td>{{$dato->observaciones}}</td>
                     <td>
@@ -308,16 +350,6 @@ Lista de soporte
                                 <a href="{{ asset('storage/' . $dato->archivo) }}" target="_blank"><ion-icon name="document-outline"></ion-icon></a>
                             @endif
                         @endif
-                    </td>
-
-                    <td class="">
-                        <a href="{{url('soporte/'.$dato->id.'/edit')}}" class="edit"><ion-icon name="pencil-outline"></ion-icon></a>
-                        {{-- |
-                        <form action="{{url('soporte/'.$dato->id)}}" method="POST" class="delete">
-                            @csrf
-                            {{method_field('DELETE')}}
-                            <button type="submit"><ion-icon name="beaker-outline"></ion-icon></button>
-                        </form> --}}
                     </td>
                 </tr>
             @endforeach
