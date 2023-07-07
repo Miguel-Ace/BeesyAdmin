@@ -36,22 +36,43 @@ Actualizar soporte
                     <option value="Norman Logo">Norman Logo</option>
                     <option value="Edwin Torres">Edwin Torres</option>
                     <option value="Jasson Ulloa">Jasson Ulloa</option>
+                    <option value="José Rizo">José Rizo</option>
+                    <option value="Kenneth Granados">Kenneth Granados</option>
                 @elseif ($datos->colaborador === 'Norman Logo')
                     <option value="Roxana Baez">Roxana Baez</option>
                     <option value="Norman Logo" selected>Norman Logo</option>
                     <option value="Edwin Torres">Edwin Torres</option>
                     <option value="Jasson Ulloa">Jasson Ulloa</option>
-
+                    <option value="José Rizo">José Rizo</option>
+                    <option value="Kenneth Granados">Kenneth Granados</option>
                 @elseif ($datos->colaborador === 'Edwin Torres')
                     <option value="Roxana Baez">Roxana Baez</option>
                     <option value="Norman Logo">Norman Logo</option>
                     <option value="Edwin Torres" selected>Edwin Torres</option>
                     <option value="Jasson Ulloa">Jasson Ulloa</option>
-                @else
+                    <option value="José Rizo">José Rizo</option>
+                    <option value="Kenneth Granados">Kenneth Granados</option>
+                @elseif ($datos->colaborador === 'Jasson Ulloa')
                     <option value="Roxana Baez">Roxana Baez</option>
                     <option value="Norman Logo">Norman Logo</option>
                     <option value="Edwin Torres">Edwin Torres</option>
                     <option value="Jasson Ulloa" selected>Jasson Ulloa</option>
+                    <option value="José Rizo">José Rizo</option>
+                    <option value="Kenneth Granados">Kenneth Granados</option>
+                @elseif ($datos->colaborador === 'José Rizo')
+                    <option value="Roxana Baez">Roxana Baez</option>
+                    <option value="Norman Logo">Norman Logo</option>
+                    <option value="Edwin Torres">Edwin Torres</option>
+                    <option value="Jasson Ulloa">Jasson Ulloa</option>
+                    <option value="José Rizo" selected>José Rizo</option>
+                    <option value="Kenneth Granados">Kenneth Granados</option>
+                @else
+                    <option value="Roxana Baez">Roxana Baez</option>
+                    <option value="Norman Logo">Norman Logo</option>
+                    <option value="Edwin Torres">Edwin Torres</option>
+                    <option value="Jasson Ulloa">Jasson Ulloa</option>
+                    <option value="José Rizo">José Rizo</option>
+                    <option value="Kenneth Granados" selected>Kenneth Granados</option>
                 @endif
               </select>
           </div>
@@ -149,6 +170,19 @@ Actualizar soporte
                     <option value="Completo" selected>Completo</option>
                   @endif
               </select>
+          </div>
+
+          <div class="col-md-4">
+            <label for="origen_asistencia" class="form-label">Origen Asistencia</label>
+            <select class="form-select" name="origen_asistencia" @error("origen_asistencia")style="border: solid 2px red"@enderror>
+              @if ($datos->origen_asistencia == "Error de usuario")
+                <option {{ old('origen_asistencia') == 'Error de usuario' ? 'selected' : '' }} selected value="Error de usuario">Error de usuario</option>
+                <option {{ old('origen_asistencia') == 'Error de software' ? 'selected' : '' }} value="Error de software">Error de software</option>
+              @else
+                <option {{ old('origen_asistencia') == 'Error de usuario' ? 'selected' : '' }} value="Error de usuario">Error de usuario</option>
+                <option {{ old('origen_asistencia') == 'Error de software' ? 'selected' : '' }} selected value="Error de software">Error de software</option>
+              @endif
+            </select>
           </div>
 
           {{-- <div class="col-md-4 d-none">

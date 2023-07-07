@@ -50,6 +50,8 @@ Agregar soporte
                 <option {{ old('colaborador') == 'Norman Logo' ? 'selected' : '' }} value="Norman Logo">Norman Logo</option>
                 <option {{ old('colaborador') == 'Edwin Torres' ? 'selected' : '' }} value="Edwin Torres">Edwin Torres</option>
                 <option {{ old('colaborador') == 'Jasson Ulloa' ? 'selected' : '' }} value="Jasson Ulloa">Jasson Ulloa</option>
+                <option {{ old('colaborador') == 'José Rizo' ? 'selected' : '' }} value="José Rizo">José Rizo</option>
+                <option {{ old('colaborador') == 'Kenneth Granados' ? 'selected' : '' }} value="Kenneth Granados">Kenneth Granados</option>
               </select>
           </div>
 
@@ -223,6 +225,8 @@ Lista de soporte
                         <option value="Norman Logo">Norman Logo</option>
                         <option value="Edwin Torres">Edwin Torres</option>
                         <option value="Jasson Ulloa">Jasson Ulloa</option>
+                        <option value="José Rizo">José Rizo</option>
+                        <option value="Kenneth Granados">Kenneth Granados</option>
                     </select>
                 </th>
                 <th scope="col">
@@ -368,11 +372,17 @@ Lista de soporte
     // Extrallendo los valores de los inputs
     const selectColaborador = document.querySelector('#colaborador');
     const selectCliente = document.querySelector('#cliente');
+    const selectEstado = document.querySelector('#estado');
+    const selectEmpresa = document.querySelector('#select_empresa');
+    const selectOrigenAsistencia = document.querySelector('#origen_asistencia');
     const fecha1 = document.querySelector('#fecha1');
     const fecha2 = document.querySelector('#fecha2');
 
     let clienteFiltrado = selectCliente.value;
     let colaboradorFiltrado = selectColaborador.value;
+    let estadoFiltrado = selectEstado.value;
+    let empresaFiltrado = selectEmpresa.value;
+    let origenAsistenciaFiltrado = selectOrigenAsistencia.value;
     let fecha1valor = fecha1.value;
     let fecha2valor = fecha2.value;
 
@@ -401,16 +411,21 @@ Lista de soporte
     const id_cliente = item.id_cliente;
     const problema = item.problema;
     const colaborador = item.colaborador;
+    const estado = item.estado;
+    const origenAsistencia = item.origen_asistencia;
     // Fin valor arreglo
 
     // Haciendo condicionales en variables para un mejor orden con el if
+    const coincideEmpresa = empresaFiltrado === '' || empresaFiltrado === empresa;
+    const coincideEstado = estadoFiltrado === '' || estadoFiltrado === estado;
+    const coincideOrigenAsistencia = origenAsistenciaFiltrado === '' || origenAsistenciaFiltrado === origenAsistencia;
     const coincideCliente = clienteFiltrado === '' || clienteFiltrado === id_cliente;
     const coincideColaborador = colaboradorFiltrado === '' || colaboradorFiltrado === colaborador;
     const coincideFecha1 = fecha1valor == '' || fecha1valor <= fechaCreacionTicke;
     const coincideFecha2 = fecha2valor == '' || fecha2valor >= fechaCreacionTicke;
 
     // si los datos se cumplen correctamente se mostraran los resultados
-    if ((coincideCliente && coincideColaborador) && (coincideFecha1 && coincideFecha2)) {
+    if (((coincideCliente && coincideColaborador) && (coincideFecha1 && coincideFecha2)) && ((coincideEstado && coincideEmpresa) && coincideOrigenAsistencia)) {
         csvContent += `${fechaCreacionTicke},${empresa},${ticker},${fechaInicioAsistencia},${fechaFinalAsistencia},${totalHoras},${id_cliente},${problema},${colaborador}\n`;
     }
     });
