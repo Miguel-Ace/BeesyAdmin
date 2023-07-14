@@ -102,6 +102,7 @@
                 </p>
                 <p class=""><span>Ticket:</span> {{$msg['ticker']}}</p>
                 <p class=""><span>Fecha y Hora:</span> {{$msg['fechaCreacionTicke']}}</p>
+                <p class=""><span>Fecha prevista de cumplimiento del Ticket:</span> {{$msg['fecha_prevista_cumplimiento']}}</p>
                 {{-- <p class=""><span>Colaborador:</span> {{$msg['colaborador']}}</p> --}}
                 {{-- <p class=""><span>Fecha y Hora Final:</span> {{$msg['fechaHoraFinal']}}</p> --}}
                 {{-- <p class=""><span>Problema:</span> {{$msg['problema']}}</p>

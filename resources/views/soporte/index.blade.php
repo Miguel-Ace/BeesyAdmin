@@ -52,6 +52,9 @@ Agregar soporte
                 <option {{ old('colaborador') == 'Jasson Ulloa' ? 'selected' : '' }} value="Jasson Ulloa">Jasson Ulloa</option>
                 <option {{ old('colaborador') == 'José Rizo' ? 'selected' : '' }} value="José Rizo">José Rizo</option>
                 <option {{ old('colaborador') == 'Kenneth Granados' ? 'selected' : '' }} value="Kenneth Granados">Kenneth Granados</option>
+                <option {{ old('colaborador') == 'Ramses Rivas' ? 'selected' : '' }} value="Ramses Rivas">Ramses Rivas</option>
+                <option {{ old('colaborador') == 'Mauro Pettyn' ? 'selected' : '' }} value="Mauro Pettyn">Mauro Pettyn</option>
+                <option {{ old('colaborador') == 'Deyna López' ? 'selected' : '' }} value="Deyna López">Deyna López</option>
               </select>
           </div>
 
@@ -146,6 +149,13 @@ Agregar soporte
               </select>
           </div>
           
+          <div class="col-md-4">
+            <div class="mb-3">
+                <label for="fecha_prevista_cumplimiento" class="form-label">Fecha Prevista Cumplimiento</label>
+                <input type="datetime-local" class="form-control" id="fecha_prevista_cumplimiento" name="fecha_prevista_cumplimiento" value="{{old('fecha_prevista_cumplimiento')}}" @error("fecha_prevista_cumplimiento")style="border: solid 2px red"@enderror>
+            </div>
+          </div>
+
           {{-- <div class="col-md-4">
             <label for="usuario" class="form-label">Usuario</label>
               <select class="form-select" name="usuario" @error("usuario")style="border: solid 2px red"@enderror>
@@ -164,7 +174,7 @@ Agregar soporte
           </div>
           {{--  --}}
 
-          <div class="col-md-6">
+          <div class="col-md-8">
             <div class="mb-3">
                 <label for="problema" class="form-label">Problema</label>
                 <input type="text" class="form-control" id="problema" name="problema" value="{{old('problema')}}" @error("problema")style="border: solid 2px red"@enderror>
@@ -178,7 +188,7 @@ Agregar soporte
               </div>
           </div> --}}
 
-        <div class="col-md-6">
+        <div class="col-md-12">
             <div class="mb-3">
                 <label for="observaciones" class="form-label">Observaciones</label>
                 <input type="text" class="form-control" id="observaciones" name="observaciones" value="{{old('observaciones')}}">
@@ -227,6 +237,9 @@ Lista de soporte
                         <option value="Jasson Ulloa">Jasson Ulloa</option>
                         <option value="José Rizo">José Rizo</option>
                         <option value="Kenneth Granados">Kenneth Granados</option>
+                        <option value="Ramses Rivas">Ramses Rivas</option>
+                        <option value="Mauro Pettyn">Mauro Pettyn</option>
+                        <option value="Deyna López">Deyna López</option>
                     </select>
                 </th>
                 <th scope="col">

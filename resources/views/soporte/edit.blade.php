@@ -29,7 +29,7 @@ Actualizar soporte
 
     <div class="row">
         <div class="col-md-4">
-            <label for="colaborador" >Colaborador</label>
+            <label for="colaborador">Colaborador</label>
               <select class="form-select" name="colaborador">
                 @if ($datos->colaborador === 'Roxana Baez')
                     <option value="Roxana Baez" selected>Roxana Baez</option>
@@ -38,6 +38,9 @@ Actualizar soporte
                     <option value="Jasson Ulloa">Jasson Ulloa</option>
                     <option value="José Rizo">José Rizo</option>
                     <option value="Kenneth Granados">Kenneth Granados</option>
+                    <option value="Ramses Rivas">Ramses Rivas</option>
+                    <option value="Mauro Pettyn">Mauro Pettyn</option>
+                    <option value="Deyna López">Deyna López</option>
                 @elseif ($datos->colaborador === 'Norman Logo')
                     <option value="Roxana Baez">Roxana Baez</option>
                     <option value="Norman Logo" selected>Norman Logo</option>
@@ -45,6 +48,9 @@ Actualizar soporte
                     <option value="Jasson Ulloa">Jasson Ulloa</option>
                     <option value="José Rizo">José Rizo</option>
                     <option value="Kenneth Granados">Kenneth Granados</option>
+                    <option value="Ramses Rivas">Ramses Rivas</option>
+                    <option value="Mauro Pettyn">Mauro Pettyn</option>
+                    <option value="Deyna López">Deyna López</option>
                 @elseif ($datos->colaborador === 'Edwin Torres')
                     <option value="Roxana Baez">Roxana Baez</option>
                     <option value="Norman Logo">Norman Logo</option>
@@ -52,6 +58,9 @@ Actualizar soporte
                     <option value="Jasson Ulloa">Jasson Ulloa</option>
                     <option value="José Rizo">José Rizo</option>
                     <option value="Kenneth Granados">Kenneth Granados</option>
+                    <option value="Ramses Rivas">Ramses Rivas</option>
+                    <option value="Mauro Pettyn">Mauro Pettyn</option>
+                    <option value="Deyna López">Deyna López</option>
                 @elseif ($datos->colaborador === 'Jasson Ulloa')
                     <option value="Roxana Baez">Roxana Baez</option>
                     <option value="Norman Logo">Norman Logo</option>
@@ -59,6 +68,9 @@ Actualizar soporte
                     <option value="Jasson Ulloa" selected>Jasson Ulloa</option>
                     <option value="José Rizo">José Rizo</option>
                     <option value="Kenneth Granados">Kenneth Granados</option>
+                    <option value="Ramses Rivas">Ramses Rivas</option>
+                    <option value="Mauro Pettyn">Mauro Pettyn</option>
+                    <option value="Deyna López">Deyna López</option>
                 @elseif ($datos->colaborador === 'José Rizo')
                     <option value="Roxana Baez">Roxana Baez</option>
                     <option value="Norman Logo">Norman Logo</option>
@@ -66,13 +78,49 @@ Actualizar soporte
                     <option value="Jasson Ulloa">Jasson Ulloa</option>
                     <option value="José Rizo" selected>José Rizo</option>
                     <option value="Kenneth Granados">Kenneth Granados</option>
-                @else
+                    <option value="Ramses Rivas">Ramses Rivas</option>
+                    <option value="Mauro Pettyn">Mauro Pettyn</option>
+                    <option value="Deyna López">Deyna López</option>
+                @elseif ($datos->colaborador === 'Kenneth Granados')
                     <option value="Roxana Baez">Roxana Baez</option>
                     <option value="Norman Logo">Norman Logo</option>
                     <option value="Edwin Torres">Edwin Torres</option>
                     <option value="Jasson Ulloa">Jasson Ulloa</option>
                     <option value="José Rizo">José Rizo</option>
                     <option value="Kenneth Granados" selected>Kenneth Granados</option>
+                    <option value="Ramses Rivas">Ramses Rivas</option>
+                    <option value="Mauro Pettyn">Mauro Pettyn</option>
+                    <option value="Deyna López">Deyna López</option>
+                @elseif ($datos->colaborador === 'Ramses Rivas')
+                    <option value="Roxana Baez">Roxana Baez</option>
+                    <option value="Norman Logo">Norman Logo</option>
+                    <option value="Edwin Torres">Edwin Torres</option>
+                    <option value="Jasson Ulloa">Jasson Ulloa</option>
+                    <option value="José Rizo">José Rizo</option>
+                    <option value="Kenneth Granados">Kenneth Granados</option>
+                    <option value="Ramses Rivas" selected>Ramses Rivas</option>
+                    <option value="Mauro Pettyn">Mauro Pettyn</option>
+                    <option value="Deyna López">Deyna López</option>
+                @elseif ($datos->colaborador === 'Mauro Pettyn')
+                    <option value="Roxana Baez">Roxana Baez</option>
+                    <option value="Norman Logo">Norman Logo</option>
+                    <option value="Edwin Torres">Edwin Torres</option>
+                    <option value="Jasson Ulloa">Jasson Ulloa</option>
+                    <option value="José Rizo">José Rizo</option>
+                    <option value="Kenneth Granados">Kenneth Granados</option>
+                    <option value="Ramses Rivas">Ramses Rivas</option>
+                    <option value="Mauro Pettyn" selected>Mauro Pettyn</option>
+                    <option value="Deyna López">Deyna López</option>
+                @else
+                    <option value="Roxana Baez">Roxana Baez</option>
+                    <option value="Norman Logo">Norman Logo</option>
+                    <option value="Edwin Torres">Edwin Torres</option>
+                    <option value="Jasson Ulloa">Jasson Ulloa</option>
+                    <option value="José Rizo">José Rizo</option>
+                    <option value="Kenneth Granados">Kenneth Granados</option>
+                    <option value="Ramses Rivas">Ramses Rivas</option>
+                    <option value="Mauro Pettyn">Mauro Pettyn</option>
+                    <option value="Deyna López" selected>Deyna López</option>
                 @endif
               </select>
           </div>
@@ -86,7 +134,7 @@ Actualizar soporte
 
         <div class="col-md-4">
             <div class="mb-3">
-                <label for="fechaFinalAsistencia" class="form-label">fecha y hora final de asistencia</label>
+                <label for="fechaFinalAsistencia" class="form-label">Fecha y hora final de asistencia</label>
                 <input type="datetime-local" class="form-control" id="fechaFinalAsistencia" name="fechaFinalAsistencia" value="{{$datos->fechaFinalAsistencia}}" @error("fechaFinalAsistencia")style="border: solid 2px red"@enderror>
               </div>
           </div>
@@ -183,6 +231,13 @@ Actualizar soporte
                 <option {{ old('origen_asistencia') == 'Error de software' ? 'selected' : '' }} selected value="Error de software">Error de software</option>
               @endif
             </select>
+          </div>
+
+          <div class="col-md-4 d-none">
+              <div class="mb-3">
+                <label for="fecha_prevista_cumplimiento" class="form-label">Fecha Prevista</label>
+                <input type="datetime-local" class="form-control" id="fecha_prevista_cumplimiento" name="fecha_prevista_cumplimiento" value="{{$datos->fecha_prevista_cumplimiento}}" @error("fecha_prevista_cumplimiento")style="border: solid 2px red"@enderror>
+              </div>
           </div>
 
           {{-- <div class="col-md-4 d-none">

@@ -71,6 +71,7 @@ class SoporteController extends Controller
             'estado' => 'required',
             'archivo' => 'nullable',
             'empresa' => 'required',
+            'fecha_prevista_cumplimiento' => 'required',
         ]);
 
         $datos = $request->except('_token');
