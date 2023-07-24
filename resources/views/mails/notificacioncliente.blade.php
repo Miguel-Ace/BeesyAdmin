@@ -102,14 +102,14 @@
                 </p>
                 <p class=""><span>Ticket:</span> {{$msg['ticker']}}</p>
                 <p class=""><span>Fecha y Hora:</span> {{$msg['fechaCreacionTicke']}}</p>
-                <p class=""><span>Fecha prevista de cumplimiento del Ticket:</span> {{$msg['fecha_prevista_cumplimiento']}}</p>
+                {{-- <p class=""><span>Fecha prevista de cumplimiento del Ticket:</span> {{$msg['fecha_prevista_cumplimiento']}}</p> --}}
                 {{-- <p class=""><span>Colaborador:</span> {{$msg['colaborador']}}</p> --}}
                 {{-- <p class=""><span>Fecha y Hora Final:</span> {{$msg['fechaHoraFinal']}}</p> --}}
-                {{-- <p class=""><span>Problema:</span> {{$msg['problema']}}</p>
-                <p class=""><span>Prioridad:</span> {{$msg['prioridad']}}</p>
-                <p class=""><span>Estado:</span> {{$msg['estado']}}</p>
-                <p class=""><span>Solución:</span> {{$msg['solucion']}}</p>
-                <p class=""><span>Observaciones:</span> {{$msg['observaciones']}}</p> --}}
+                <p class=""><span>Problema:</span> {{$msg['problema']}}</p>
+                {{-- <p class=""><span>Prioridad:</span> {{$msg['prioridad']}}</p> --}}
+                {{-- <p class=""><span>Estado:</span> {{$msg['estado']}}</p> --}}
+                {{-- <p class=""><span>Solución:</span> {{$msg['solucion']}}</p> --}}
+                {{-- <p class=""><span>Observaciones:</span> {{$msg['observaciones']}}</p> --}}
             </div>
 
             {{-- <div class="contenedorlink">

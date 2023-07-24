@@ -58,10 +58,10 @@ function filtrarListaSoporte() {
   listaSoporte.forEach((item) => {
     const valorEmpresa = item.querySelector('td:nth-child(3)').textContent;
     const valorColaboradorTd = item.querySelector('td:nth-child(4)').textContent;
-    const valorClienteTd = item.querySelector('td:nth-child(6)').textContent;
-    const valorEstado = item.querySelector('td:nth-child(9)').textContent;
-    const valorOrigenAsistencia = item.querySelector('td:nth-child(13)').textContent;
-    const valorFecha = item.querySelector('td:nth-child(5)').textContent;
+    const valorClienteTd = item.querySelector('td:nth-child(8)').textContent;
+    const valorEstado = item.querySelector('td:nth-child(11)').textContent;
+    const valorOrigenAsistencia = item.querySelector('td:nth-child(15)').textContent;
+    const valorFecha = item.querySelector('td:nth-child(6)').textContent;
 
     // Comprobar si el elemento coincide con los filtros activos
     const coincideEmpresa = empresaFiltrado === '' || empresaFiltrado === valorEmpresa;

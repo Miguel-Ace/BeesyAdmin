@@ -9,6 +9,26 @@ class Soporte extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+    protected $fillable = [
+        'id',
+        'ticker',
+        'colaborador',
+        'fechaCreacionTicke',
+        'fechaInicioAsistencia',
+        'fechaFinalAsistencia',
+        'id_cliente',
+        'id_software',
+        'problema',
+        'solucion',
+        'observaciones',
+        'numLaboral',
+        'prioridad',
+        'estado',
+        'correo_cliente',
+        'archivo',
+    ];
+
     // function clientes(){
     //     return $this->belongsTo(Cliente::class, 'id_cliente');
     // }

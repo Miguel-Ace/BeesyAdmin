@@ -128,14 +128,14 @@ Actualizar soporte
           <div class="col-md-4">
             <div class="mb-3">
                 <label for="fechaInicioAsistencia" class="form-label">Fecha y hora inicio de asistencia</label>
-                <input type="datetime-local" class="form-control" id="fechaInicioAsistencia" name="fechaInicioAsistencia" value="{{$datos->fechaInicioAsistencia}}" @error("fechaInicioAsistencia")style="border: solid 2px red"@enderror>
+                <input type="datetime-local" class="form-control" id="fechaInicioAsistencia" name="fechaInicioAsistencia" value="{{$datos->fechaInicioAsistencia ? $datos->fechaInicioAsistencia : old('fechaInicioAsistencia')}}" @error("fechaInicioAsistencia")style="border: solid 2px red"@enderror>
               </div>
           </div>
 
         <div class="col-md-4">
             <div class="mb-3">
                 <label for="fechaFinalAsistencia" class="form-label">Fecha y hora final de asistencia</label>
-                <input type="datetime-local" class="form-control" id="fechaFinalAsistencia" name="fechaFinalAsistencia" value="{{$datos->fechaFinalAsistencia}}" @error("fechaFinalAsistencia")style="border: solid 2px red"@enderror>
+                <input type="datetime-local" class="form-control" id="fechaFinalAsistencia" name="fechaFinalAsistencia" value="{{$datos->fechaFinalAsistencia ? $datos->fechaFinalAsistencia : old('fechaFinalAsistencia')}}" @error("fechaFinalAsistencia")style="border: solid 2px red"@enderror>
               </div>
           </div>
 
@@ -183,6 +183,17 @@ Actualizar soporte
             <label for="prioridad" class="form-label">Prioridad</label>
               <select class="form-select" name="prioridad" @error("prioridad")style="border: solid 2px red"@enderror>
                   <option value="" selected disabled>Selccione una prioridad</option>
+
+                  {{-- @if ($datos->prioridad != 'leve')
+                    <option value="Moderado" {{old('prioridad') == 'Moderado' ? 'selected' : ''}}>Moderado</option>
+                    <option value="Alta" {{old('prioridad') == 'Alta' ? 'selected' : ''}}>Alta</option>
+                  @elseif ($datos->prioridad != 'Moderado')
+                    <option value="Leve" {{old('prioridad') == 'Leve' ? 'selected' : ''}}>Leve</option>
+                    <option value="Alta" {{old('prioridad') == 'Alta' ? 'selected' : ''}}>Alta</option>
+                  @else
+                    <option value="Leve" {{old('prioridad') == 'Leve' ? 'selected' : ''}}>Leve</option>
+                    <option value="Moderado" {{old('prioridad') == 'Moderado' ? 'selected' : ''}}>Moderado</option>
+                  @endif --}}
 
                   @if ($datos->prioridad === 'Leve')
                     <option value="Leve" selected>Leve</option>
@@ -271,14 +282,14 @@ Actualizar soporte
         <div class="col-md-6">
             <div class="mb-3">
                 <label for="solucion" class="form-label">Solución</label>
-                <input type="text" class="form-control" id="solucion" name="solucion" value="{{$datos->solucion}}" @error("solucion")style="border: solid 2px red"@enderror>
+                <input type="text" class="form-control" id="solucion" name="solucion" value="{{$datos->solucion ? $datos->solucion : old('solucion')}}" @error("solucion")style="border: solid 2px red"@enderror>
               </div>
           </div>
 
         <div class="col-md-6">
             <div class="mb-3">
                 <label for="observaciones" class="form-label">Observaciones</label>
-                <input type="text" class="form-control" id="observaciones" name="observaciones" value="{{$datos->observaciones}}" @error("observaciones")style="border: solid 2px red"@enderror>
+                <input type="text" class="form-control" id="observaciones" name="observaciones" value="{{$datos->observaciones ? $datos->observaciones : old('observaciones')}}" @error("observaciones")style="border: solid 2px red"@enderror>
               </div>
           </div>
 

@@ -9,6 +9,7 @@ export default defineConfig({
                 'resources/js/app.js',
                 'resources/js/menutoggle.js',
                 'resources/js/filtro.js',
+                'resources/js/exportSoporte.js',
             ],
             refresh: true,
         }),

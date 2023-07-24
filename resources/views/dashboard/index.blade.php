@@ -104,16 +104,47 @@
         }
         });
 
-        const cData2 = JSON.parse(`<?php echo $data2; ?>`);
+        
+
+        let clientes = JSON.parse('{!! json_encode($clientes) !!}')
+        let empresas = JSON.parse('{!! json_encode($empresas) !!}')
+        
+        let infoSoporte = []
+        let labels = []
+        let datas = []
+
+        clientes.forEach(cliente => {
+            const valor = [cliente.nombre,0]
+            infoSoporte.push(valor)
+        })
+        
+
+        empresas.forEach(empresa => {
+            for (let i = 0; i < infoSoporte.length; i++) {
+                if (empresa == infoSoporte[i][0]) {
+                    infoSoporte[i][1]++
+                }
+            }
+        })
+
+        infoSoporte.forEach(item => {
+            labels.push(item[0])
+            datas.push(item[1])
+        })
+        
+        console.log(infoSoporte)
+
+
+        // const cData2 = JSON.parse(`<?php echo $data2; ?>`);
         const ctx2 = document.getElementById('myChart2');
 
         new Chart(ctx2, {
         type: 'pie',
         data: {
-            labels: cData2.label,
+            labels: labels,
             datasets: [{
             label: '',
-            data: cData2.data,
+            data: datas,
             borderWidth: 1,
             }]
         },

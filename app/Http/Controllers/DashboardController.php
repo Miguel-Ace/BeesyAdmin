@@ -52,9 +52,11 @@ class DashboardController extends Controller
                     
                     if($soporte->id_cliente == $cliente->id){
                         $data2['label'][] = $cliente->nombre;
+                        // $data2['label'][] = $cliente->nombre;
                     }
                 }
                 $data2['data'][] = $soporte->numLaboral;
+                // $data2['data'][] = $soporte->numLaboral;
             }
             if (empty($data2)) {
                 $data2 = 0;
@@ -142,8 +144,9 @@ class DashboardController extends Controller
         $clientes = Cliente::all();
         $soportes = Soporte::all();
         $proyectos = Proyecto::all();
-
-        return view('dashboard.index', $data ,compact('licencias','clientes','soportes','proyectos','ultimoMesLicencia','totalLicencias','totalClientes','totalsoportes','totalproyectos'));
+        
+        $empresas = Soporte::pluck('empresa');
+        return view('dashboard.index', $data ,compact('empresas','licencias','clientes','soportes','proyectos','ultimoMesLicencia','totalLicencias','totalClientes','totalsoportes','totalproyectos'));
     }
 
     /**
