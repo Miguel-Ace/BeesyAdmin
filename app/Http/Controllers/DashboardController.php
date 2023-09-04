@@ -30,6 +30,7 @@ class DashboardController extends Controller
         $clientes = Cliente::all();
         $soportes = Soporte::all();
         $proyectos = Proyecto::all();
+
         // Licencia
             foreach ($licencias as $licencia) {
                 foreach($clientes as $cliente){
@@ -144,9 +145,28 @@ class DashboardController extends Controller
         $clientes = Cliente::all();
         $soportes = Soporte::all();
         $proyectos = Proyecto::all();
-        
         $empresas = Soporte::pluck('empresa');
-        return view('dashboard.index', $data ,compact('empresas','licencias','clientes','soportes','proyectos','ultimoMesLicencia','totalLicencias','totalClientes','totalsoportes','totalproyectos'));
+        
+        $arrayClientes = [];
+
+        foreach ($clientes as $cliente) {
+            array_push($arrayClientes, [
+                'cantidad' => 1,
+                'empresa' => $cliente->nombre,
+                'nombre' => $cliente->contacto,
+            ]);
+        }
+
+        for ($i=0; $i < count($arrayClientes); $i++) {
+            // echo $arrayClientes[$i]['empresa'];
+            if ($soporte['empresa'] == $soportes[$i]['empresa']) {
+                echo $soporte['cantidad']++;
+            }
+        }
+        
+        $arrSoportes = DB::table('soportes')->select('id', 'fechaCreacionTicke','id_cliente','empresa')->get();
+
+        return view('dashboard.index', $data ,compact('arrSoportes','empresas','licencias','clientes','soportes','proyectos','ultimoMesLicencia','totalLicencias','totalClientes','totalsoportes','totalproyectos','arrayClientes'));
     }
 
     /**

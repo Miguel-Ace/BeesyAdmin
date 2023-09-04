@@ -127,7 +127,7 @@ Agregar Detalle a Este Proyectos
               </div>
           </div>
 
-          <div class="col-md-3 d-none">
+          <div class="col-md-3 ">
             <div class="mb-3">
                 <label for="rendimiento" class="form-label">Rendimiento</label>
                 <input type="text" class="form-control" id="rendimiento" name="rendimiento" @error("rendimiento") style="border: 1px solid red" @enderror value="">

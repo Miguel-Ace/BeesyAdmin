@@ -80,6 +80,7 @@
         </div>
     </div>
 
+    
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         const cData = JSON.parse(`<?php echo $data1; ?>`);
@@ -132,7 +133,7 @@
             datas.push(item[1])
         })
         
-        console.log(infoSoporte)
+        // console.log(infoSoporte)
 
 
         // const cData2 = JSON.parse(`<?php echo $data2; ?>`);
@@ -263,4 +264,183 @@
         }
         });
     </script>
+@endsection
+
+@section('tablas')
+<div class="col-md-12 fs-6">
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr class="text-center">
+                
+                <th scope="col">
+                    <select name="select_empresa" id="select_empresa">
+                        <option value=""></option>
+                        @foreach ($clientes as $cliente)
+                            <option value="{{$cliente->nombre}}">{{$cliente->nombre}}</option>
+                        @endforeach
+                    </select>
+                </th>
+
+                <th scope="col">
+                    <select name="cliente" id="cliente">
+                        <option value=""></option>
+                        @foreach ($clientes as $cliente)
+                            <option value="{{$cliente->contacto}}">{{$cliente->contacto}}</option>
+                        @endforeach
+                    </select>
+                </th>
+
+                <th scope="col"></th>
+
+                <th scope="col" style="display: flex; flex-direction: column">
+                    <input type="date" id="fecha1">
+                    <input type="date" id="fecha2">
+                </th>
+            </tr>
+
+            <tr class="text-center">
+                <th scope="col">Empresa</th>
+                <th scope="col">Cliente</th>
+                <th scope="col">Cantidad de soportes</th>
+                <th scope="col">Soportes por fecha</th>
+            </tr>
+        </thead>
+        <tbody class="text-center" id="listaSoporte">
+            @foreach ($arrayClientes as $soporte)
+                <tr>
+                    <td>{{$soporte['empresa']}}</td>
+                    <td>{{$soporte['nombre']}}</td>
+                    <td>
+                        @php
+                            $arr = [];
+
+                            for ($i=0; $i < count($soportes); $i++) {
+                                // echo $soportes[$i]['id_cliente'];
+                                if ($soporte['empresa'] == $soportes[$i]['empresa']) {
+                                    $soporte['cantidad']++;
+                                    array_push($arr, $soporte['cantidad']);
+                                }
+                            }
+                            $ultimoElemento = end($arr); // Obtiene el último elemento
+
+                            echo $ultimoElemento - 1;
+                        @endphp
+                    </td>
+                    <td></td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+</div>
+
+<script>
+    const tbody = document.querySelectorAll('tbody tr');
+    const inputSelectEmpresa = document.querySelector('#select_empresa');
+    const inputcCliente = document.querySelector('#cliente');
+    let soportes = JSON.parse('{!! json_encode($arrSoportes) !!}')
+    const fecha1 = document.querySelector('#fecha1');
+    const fecha2 = document.querySelector('#fecha2');
+
+    tbody.forEach(item => {
+        const cantidadSoporte = item.querySelector('td:nth-child(3)')
+
+    // Quitando los números negativos
+        if (parseInt(cantidadSoporte.textContent) == -1) {
+            cantidadSoporte.innerText = ''
+        }    
+    })
+
+    // Filtrar información
+    let empresaFiltrado = '';
+    let clienteFiltrado = '';
+
+    inputSelectEmpresa.addEventListener('change', () => {
+        empresaFiltrado = inputSelectEmpresa.value
+        funcionFiltrar()
+    })
+
+    inputcCliente.addEventListener('change', () => {
+        clienteFiltrado = inputcCliente.value
+        funcionFiltrar()
+    })
+
+    function funcionFiltrar() {
+
+        tbody.forEach(item => {
+            const empresa = item.querySelector('td:nth-child(1)').textContent
+            const cliente = item.querySelector('td:nth-child(2)').textContent
+            const cantidadSoporte = item.querySelector('td:nth-child(3)')
+            
+            // Variables comparativas
+            const coincideEmpresa = empresaFiltrado === '' || empresaFiltrado === empresa
+            const inputCliente = clienteFiltrado === '' || clienteFiltrado === cliente
+
+            if (coincideEmpresa && inputCliente) {
+                item.style.display = '';
+            } else {
+                item.style.display = 'none';
+            }
+        })
+    }
+
+    let valorFecha1 = ''
+    let valorFecha2 = ''
+
+    fecha1.addEventListener('change', () => {
+        valorFecha1 = fecha1.value
+
+        tbody.forEach(item => {
+            item.querySelector('td:nth-child(4)').textContent = 0
+            // item.querySelector('td').style.backgroundColor = 'white'
+            // item.style.backgroundColor = 'white'
+            funcionFiltrarFechas(item)
+        })
+    })
+    fecha2.addEventListener('change', () => {
+        valorFecha2 = fecha2.value
+
+        tbody.forEach(item => {
+            item.querySelector('td:nth-child(4)').textContent = 0
+            // item.querySelector('td').style.backgroundColor = 'white'
+            // item.style.backgroundColor = 'white'
+            funcionFiltrarFechas(item)
+        })
+    })
+
+
+    function funcionFiltrarFechas(item2) {
+        const tbodyEmpresa = item2.querySelector('td:nth-child(1)').textContent
+        const tbodycliente = item2.querySelector('td:nth-child(2)').textContent
+        const tbodycantidad = item2.querySelector('td:nth-child(4)')
+
+        soportes.forEach(item => {
+                const fecha = item.fechaCreacionTicke
+                const id_cliente = item.id_cliente
+                const empresa = item.empresa
+
+
+                if (valorFecha1 <= fecha && valorFecha2 >= fecha) {
+                    if (valorFecha1 <= valorFecha2) {
+                        if (tbodyEmpresa == empresa && tbodycliente == id_cliente) {
+                            // console.log(`xxxxx${empresa} ${fecha}xxxxx`);
+                            // console.log(`=====${tbodyEmpresa} ${valorFecha1}=====`);
+                            tbodycantidad.textContent = parseInt(tbodycantidad.textContent) + 1
+                            // tbodyEmpresa.style.backgroundColor = '#F4F6F6'
+                            // tbodycliente.style.backgroundColor = '#F4F6F6'
+                            // tbodycantidad.style.backgroundColor = '#D5DBDB'
+                        }
+                    }
+                }else if (valorFecha1 <= fecha) {
+                    if (tbodyEmpresa == empresa && tbodycliente == id_cliente) {
+                        // console.log(`xxxxx${empresa} ${fecha}xxxxx`);
+                        // console.log(`=====${tbodyEmpresa} ${valorFecha1}=====`);
+                        tbodycantidad.textContent = parseInt(tbodycantidad.textContent) + 1
+                        // tbodyEmpresa.style.backgroundColor = '#F4F6F6'
+                        // tbodycliente.style.backgroundColor = '#F4F6F6'
+                        // tbodycantidad.style.backgroundColor = '#D5DBDB'
+                    }
+                }
+        })
+    }
+</script>
 @endsection
