@@ -290,6 +290,21 @@
                     </select>
                 </th>
 
+                <th scope="col">
+                    <select name="colaborador" id="colaborador">
+                      <option value=""></option>
+                      <option value="Roxana Baez">Roxana Baez</option>
+                      <option value="Norman Logo">Norman Logo</option>
+                      <option value="Edwin Torres">Edwin Torres</option>
+                      <option value="Jasson Ulloa">Jasson Ulloa</option>
+                      <option value="José Rizo">José Rizo</option>
+                      <option value="Kenneth Granados">Kenneth Granados</option>
+                      <option value="Ramses Rivas">Ramses Rivas</option>
+                      <option value="Mauro Pettyn">Mauro Pettyn</option>
+                      <option value="Deyna López">Deyna López</option>
+                    </select>
+                </th>
+
                 <th scope="col"></th>
 
                 <th scope="col" style="display: flex; flex-direction: column">
@@ -301,8 +316,10 @@
             <tr class="text-center">
                 <th scope="col">Empresa</th>
                 <th scope="col">Cliente</th>
+                <th scope="col">Colaborador</th>
                 <th scope="col">Cantidad de soportes</th>
                 <th scope="col">Soportes por fecha</th>
+                <th scope="col">Horas</th>
             </tr>
         </thead>
         <tbody class="text-center" id="listaSoporte">
@@ -310,6 +327,7 @@
                 <tr>
                     <td>{{$soporte['empresa']}}</td>
                     <td>{{$soporte['nombre']}}</td>
+                    <td></td>
                     <td>
                         @php
                             $arr = [];
@@ -327,22 +345,49 @@
                         @endphp
                     </td>
                     <td></td>
+                    <td></td>
                 </tr>
             @endforeach
         </tbody>
     </table>
+
+    @php
+        use Carbon\Carbon;
+    @endphp
+    @foreach ($arrSoportes as $dato)
+        <div class="info" style="display: none">
+            <div>{{$dato->empresa}}</div>    
+            <div>{{$dato->id_cliente}}</div>    
+            <div>{{$dato->fechaInicioAsistencia}}</div>    
+            <div>{{$dato->fechaFinalAsistencia}}</div>    
+            <div>
+                @php
+                    $fechaInicio = Carbon::parse($dato->fechaInicioAsistencia);
+                    $fechaFinal = Carbon::parse($dato->fechaFinalAsistencia);
+                    $diferencia = $fechaFinal->diff($fechaInicio);
+                    $horas = $diferencia->h;
+                    $minutos = $diferencia->i;
+                @endphp
+            
+                {{-- {{ $horas }} horas {{ $minutos }} minutos --}}
+                {{$tiempoTotalEnMinutos = ($diferencia->h * 60) + $diferencia->i;}}
+            </div>
+            <div>{{$dato->colaborador}}</div>
+        </div>
+    @endforeach
 </div>
 
 <script>
     const tbody = document.querySelectorAll('tbody tr');
     const inputSelectEmpresa = document.querySelector('#select_empresa');
     const inputcCliente = document.querySelector('#cliente');
+    const inputcColaborador = document.querySelector('#colaborador');
     let soportes = JSON.parse('{!! json_encode($arrSoportes) !!}')
     const fecha1 = document.querySelector('#fecha1');
     const fecha2 = document.querySelector('#fecha2');
 
     tbody.forEach(item => {
-        const cantidadSoporte = item.querySelector('td:nth-child(3)')
+        const cantidadSoporte = item.querySelector('td:nth-child(4)')
 
     // Quitando los números negativos
         if (parseInt(cantidadSoporte.textContent) == -1) {
@@ -369,7 +414,7 @@
         tbody.forEach(item => {
             const empresa = item.querySelector('td:nth-child(1)').textContent
             const cliente = item.querySelector('td:nth-child(2)').textContent
-            const cantidadSoporte = item.querySelector('td:nth-child(3)')
+            const cantidadSoporte = item.querySelector('td:nth-child(4)')
             
             // Variables comparativas
             const coincideEmpresa = empresaFiltrado === '' || empresaFiltrado === empresa
@@ -385,24 +430,25 @@
 
     let valorFecha1 = ''
     let valorFecha2 = ''
+    let valorColaborador = ''
+    const info = document.querySelectorAll('.info')
 
     fecha1.addEventListener('change', () => {
         valorFecha1 = fecha1.value
-
+        valorColaborador = inputcColaborador.value
         tbody.forEach(item => {
-            item.querySelector('td:nth-child(4)').textContent = 0
-            // item.querySelector('td').style.backgroundColor = 'white'
-            // item.style.backgroundColor = 'white'
+            item.querySelector('td:nth-child(5)').textContent = 0
+            item.querySelector('td:nth-child(6)').textContent = 0
             funcionFiltrarFechas(item)
         })
     })
+
     fecha2.addEventListener('change', () => {
         valorFecha2 = fecha2.value
-
+        valorColaborador = inputcColaborador.value
         tbody.forEach(item => {
-            item.querySelector('td:nth-child(4)').textContent = 0
-            // item.querySelector('td').style.backgroundColor = 'white'
-            // item.style.backgroundColor = 'white'
+            item.querySelector('td:nth-child(5)').textContent = 0
+            item.querySelector('td:nth-child(6)').textContent = 0
             funcionFiltrarFechas(item)
         })
     })
@@ -411,36 +457,151 @@
     function funcionFiltrarFechas(item2) {
         const tbodyEmpresa = item2.querySelector('td:nth-child(1)').textContent
         const tbodycliente = item2.querySelector('td:nth-child(2)').textContent
-        const tbodycantidad = item2.querySelector('td:nth-child(4)')
+        const tbodycantidad = item2.querySelector('td:nth-child(5)')
+        const tbodyHoras = item2.querySelector('td:nth-child(6)')
 
+        // const tbodycolaborador = item2.querySelector('td:nth-child(3)').textContent
+
+        soportes.forEach(item => {
+                // const fecha = item.fechaCreacionTicke
+                const fecha = item.fechaInicioAsistencia
+                const id_cliente = item.id_cliente
+                const empresa = item.empresa
+                const colaborador = item.colaborador
+
+                if (valorColaborador) {
+                    if (valorFecha1 <= fecha && valorFecha2 >= fecha) {
+                        if (tbodyEmpresa == empresa && tbodycliente == id_cliente) {
+                            if (valorColaborador == colaborador) {
+                                // console.log(valorColaborador);
+                                // console.log(colaborador);
+                                tbodycantidad.textContent = parseInt(tbodycantidad.textContent) + 1
+                            }
+                        }
+                    }else if (valorFecha1 <= fecha) {
+                        if (tbodyEmpresa == empresa && tbodycliente == id_cliente) {
+                            if (valorColaborador == colaborador) {
+                                // console.log(valorColaborador);
+                                // console.log(colaborador);
+                                tbodycantidad.textContent = parseInt(tbodycantidad.textContent) + 1
+                            }
+                        }
+                    }
+                }else{
+                    if (valorFecha1 <= fecha && valorFecha2 >= fecha) {
+                        if (tbodyEmpresa == empresa && tbodycliente == id_cliente) {
+                            tbodycantidad.textContent = parseInt(tbodycantidad.textContent) + 1
+                        }
+                    }else if (valorFecha1 <= fecha) {
+                        if (tbodyEmpresa == empresa && tbodycliente == id_cliente) {
+                            tbodycantidad.textContent = parseInt(tbodycantidad.textContent) + 1
+                        }
+                    }
+                }
+        })
+
+        info.forEach(item => {
+            const empresa = item.querySelector('div:nth-child(1)').textContent
+            const id_cliente = item.querySelector('div:nth-child(2)').textContent
+            const fechaInicio = item.querySelector('div:nth-child(3)').textContent
+            const fechaFin = item.querySelector('div:nth-child(4)').textContent
+            const tiempoTotalMinutos = item.querySelector('div:nth-child(5)').textContent
+
+            const colaborador = item.querySelector('div:nth-child(6)').textContent
+            
+            if (valorColaborador) {
+                if (valorFecha1 <= fechaInicio && valorFecha2 >= fechaFin) {
+                    if (valorFecha1 <= valorFecha2) {
+                        if (tbodyEmpresa == empresa && tbodycliente == id_cliente) {
+                            if (valorColaborador == colaborador) {
+                                const horas = Math.floor(tiempoTotalMinutos / 60)
+                                const minutosRestantes = tiempoTotalMinutos % 60
+                                const horaFormateada = `${horas.toString().padStart(2, '0')}:${minutosRestantes.toString().padStart(2, '0')}`;
+    
+                                tbodyHoras.textContent = horaFormateada
+                            }   
+                        }
+                    }
+                }else if (valorFecha1 <= fechaInicio) {
+                    if (tbodyEmpresa == empresa && tbodycliente == id_cliente) {
+                        if (valorColaborador == colaborador) {
+                            const horas = Math.floor(tiempoTotalMinutos / 60)
+                            const minutosRestantes = tiempoTotalMinutos % 60
+                            const horaFormateada = `${horas.toString().padStart(2, '0')}:${minutosRestantes.toString().padStart(2, '0')}`;
+
+                            tbodyHoras.textContent = horaFormateada
+                        }   
+                    }
+                }
+            }else{
+                if (valorFecha1 <= fechaInicio && valorFecha2 >= fechaFin) {
+                    if (valorFecha1 <= valorFecha2) {
+                        if (tbodyEmpresa == empresa && tbodycliente == id_cliente) {
+                            
+                            const horas = Math.floor(tiempoTotalMinutos / 60)
+                            const minutosRestantes = tiempoTotalMinutos % 60
+                            const horaFormateada = `${horas.toString().padStart(2, '0')}:${minutosRestantes.toString().padStart(2, '0')}`;
+
+                            tbodyHoras.textContent = horaFormateada
+                        }
+                    }
+                }else if (valorFecha1 <= fechaInicio) {
+                    if (tbodyEmpresa == empresa && tbodycliente == id_cliente) {
+                        // tbodyHoras.textContent = parseInt(tbodycantidad.textContent) + parseInt(tiempoTotalMinutos)
+                        // console.log(`${empresa} ${id_cliente} ${tiempoTotalMinutos}`);
+                        
+                        const horas = Math.floor(tiempoTotalMinutos / 60)
+                        const minutosRestantes = tiempoTotalMinutos % 60
+                        const horaFormateada = `${horas.toString().padStart(2, '0')}:${minutosRestantes.toString().padStart(2, '0')}`;
+                        
+                        tbodyHoras.textContent = horaFormateada
+                    }
+                }
+            }
+        });
+    }
+
+    // Colaborador
+    inputcColaborador.addEventListener('change', () => {
+        valorColaborador = inputcColaborador.value
+        tbody.forEach(item => {
+            item.querySelector('td:nth-child(3)').textContent = 0
+            funcionSoportesColaborador(item)
+
+            if (valorFecha1 || valorFecha2) {
+                item.querySelector('td:nth-child(5)').textContent = 0
+                item.querySelector('td:nth-child(6)').textContent = 0
+                funcionFiltrarFechas(item)
+            }
+        })
+    })
+
+    function funcionSoportesColaborador(item2) {
+        const tbodyEmpresa = item2.querySelector('td:nth-child(1)').textContent
+        const tbodycliente = item2.querySelector('td:nth-child(2)').textContent
+        const tbodycolaborador = item2.querySelector('td:nth-child(3)')
+ 
         soportes.forEach(item => {
                 const fecha = item.fechaCreacionTicke
                 const id_cliente = item.id_cliente
                 const empresa = item.empresa
+                const colaborador = item.colaborador
 
-
-                if (valorFecha1 <= fecha && valorFecha2 >= fecha) {
-                    if (valorFecha1 <= valorFecha2) {
-                        if (tbodyEmpresa == empresa && tbodycliente == id_cliente) {
-                            // console.log(`xxxxx${empresa} ${fecha}xxxxx`);
-                            // console.log(`=====${tbodyEmpresa} ${valorFecha1}=====`);
-                            tbodycantidad.textContent = parseInt(tbodycantidad.textContent) + 1
-                            // tbodyEmpresa.style.backgroundColor = '#F4F6F6'
-                            // tbodycliente.style.backgroundColor = '#F4F6F6'
-                            // tbodycantidad.style.backgroundColor = '#D5DBDB'
-                        }
-                    }
-                }else if (valorFecha1 <= fecha) {
-                    if (tbodyEmpresa == empresa && tbodycliente == id_cliente) {
-                        // console.log(`xxxxx${empresa} ${fecha}xxxxx`);
-                        // console.log(`=====${tbodyEmpresa} ${valorFecha1}=====`);
-                        tbodycantidad.textContent = parseInt(tbodycantidad.textContent) + 1
-                        // tbodyEmpresa.style.backgroundColor = '#F4F6F6'
-                        // tbodycliente.style.backgroundColor = '#F4F6F6'
-                        // tbodycantidad.style.backgroundColor = '#D5DBDB'
-                    }
+                if ((tbodyEmpresa == empresa && tbodycliente == id_cliente) && valorColaborador == colaborador) {
+                    // console.log(colaborador, empresa);
+                    tbodycolaborador.textContent = parseInt(tbodycolaborador.textContent) + 1
                 }
+
+                // if (fecha1.value != '') {
+                //     console.log(fecha1.value);
+                // }
         })
+
+        if (tbodycolaborador.textContent == 0) {
+            tbodycolaborador.textContent = ''
+        }
+
     }
+
 </script>
 @endsection

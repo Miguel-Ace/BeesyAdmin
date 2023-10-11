@@ -237,9 +237,75 @@ Actualizar soporte
               @if ($datos->origen_asistencia == "Error de usuario")
                 <option {{ old('origen_asistencia') == 'Error de usuario' ? 'selected' : '' }} selected value="Error de usuario">Error de usuario</option>
                 <option {{ old('origen_asistencia') == 'Error de software' ? 'selected' : '' }} value="Error de software">Error de software</option>
-              @else
+                <option {{ old('origen_asistencia') == 'Instalación' ? 'selected' : '' }} value="Instalación">Instalación</option>
+                <option {{ old('origen_asistencia') == 'Configuración' ? 'selected' : '' }} value="Configuración">Configuración</option>
+                <option {{ old('origen_asistencia') == 'Capacitación' ? 'selected' : '' }} value="Capacitación">Capacitación</option>
+                <option {{ old('origen_asistencia') == 'Mejora' ? 'selected' : '' }} value="Mejora">Mejora</option>
+                <option {{ old('origen_asistencia') == 'Especialización' ? 'selected' : '' }} value="Especialización">Especialización</option>
+                <option {{ old('origen_asistencia') == 'Otros' ? 'selected' : '' }} value="Otros">Otros</option>
+              @elseif ($datos->origen_asistencia == "Error de software")
                 <option {{ old('origen_asistencia') == 'Error de usuario' ? 'selected' : '' }} value="Error de usuario">Error de usuario</option>
                 <option {{ old('origen_asistencia') == 'Error de software' ? 'selected' : '' }} selected value="Error de software">Error de software</option>
+                <option {{ old('origen_asistencia') == 'Instalación' ? 'selected' : '' }} value="Instalación">Instalación</option>
+                <option {{ old('origen_asistencia') == 'Configuración' ? 'selected' : '' }} value="Configuración">Configuración</option>
+                <option {{ old('origen_asistencia') == 'Capacitación' ? 'selected' : '' }} value="Capacitación">Capacitación</option>
+                <option {{ old('origen_asistencia') == 'Mejora' ? 'selected' : '' }} value="Mejora">Mejora</option>
+                <option {{ old('origen_asistencia') == 'Especialización' ? 'selected' : '' }} value="Especialización">Especialización</option>
+                <option {{ old('origen_asistencia') == 'Otros' ? 'selected' : '' }} value="Otros">Otros</option>
+              @elseif ($datos->origen_asistencia == "Instalación")
+                <option {{ old('origen_asistencia') == 'Error de usuario' ? 'selected' : '' }} value="Error de usuario">Error de usuario</option>
+                <option {{ old('origen_asistencia') == 'Error de software' ? 'selected' : '' }} value="Error de software">Error de software</option>
+                <option {{ old('origen_asistencia') == 'Instalación' ? 'selected' : '' }} selected value="Instalación">Instalación</option>
+                <option {{ old('origen_asistencia') == 'Configuración' ? 'selected' : '' }} value="Configuración">Configuración</option>
+                <option {{ old('origen_asistencia') == 'Capacitación' ? 'selected' : '' }} value="Capacitación">Capacitación</option>
+                <option {{ old('origen_asistencia') == 'Mejora' ? 'selected' : '' }} value="Mejora">Mejora</option>
+                <option {{ old('origen_asistencia') == 'Especialización' ? 'selected' : '' }} value="Especialización">Especialización</option>
+                <option {{ old('origen_asistencia') == 'Otros' ? 'selected' : '' }} value="Otros">Otros</option>
+              @elseif ($datos->origen_asistencia == "Configuración")
+                <option {{ old('origen_asistencia') == 'Error de usuario' ? 'selected' : '' }} value="Error de usuario">Error de usuario</option>
+                <option {{ old('origen_asistencia') == 'Error de software' ? 'selected' : '' }} value="Error de software">Error de software</option>
+                <option {{ old('origen_asistencia') == 'Instalación' ? 'selected' : '' }} value="Instalación">Instalación</option>
+                <option {{ old('origen_asistencia') == 'Configuración' ? 'selected' : '' }} selected value="Configuración">Configuración</option>
+                <option {{ old('origen_asistencia') == 'Capacitación' ? 'selected' : '' }} value="Capacitación">Capacitación</option>
+                <option {{ old('origen_asistencia') == 'Mejora' ? 'selected' : '' }} value="Mejora">Mejora</option>
+                <option {{ old('origen_asistencia') == 'Especialización' ? 'selected' : '' }} value="Especialización">Especialización</option>
+                <option {{ old('origen_asistencia') == 'Otros' ? 'selected' : '' }} value="Otros">Otros</option>
+              @elseif ($datos->origen_asistencia == "Capacitación")
+                <option {{ old('origen_asistencia') == 'Error de usuario' ? 'selected' : '' }} value="Error de usuario">Error de usuario</option>
+                <option {{ old('origen_asistencia') == 'Error de software' ? 'selected' : '' }} value="Error de software">Error de software</option>
+                <option {{ old('origen_asistencia') == 'Instalación' ? 'selected' : '' }} value="Instalación">Instalación</option>
+                <option {{ old('origen_asistencia') == 'Configuración' ? 'selected' : '' }} value="Configuración">Configuración</option>
+                <option {{ old('origen_asistencia') == 'Capacitación' ? 'selected' : '' }} selected value="Capacitación">Capacitación</option>
+                <option {{ old('origen_asistencia') == 'Mejora' ? 'selected' : '' }} value="Mejora">Mejora</option>
+                <option {{ old('origen_asistencia') == 'Especialización' ? 'selected' : '' }} value="Especialización">Especialización</option>
+                <option {{ old('origen_asistencia') == 'Otros' ? 'selected' : '' }} value="Otros">Otros</option>
+              @elseif ($datos->origen_asistencia == "Mejora")
+                <option {{ old('origen_asistencia') == 'Error de usuario' ? 'selected' : '' }} value="Error de usuario">Error de usuario</option>
+                <option {{ old('origen_asistencia') == 'Error de software' ? 'selected' : '' }} value="Error de software">Error de software</option>
+                <option {{ old('origen_asistencia') == 'Instalación' ? 'selected' : '' }} value="Instalación">Instalación</option>
+                <option {{ old('origen_asistencia') == 'Configuración' ? 'selected' : '' }} value="Configuración">Configuración</option>
+                <option {{ old('origen_asistencia') == 'Capacitación' ? 'selected' : '' }} value="Capacitación">Capacitación</option>
+                <option {{ old('origen_asistencia') == 'Mejora' ? 'selected' : '' }} selected value="Mejora">Mejora</option>
+                <option {{ old('origen_asistencia') == 'Especialización' ? 'selected' : '' }} value="Especialización">Especialización</option>
+                <option {{ old('origen_asistencia') == 'Otros' ? 'selected' : '' }} value="Otros">Otros</option>
+              @elseif ($datos->origen_asistencia == "Especialización")
+                <option {{ old('origen_asistencia') == 'Error de usuario' ? 'selected' : '' }} value="Error de usuario">Error de usuario</option>
+                <option {{ old('origen_asistencia') == 'Error de software' ? 'selected' : '' }} value="Error de software">Error de software</option>
+                <option {{ old('origen_asistencia') == 'Instalación' ? 'selected' : '' }} value="Instalación">Instalación</option>
+                <option {{ old('origen_asistencia') == 'Configuración' ? 'selected' : '' }} value="Configuración">Configuración</option>
+                <option {{ old('origen_asistencia') == 'Capacitación' ? 'selected' : '' }} value="Capacitación">Capacitación</option>
+                <option {{ old('origen_asistencia') == 'Mejora' ? 'selected' : '' }} value="Mejora">Mejora</option>
+                <option {{ old('origen_asistencia') == 'Especialización' ? 'selected' : '' }} selected value="Especialización">Especialización</option>
+                <option {{ old('origen_asistencia') == 'Otros' ? 'selected' : '' }} value="Otros">Otros</option>
+              @else
+                <option {{ old('origen_asistencia') == 'Error de usuario' ? 'selected' : '' }} value="Error de usuario">Error de usuario</option>
+                <option {{ old('origen_asistencia') == 'Error de software' ? 'selected' : '' }} value="Error de software">Error de software</option>
+                <option {{ old('origen_asistencia') == 'Instalación' ? 'selected' : '' }} value="Instalación">Instalación</option>
+                <option {{ old('origen_asistencia') == 'Configuración' ? 'selected' : '' }} value="Configuración">Configuración</option>
+                <option {{ old('origen_asistencia') == 'Capacitación' ? 'selected' : '' }} value="Capacitación">Capacitación</option>
+                <option {{ old('origen_asistencia') == 'Mejora' ? 'selected' : '' }} value="Mejora">Mejora</option>
+                <option {{ old('origen_asistencia') == 'Especialización' ? 'selected' : '' }} value="Especialización">Especialización</option>
+                <option {{ old('origen_asistencia') == 'Otros' ? 'selected' : '' }} selected value="Otros">Otros</option>
               @endif
             </select>
           </div>

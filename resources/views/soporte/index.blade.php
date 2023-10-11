@@ -40,7 +40,7 @@ Agregar soporte
         <div class="col-md-3 d-none">
             <div class="mb-3">
                 <label for="ticker" class="form-label">Ticket (Auto Generado)</label>
-                <input type="number" class="form-control" min="{{$cantidad + 1}}" max="{{$cantidad + 1}}" id="ticker" name="ticker"  value="{{$cantidad + 1}}">
+                <input type="number" class="form-control" min="{{$cantidad}}" max="{{$cantidad}}" id="ticker" name="ticker"  value="{{$cantidad}}">
               </div>
           </div>
 
@@ -93,8 +93,16 @@ Agregar soporte
             <select class="form-select" name="id_cliente" id="id_cliente" @error("id_cliente")style="border: solid 2px red"@enderror>
               <option value="" selected disabled>Selecciona un Cliente</option>
               @foreach ($clientes->sortBy('contacto') as $cliente)
-                <option {{ old('id_cliente') == $cliente->contacto ? 'selected' : '' }} value="{{$cliente->contacto}}">{{$cliente->contacto}}</option>
+                <option {{ old('id_cliente') == $cliente->contacto ? 'selected' : '' }} value="{{$cliente->contacto}}" id="{{$cliente->id}}">{{$cliente->contacto}}</option>
               @endforeach
+            </select>
+          </div>
+
+          <div class="col-md-4 mb-3">
+            <label for="user_cliente" class="form-label">Usuario Cliente</label>
+            <select class="form-select" name="user_cliente" id="user_cliente">
+                <option value="" selected disabled>Selecciona al Usuario del Cliente</option>
+                {{-- Se llena con js --}}
             </select>
           </div>
 
@@ -148,6 +156,12 @@ Agregar soporte
                   <option value="Grave" selected disabled>Origen Asistencia</option>
                   <option {{ old('origen_asistencia') == 'Error de usuario' ? 'selected' : '' }} value="Error de usuario">Error de usuario</option>
                   <option {{ old('origen_asistencia') == 'Error de software' ? 'selected' : '' }} value="Error de software">Error de software</option>
+                  <option {{ old('origen_asistencia') == 'Instalación' ? 'selected' : '' }} value="Instalación">Instalación</option>
+                  <option {{ old('origen_asistencia') == 'Configuración' ? 'selected' : '' }} value="Configuración">Configuración</option>
+                  <option {{ old('origen_asistencia') == 'Capacitación' ? 'selected' : '' }} value="Capacitación">Capacitación</option>
+                  <option {{ old('origen_asistencia') == 'Mejora' ? 'selected' : '' }} value="Mejora">Mejora</option>
+                  <option {{ old('origen_asistencia') == 'Especialización' ? 'selected' : '' }} value="Especialización">Especialización</option>
+                  <option {{ old('origen_asistencia') == 'Otros' ? 'selected' : '' }} value="Otros">Otros</option>
               </select>
           </div>
           
@@ -260,6 +274,7 @@ Lista de soporte
                 </th>
                 <th scope="col"></th>
                 <th scope="col"></th>
+                <th scope="col"></th>
                 {{-- <th scope="col">Usuario</th> --}}
                 <th scope="col">
                     <select name="estado" id="estado">
@@ -278,6 +293,12 @@ Lista de soporte
                         <option value=""></option>
                         <option value="Error de usuario">Error de usuario</option>
                         <option value="Error de software">Error de software</option>
+                        <option value="Instalación">Instalación</option>
+                        <option value="Configuración">Configuración</option>
+                        <option value="Capacitación">Capacitación</option>
+                        <option value="Mejora">Mejora</option>
+                        <option value="Especialización">Especialización</option>
+                        <option value="Otros">Otros</option>
                     </select>
                 </th>
                 <th scope="col"></th>
@@ -292,6 +313,7 @@ Lista de soporte
                 <th scope="col">Fecha y hora creacion del Ticket</th>
                 <th scope="col">Fecha prevista cumplimiento</th>
                 <th scope="col">Cliente</th>
+                <th scope="col">Usuario del Cliente</th>
                 <th scope="col">Software</th>
                 <th scope="col">Prioridad</th>
                 <th scope="col">Estado</th>
@@ -328,6 +350,7 @@ Lista de soporte
                     <td>{{$dato->fechaCreacionTicke}}</td>
                     <td>{{$dato->fecha_prevista_cumplimiento}}</td>
                     <td>{{$dato->id_cliente}}</td>
+                    <td>{{$dato->user_cliente}}</td>
                     <td>{{$dato->id_software}}</td>
 
                     @if ($dato->prioridad == 'Leve')
@@ -487,5 +510,53 @@ Lista de soporte
         }
     });
     });
+
+    // Evitando que se presione 2 veces click al enviar el formulario
+    const btnEnviar = document.querySelector('.enviar')
+    
+    btnEnviar.addEventListener('click', () => {
+        if (btnEnviar.disabled == false) {
+            setTimeout(function () {
+            btnEnviar.disabled = true;
+            }, 10); // Cambia 10 a la cantidad de milisegundos que desees
+        }
+    });
+
+    // Agregando a los usuarios de los clientes al campo user_cliente
+    let tablaUserClientes = JSON.parse('{!! json_encode($usuarioclientes) !!}');
+    const userCliente = document.querySelector('#user_cliente')
+
+    tablaUserClientes.forEach(item => {
+        userCliente.innerHTML += `
+            <option value="${item.name}" cl="${item.cliente}">${item.name}</option>
+        `
+    });
+
+    idClienteSelect.addEventListener('change', () => {
+        compararNombre(idClienteSelect.value)
+    })
+
+    function compararNombre(nombre) {
+        const options = idClienteSelect.querySelectorAll('option')
+
+        options.forEach(item => {
+            if (item.value == nombre) {
+                compararId(item.id)
+            }
+        });
+    }
+
+    function compararId(id) {
+        const userClientes = userCliente.querySelectorAll('option')
+    
+        userClientes.forEach(item => {
+            const idCl = item.getAttribute('cl')
+            if (idCl != id) {
+                item.style.display = 'none'
+            }else{
+                item.style.display = ''
+            }
+        });
+    }
 </script>
 @endsection

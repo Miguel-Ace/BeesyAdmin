@@ -31,7 +31,7 @@ class SoporteController extends Controller
         $clientes = Cliente::all();
         $softwares = Software::all();
         $usuarioclientes = UserCliente::all();
-        $cantidad = Soporte::count();
+        $cantidad = Soporte::count() + 1;
         // $cantidad = Soporte::lastest()->paginate(1);
         return view('soporte.index', compact('datos','clientes','softwares','cantidad','usuarioclientes'));
     }

@@ -164,7 +164,7 @@ class DashboardController extends Controller
             }
         }
         
-        $arrSoportes = DB::table('soportes')->select('id', 'fechaCreacionTicke','id_cliente','empresa')->get();
+        $arrSoportes = DB::table('soportes')->select('id', 'fechaCreacionTicke','id_cliente','empresa','fechaInicioAsistencia','fechaFinalAsistencia','colaborador')->get();
 
         return view('dashboard.index', $data ,compact('arrSoportes','empresas','licencias','clientes','soportes','proyectos','ultimoMesLicencia','totalLicencias','totalClientes','totalsoportes','totalproyectos','arrayClientes'));
     }
