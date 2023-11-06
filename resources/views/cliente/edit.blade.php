@@ -14,7 +14,7 @@ Actualizar CLIENTES
     {{method_field('PATCH')}}
     <div class="col-md-4">
         <div class="mb-3">
-            <label for="cedula" class="form-label">Cédula/RUC</label>
+            <label for="cedula" class="form-label">Identificación</label>
             <input type="text" class="form-control" id="cedula" name="cedula" value="{{$datos->cedula}}">
           </div>
       </div>

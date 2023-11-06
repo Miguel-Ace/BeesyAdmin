@@ -81,22 +81,22 @@ Agregar soporte
               </div>
           </div>
 
-        <div class="col-md-4 d-none">
-            <div class="mb-3">
-                <label for="empresa" class="form-label">Empresa</label>
-                <input type="text" class="form-control" id="empresa" name="empresa" value="{{old('empresa')}}" @error("empresa")style="border: solid 2px red"@enderror>
-              </div>
-          </div>
-
           <div class="col-md-4 mb-3">
-            <label for="id_cliente" class="form-label">Cliente</label>
-            <select class="form-select" name="id_cliente" id="id_cliente" @error("id_cliente")style="border: solid 2px red"@enderror>
+            <label for="empresa" class="form-label">Empresa</label>
+            <select class="form-select" name="empresa" id="empresa" @error("empresa")style="border: solid 2px red"@enderror>
               <option value="" selected disabled>Selecciona un Cliente</option>
-              @foreach ($clientes->sortBy('contacto') as $cliente)
-                <option {{ old('id_cliente') == $cliente->contacto ? 'selected' : '' }} value="{{$cliente->contacto}}" id="{{$cliente->id}}">{{$cliente->contacto}}</option>
+              @foreach ($clientes->sortBy('nombre') as $cliente)
+                <option {{ old('empresa') == $cliente->nombre ? 'selected' : '' }} value="{{$cliente->nombre}}" id="{{$cliente->id}}">{{$cliente->nombre}}</option>
               @endforeach
             </select>
           </div>
+
+            <div class="col-md-4 d-none">
+                <div class="mb-3">
+                    <label for="id_cliente" class="form-label">Cliente</label>
+                    <input type="text" class="form-control" id="id_cliente" name="id_cliente" value="{{old('id_cliente')}}" @error("id_cliente")style="border: solid 2px red"@enderror>
+                </div>
+            </div>
 
           <div class="col-md-4 mb-3">
             <label for="user_cliente" class="form-label">Usuario Cliente</label>
@@ -154,8 +154,8 @@ Agregar soporte
               <label for="origen_asistencia" class="form-label">Origen Asistencia</label>
               <select class="form-select" name="origen_asistencia" @error("origen_asistencia")style="border: solid 2px red"@enderror>
                   <option value="Grave" selected disabled>Origen Asistencia</option>
-                  <option {{ old('origen_asistencia') == 'Error de usuario' ? 'selected' : '' }} value="Error de usuario">Error de usuario</option>
-                  <option {{ old('origen_asistencia') == 'Error de software' ? 'selected' : '' }} value="Error de software">Error de software</option>
+                  <option {{ old('origen_asistencia') == 'Asistencia' ? 'selected' : '' }} value="Asistencia">Asistencia</option>
+                  <option {{ old('origen_asistencia') == 'Garantía' ? 'selected' : '' }} value="Garantía">Garantía</option>
                   <option {{ old('origen_asistencia') == 'Instalación' ? 'selected' : '' }} value="Instalación">Instalación</option>
                   <option {{ old('origen_asistencia') == 'Configuración' ? 'selected' : '' }} value="Configuración">Configuración</option>
                   <option {{ old('origen_asistencia') == 'Capacitación' ? 'selected' : '' }} value="Capacitación">Capacitación</option>
@@ -190,7 +190,7 @@ Agregar soporte
           </div>
           {{--  --}}
 
-          <div class="col-md-8">
+          <div class="col-md-12">
             <div class="mb-3">
                 <label for="problema" class="form-label">Problema</label>
                 <input type="text" class="form-control" id="problema" name="problema" value="{{old('problema')}}" @error("problema")style="border: solid 2px red"@enderror>
@@ -208,9 +208,14 @@ Agregar soporte
             <div class="mb-3">
                 <label for="observaciones" class="form-label">Observaciones</label>
                 <input type="text" class="form-control" id="observaciones" name="observaciones" value="{{old('observaciones')}}">
-              </div>
-          </div>
+            </div>
+        </div>
 
+        <div class="col-md-4">
+            <label for="interno">Soporte interno</label>
+            <input type="checkbox" name="interno" id="interno" value="1">
+        </div>
+        
     </div>
     <button type="submit" class="enviar">
       <ion-icon name="save-outline"></ion-icon>
@@ -291,8 +296,8 @@ Lista de soporte
                 <th scope="col">
                     <select name="origen_asistencia" id="origen_asistencia">
                         <option value=""></option>
-                        <option value="Error de usuario">Error de usuario</option>
-                        <option value="Error de software">Error de software</option>
+                        <option value="Asistencia">Asistencia</option>
+                        <option value="Garantía">Garantía</option>
                         <option value="Instalación">Instalación</option>
                         <option value="Configuración">Configuración</option>
                         <option value="Capacitación">Capacitación</option>
@@ -376,11 +381,15 @@ Lista de soporte
                             $fechaInicio = Carbon::parse($dato->fechaInicioAsistencia);
                             $fechaFinal = Carbon::parse($dato->fechaFinalAsistencia);
                             $diferencia = $fechaFinal->diff($fechaInicio);
+                            $dias = $diferencia->days;
                             $horas = $diferencia->h;
                             $minutos = $diferencia->i;
+                            
+                            // $diferenciaDays = $fechaFinal->diffInDays($fechaInicio);
                         @endphp
-                    
-                        {{ $horas }} horas {{ $minutos }} minutos
+                        <p style="color: #795548" class="color-dias">{{ $dias }} dias </p>
+                        <p style="color: #004D40" class="color-horas">{{ $horas }} horas </p>
+                        <p style="color: #F06292" class="color-min">{{ $minutos }} minutos </p>
                     </td>
                     {{-- <td>{{$dato->usuario}}</td> --}}
                     {{-- <td>{{$dato->numLaboral}}</td> --}}
@@ -403,112 +412,42 @@ Lista de soporte
 </div>
 
 {{-- {{ $datos->links() }} --}}
+
 <script>
-    // function exportarSoporte() {
-
-    // // Crear contenido del archivo CSV
-    // let csvContent = 'data:text/csv;charset=utf-8,';
-    // csvContent += 'Fecha,Empresa,Ticket,Fecha Inicial Asistencia,Fecha Final Asistencia,Total de horas,Usuario,Detalle Asitencia,Asesor\n'; // Encabezados de las columnas
-
-    // // Extrallendo los valores de los inputs
-    // const selectColaborador = document.querySelector('#colaborador');
-    // const selectCliente = document.querySelector('#cliente');
-    // const selectEstado = document.querySelector('#estado');
-    // const selectEmpresa = document.querySelector('#select_empresa');
-    // const selectOrigenAsistencia = document.querySelector('#origen_asistencia');
-    // const fecha1 = document.querySelector('#fecha1');
-    // const fecha2 = document.querySelector('#fecha2');
-
-    // let clienteFiltrado = selectCliente.value;
-    // let colaboradorFiltrado = selectColaborador.value;
-    // let estadoFiltrado = selectEstado.value;
-    // let empresaFiltrado = selectEmpresa.value;
-    // let origenAsistenciaFiltrado = selectOrigenAsistencia.value;
-    // let fecha1valor = fecha1.value;
-    // let fecha2valor = fecha2.value;
-
-    // // Decodificar un arreglo de laravel a javascript
-    // let tablaClientes = JSON.parse('{!! json_encode($datos) !!}');
-
-    // // Recorriendo el arreglo para para entrar a los valores
-    // tablaClientes.forEach((item) => {
-    // // Valor arreglo
-    // const fechaCreacionTicke = item.fechaCreacionTicke;
-    // const empresa = item.empresa;
-    // const ticker = item.ticker;
-    // const fechaInicioAsistencia = item.fechaInicioAsistencia;
-    // const fechaFinalAsistencia = item.fechaFinalAsistencia;
-
-    // // Sacar fecha
-    // const fecha1 = new Date(item.fechaInicioAsistencia);
-    // const fecha2 = new Date(item.fechaFinalAsistencia);
-    // const diff = Math.abs(fecha2 - fecha1); // Obtener la diferencia en milisegundos
-    // // Calcular horas y minutos
-    // const horas = Math.floor(diff / (1000 * 60 * 60));
-    // const minutos = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-    // const totalHoras = `${horas} horas y ${minutos} minutos`
-    // // Fin sacar fecha
-
-    // const id_cliente = item.id_cliente;
-    // const problema = (item.problema).normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/ñ/g, 'n');
-    // const colaborador = item.colaborador;
-    // const estado = item.estado;
-    // const origenAsistencia = item.origen_asistencia;
-    // // Fin valor arreglo
-
-    // // Haciendo condicionales en variables para un mejor orden con el if
-    // const coincideEmpresa = empresaFiltrado === '' || empresaFiltrado === empresa;
-    // const coincideEstado = estadoFiltrado === '' || estadoFiltrado === estado;
-    // const coincideOrigenAsistencia = origenAsistenciaFiltrado === '' || origenAsistenciaFiltrado === origenAsistencia;
-    // const coincideCliente = clienteFiltrado === '' || clienteFiltrado === id_cliente;
-    // const coincideColaborador = colaboradorFiltrado === '' || colaboradorFiltrado === colaborador;
-    // const coincideFecha1 = fecha1valor == '' || fecha1valor <= fechaCreacionTicke;
-    // const coincideFecha2 = fecha2valor == '' || fecha2valor >= fechaCreacionTicke;
-
-    // // si los datos se cumplen correctamente se mostraran los resultados
-    // if (((coincideCliente && coincideColaborador) && (coincideFecha1 && coincideFecha2)) && ((coincideEstado && coincideEmpresa) && coincideOrigenAsistencia)) {
-    //     csvContent += `${fechaCreacionTicke},${empresa},${ticker},${fechaInicioAsistencia},${fechaFinalAsistencia},${totalHoras},${id_cliente},${problema},${colaborador}\n`;
-    // }
-    // });
-
-    // // Crear el enlace de descarga
-    // const encodedUri = encodeURI(csvContent);
-    // const link = document.createElement('a');
-    // link.setAttribute('href', encodedUri);
-    // link.setAttribute('download', 'Soportes.csv');
-
-    // // Simular el clic en el enlace para iniciar la descarga
-    // document.body.appendChild(link);
-    // link.click();
-    // document.body.removeChild(link);
-    // }
-
-    // // Agregar un botón para iniciar la exportación
-    // const exportarButton = document.querySelector('#exportarSoporte');
-    // exportarButton.addEventListener('click', exportarSoporte);
+    // Cambiar los nombres por cambios en el sistema
+    const tablaClientes = document.querySelectorAll('tbody tr')
+    tablaClientes.forEach(item => {
+        const origenAsistencia = item.querySelector('td:nth-child(16)');
+        if (origenAsistencia.textContent == 'Error de usuario') {
+            origenAsistencia.textContent = 'Asistencia'
+        }
+        if (origenAsistencia.textContent == 'Error de software') {
+            origenAsistencia.textContent = 'Garantía'
+        }
+    });
 </script>
-
 
 <script>
     const idClienteSelect = document.querySelector('#id_cliente');
     const correoClienteInput = document.querySelector('#correo_cliente');
     const empresa = document.querySelector('#empresa');
 
-    idClienteSelect.addEventListener('change', () => {
-    const selectedValue = idClienteSelect.value;
+    empresa.addEventListener('change', () => {
+    const selectedValue = empresa.value;
 
     let tablaClientes = JSON.parse('{!! json_encode($clientes) !!}');
 
-    tablaClientes.forEach(element => {
-        let nombreCliente = element.contacto;
-        let correoCliente = element.correo;
-        let empresaCliente = element.nombre;
+        tablaClientes.forEach(element => {
+            let nombreCliente = element.nombre;
+            let correoCliente = element.correo;
+            let empresaCliente = element.contacto;
 
-        if (nombreCliente == selectedValue) {
-        correoClienteInput.value = correoCliente;
-        empresa.value = empresaCliente;
-        }
-    });
+            if (nombreCliente == selectedValue) {
+            correoClienteInput.value = correoCliente;
+            idClienteSelect.value = empresaCliente;
+            idClienteSelect.setAttribute('idE',element.id)
+            }
+        });
     });
 
     // Evitando que se presione 2 veces click al enviar el formulario
@@ -532,26 +471,17 @@ Lista de soporte
         `
     });
 
-    idClienteSelect.addEventListener('change', () => {
-        compararNombre(idClienteSelect.value)
+    empresa.addEventListener('change', () => {
+        extraerCliente()
     })
 
-    function compararNombre(nombre) {
-        const options = idClienteSelect.querySelectorAll('option')
-
-        options.forEach(item => {
-            if (item.value == nombre) {
-                compararId(item.id)
-            }
-        });
-    }
-
-    function compararId(id) {
+    function extraerCliente() {
+        const idCliente = idClienteSelect.getAttribute('idE')
         const userClientes = userCliente.querySelectorAll('option')
     
         userClientes.forEach(item => {
             const idCl = item.getAttribute('cl')
-            if (idCl != id) {
+            if (idCl != idCliente) {
                 item.style.display = 'none'
             }else{
                 item.style.display = ''

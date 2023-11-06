@@ -146,7 +146,7 @@ Lista de Clientes
         <thead>
             <tr class="text-center">
                 {{-- <th scope="col">#</th> --}}
-                <th scope="col">Cédula/RUC</th>
+                <th scope="col">Identificación</th>
                 <th scope="col">País</th>
                 <th scope="col">Nombre</th>
                 <th scope="col">Contacto</th>

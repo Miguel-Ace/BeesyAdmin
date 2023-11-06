@@ -27,12 +27,12 @@ Route::post('/login',[AuthController::class, 'login']);
 Route::post('/userinfo',[AuthController::class, 'infouser'])->middleware('auth:sanctum');
 
 //
-Route::get('/cliente', [ApiController::class, 'getCliente']);
-Route::get('/cliente/{id}', [ApiController::class, 'getClienteid']);
+Route::get('/cliente', [ApiController::class, 'getCliente'])->middleware('auth:sanctum');
+Route::get('/cliente/{id}', [ApiController::class, 'getClienteid'])->middleware('auth:sanctum');
 //
-Route::get('/licencia', [ApiController::class, 'getLicencia']);
-Route::get('/licencia/{id}', [ApiController::class, 'getLicenciaid']);
+Route::get('/licencia', [ApiController::class, 'getLicencia'])->middleware('auth:sanctum');
+Route::get('/licencia/{id}', [ApiController::class, 'getLicenciaid'])->middleware('auth:sanctum');
 //
-Route::get('/terminal', [ApiController::class, 'getTerminal']);
-Route::get('/terminal/{id}', [ApiController::class, 'getTerminalid']);
-Route::get('/terminal/insert', [ApiController::class, 'insertTerminal']);
+Route::get('/terminal', [ApiController::class, 'getTerminal'])->middleware('auth:sanctum');
+Route::get('/terminal/{id}', [ApiController::class, 'getTerminalid'])->middleware('auth:sanctum');
+Route::post('/terminal/insert', [ApiController::class, 'insertTerminal'])->middleware('auth:sanctum');

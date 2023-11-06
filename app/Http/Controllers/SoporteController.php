@@ -81,18 +81,25 @@ class SoporteController extends Controller
         }
         Soporte::insert($datos);
 
-        $correo = new notificacionesCliente($message);
+        if ($request->input('interno') == 1) {
+            // Mensaje a soporte
+            $correo = new notificaciones($message);
+            $emails = DB::table('users')->pluck('email');
+            Mail::to($emails)->send($correo);
+        }else{
+            $correo = new notificacionesCliente($message);
 
-        // Mensaje a los clientes
-        // ======================
-        $email = $request->input('correo_cliente');
-        Mail::to($email)->send($correo);
+            // Mensaje a los clientes
+            // ======================
+            $email = $request->input('correo_cliente');
+            Mail::to($email)->send($correo);
 
-        // Mensaje a soporte
-        // =================
-        $correo = new notificaciones($message);
-        $emails = DB::table('users')->pluck('email');
-        Mail::to($emails)->send($correo);
+            // Mensaje a soporte
+            // =================
+            $correo = new notificaciones($message);
+            $emails = DB::table('users')->pluck('email');
+            Mail::to($emails)->send($correo);
+        }
 
         // $emails = ['acevedo51198mac@gmail.com','juego55miguel@gmail.com','juego2miguel@gmail.com	'];
         // Mail::to('acevedomac@gmail.com')->queue($correo);
@@ -160,9 +167,11 @@ class SoporteController extends Controller
 
         if ($estado == 'Completo') {
             // Aqui hagarro el correo que se pasó al input
-            $correo = new notificacionesFinal($message);
-            $email = $request->input('correo_cliente');
-            Mail::to($email)->send($correo);
+            if ($request->input('interno') == 1) {
+                $correo = new notificacionesFinal($message);
+                $email = $request->input('correo_cliente');
+                Mail::to($email)->send($correo);
+            }
 
             $correo = new notificacionesFinal($message);
             $emails = DB::table('users')->pluck('email');
