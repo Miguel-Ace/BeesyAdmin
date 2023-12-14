@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cliente;
 use App\Models\Licencia;
+use App\Models\Soporte;
 use App\Models\Terminal;
 use Illuminate\Http\Request;
 
@@ -24,6 +25,23 @@ class ApiController extends Controller
             return response()->json(['Mensaje' => 'ID INCORRECTO'],404);
         }
         return response()->json($cliente,200);
+    }
+
+    //==================================
+    //Soporte
+
+    // Obtener todos los soportes
+    public function getSoporte(){
+        return response()->json(Soporte::all(),200);
+    }
+
+    // Insertar Cliente
+    public function insertSoporte(Request $request){
+        $usuario = Soporte::create($request->all());
+        if (is_null($usuario)) {
+            return response()->json(["message"=>"No se pudo insertar"],404);
+        }
+        return response()->json($usuario,200);
     }
 
     //==================================

@@ -161,7 +161,9 @@ Agregar soporte
                   <option {{ old('origen_asistencia') == 'Capacitación' ? 'selected' : '' }} value="Capacitación">Capacitación</option>
                   <option {{ old('origen_asistencia') == 'Mejora' ? 'selected' : '' }} value="Mejora">Mejora</option>
                   <option {{ old('origen_asistencia') == 'Especialización' ? 'selected' : '' }} value="Especialización">Especialización</option>
-                  <option {{ old('origen_asistencia') == 'Otros' ? 'selected' : '' }} value="Otros">Otros</option>
+                  <option {{ old('origen_asistencia') == 'Importación' ? 'selected' : '' }} value="Importación">Importación</option>
+                  <option {{ old('origen_asistencia') == 'Servidor' ? 'selected' : '' }} value="Servidor">Servidor</option>
+                  <option {{ old('origen_asistencia') == 'Reunión' ? 'selected' : '' }} value="Reunión">Reunión</option>
               </select>
           </div>
           
@@ -303,7 +305,9 @@ Lista de soporte
                         <option value="Capacitación">Capacitación</option>
                         <option value="Mejora">Mejora</option>
                         <option value="Especialización">Especialización</option>
-                        <option value="Otros">Otros</option>
+                        <option value="Importación">Importación</option>
+                        <option value="Servidor">Servidor</option>
+                        <option value="Reunión">Reunión</option>
                     </select>
                 </th>
                 <th scope="col"></th>

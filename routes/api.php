@@ -27,6 +27,9 @@ Route::post('/login',[AuthController::class, 'login']);
 Route::post('/userinfo',[AuthController::class, 'infouser'])->middleware('auth:sanctum');
 
 //
+Route::get('/soporte', [ApiController::class, 'getSoporte'])->middleware('auth:sanctum');
+Route::post('/soporte/insert', [ApiController::class, 'insertSoporte'])->middleware('auth:sanctum');
+//
 Route::get('/cliente', [ApiController::class, 'getCliente'])->middleware('auth:sanctum');
 Route::get('/cliente/{id}', [ApiController::class, 'getClienteid'])->middleware('auth:sanctum');
 //

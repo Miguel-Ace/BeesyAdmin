@@ -242,7 +242,9 @@ Actualizar soporte
                 <option {{ old('origen_asistencia') == 'Capacitación' ? 'selected' : '' }} value="Capacitación">Capacitación</option>
                 <option {{ old('origen_asistencia') == 'Mejora' ? 'selected' : '' }} value="Mejora">Mejora</option>
                 <option {{ old('origen_asistencia') == 'Especialización' ? 'selected' : '' }} value="Especialización">Especialización</option>
-                <option {{ old('origen_asistencia') == 'Otros' ? 'selected' : '' }} value="Otros">Otros</option>
+                <option {{ old('origen_asistencia') == 'Importación' ? 'selected' : '' }} value="Importación">Importación</option>
+                <option {{ old('origen_asistencia') == 'Servidor' ? 'selected' : '' }} value="Servidor">Servidor</option>
+                <option {{ old('origen_asistencia') == 'Reunión' ? 'selected' : '' }} value="Reunión">Reunión</option>
               @elseif ($datos->origen_asistencia == "Garantía")
                 <option {{ old('origen_asistencia') == 'Asistencia' ? 'selected' : '' }} value="Asistencia">Asistencia</option>
                 <option {{ old('origen_asistencia') == 'Garantía' ? 'selected' : '' }} selected value="Garantía">Garantía</option>
@@ -251,7 +253,9 @@ Actualizar soporte
                 <option {{ old('origen_asistencia') == 'Capacitación' ? 'selected' : '' }} value="Capacitación">Capacitación</option>
                 <option {{ old('origen_asistencia') == 'Mejora' ? 'selected' : '' }} value="Mejora">Mejora</option>
                 <option {{ old('origen_asistencia') == 'Especialización' ? 'selected' : '' }} value="Especialización">Especialización</option>
-                <option {{ old('origen_asistencia') == 'Otros' ? 'selected' : '' }} value="Otros">Otros</option>
+                <option {{ old('origen_asistencia') == 'Importación' ? 'selected' : '' }} value="Importación">Importación</option>
+                <option {{ old('origen_asistencia') == 'Servidor' ? 'selected' : '' }} value="Servidor">Servidor</option>
+                <option {{ old('origen_asistencia') == 'Reunión' ? 'selected' : '' }} value="Reunión">Reunión</option>
               @elseif ($datos->origen_asistencia == "Instalación")
                 <option {{ old('origen_asistencia') == 'Asistencia' ? 'selected' : '' }} value="Asistencia">Asistencia</option>
                 <option {{ old('origen_asistencia') == 'Garantía' ? 'selected' : '' }} value="Garantía">Garantía</option>
@@ -260,7 +264,9 @@ Actualizar soporte
                 <option {{ old('origen_asistencia') == 'Capacitación' ? 'selected' : '' }} value="Capacitación">Capacitación</option>
                 <option {{ old('origen_asistencia') == 'Mejora' ? 'selected' : '' }} value="Mejora">Mejora</option>
                 <option {{ old('origen_asistencia') == 'Especialización' ? 'selected' : '' }} value="Especialización">Especialización</option>
-                <option {{ old('origen_asistencia') == 'Otros' ? 'selected' : '' }} value="Otros">Otros</option>
+                <option {{ old('origen_asistencia') == 'Importación' ? 'selected' : '' }} value="Importación">Importación</option>
+                <option {{ old('origen_asistencia') == 'Servidor' ? 'selected' : '' }} value="Servidor">Servidor</option>
+                <option {{ old('origen_asistencia') == 'Reunión' ? 'selected' : '' }} value="Reunión">Reunión</option>
               @elseif ($datos->origen_asistencia == "Configuración")
                 <option {{ old('origen_asistencia') == 'Asistencia' ? 'selected' : '' }} value="Asistencia">Asistencia</option>
                 <option {{ old('origen_asistencia') == 'Garantía' ? 'selected' : '' }} value="Garantía">Garantía</option>
@@ -269,7 +275,9 @@ Actualizar soporte
                 <option {{ old('origen_asistencia') == 'Capacitación' ? 'selected' : '' }} value="Capacitación">Capacitación</option>
                 <option {{ old('origen_asistencia') == 'Mejora' ? 'selected' : '' }} value="Mejora">Mejora</option>
                 <option {{ old('origen_asistencia') == 'Especialización' ? 'selected' : '' }} value="Especialización">Especialización</option>
-                <option {{ old('origen_asistencia') == 'Otros' ? 'selected' : '' }} value="Otros">Otros</option>
+                <option {{ old('origen_asistencia') == 'Importación' ? 'selected' : '' }} value="Importación">Importación</option>
+                <option {{ old('origen_asistencia') == 'Servidor' ? 'selected' : '' }} value="Servidor">Servidor</option>
+                <option {{ old('origen_asistencia') == 'Reunión' ? 'selected' : '' }} value="Reunión">Reunión</option>
               @elseif ($datos->origen_asistencia == "Capacitación")
                 <option {{ old('origen_asistencia') == 'Asistencia' ? 'selected' : '' }} value="Asistencia">Asistencia</option>
                 <option {{ old('origen_asistencia') == 'Garantía' ? 'selected' : '' }} value="Garantía">Garantía</option>
@@ -278,7 +286,9 @@ Actualizar soporte
                 <option {{ old('origen_asistencia') == 'Capacitación' ? 'selected' : '' }} selected value="Capacitación">Capacitación</option>
                 <option {{ old('origen_asistencia') == 'Mejora' ? 'selected' : '' }} value="Mejora">Mejora</option>
                 <option {{ old('origen_asistencia') == 'Especialización' ? 'selected' : '' }} value="Especialización">Especialización</option>
-                <option {{ old('origen_asistencia') == 'Otros' ? 'selected' : '' }} value="Otros">Otros</option>
+                <option {{ old('origen_asistencia') == 'Importación' ? 'selected' : '' }} value="Importación">Importación</option>
+                <option {{ old('origen_asistencia') == 'Servidor' ? 'selected' : '' }} value="Servidor">Servidor</option>
+                <option {{ old('origen_asistencia') == 'Reunión' ? 'selected' : '' }} value="Reunión">Reunión</option>
               @elseif ($datos->origen_asistencia == "Mejora")
                 <option {{ old('origen_asistencia') == 'Asistencia' ? 'selected' : '' }} value="Asistencia">Asistencia</option>
                 <option {{ old('origen_asistencia') == 'Garantía' ? 'selected' : '' }} value="Garantía">Garantía</option>
@@ -287,7 +297,9 @@ Actualizar soporte
                 <option {{ old('origen_asistencia') == 'Capacitación' ? 'selected' : '' }} value="Capacitación">Capacitación</option>
                 <option {{ old('origen_asistencia') == 'Mejora' ? 'selected' : '' }} selected value="Mejora">Mejora</option>
                 <option {{ old('origen_asistencia') == 'Especialización' ? 'selected' : '' }} value="Especialización">Especialización</option>
-                <option {{ old('origen_asistencia') == 'Otros' ? 'selected' : '' }} value="Otros">Otros</option>
+                <option {{ old('origen_asistencia') == 'Importación' ? 'selected' : '' }} value="Importación">Importación</option>
+                <option {{ old('origen_asistencia') == 'Servidor' ? 'selected' : '' }} value="Servidor">Servidor</option>
+                <option {{ old('origen_asistencia') == 'Reunión' ? 'selected' : '' }} value="Reunión">Reunión</option>
               @elseif ($datos->origen_asistencia == "Especialización")
                 <option {{ old('origen_asistencia') == 'Asistencia' ? 'selected' : '' }} value="Asistencia">Asistencia</option>
                 <option {{ old('origen_asistencia') == 'Garantía' ? 'selected' : '' }} value="Garantía">Garantía</option>
@@ -296,8 +308,10 @@ Actualizar soporte
                 <option {{ old('origen_asistencia') == 'Capacitación' ? 'selected' : '' }} value="Capacitación">Capacitación</option>
                 <option {{ old('origen_asistencia') == 'Mejora' ? 'selected' : '' }} value="Mejora">Mejora</option>
                 <option {{ old('origen_asistencia') == 'Especialización' ? 'selected' : '' }} selected value="Especialización">Especialización</option>
-                <option {{ old('origen_asistencia') == 'Otros' ? 'selected' : '' }} value="Otros">Otros</option>
-              @else
+                <option {{ old('origen_asistencia') == 'Importación' ? 'selected' : '' }} value="Importación">Importación</option>
+                <option {{ old('origen_asistencia') == 'Servidor' ? 'selected' : '' }} value="Servidor">Servidor</option>
+                <option {{ old('origen_asistencia') == 'Reunión' ? 'selected' : '' }} value="Reunión">Reunión</option>
+                @elseif ($datos->origen_asistencia == "Importación")
                 <option {{ old('origen_asistencia') == 'Asistencia' ? 'selected' : '' }} value="Asistencia">Asistencia</option>
                 <option {{ old('origen_asistencia') == 'Garantía' ? 'selected' : '' }} value="Garantía">Garantía</option>
                 <option {{ old('origen_asistencia') == 'Instalación' ? 'selected' : '' }} value="Instalación">Instalación</option>
@@ -305,7 +319,31 @@ Actualizar soporte
                 <option {{ old('origen_asistencia') == 'Capacitación' ? 'selected' : '' }} value="Capacitación">Capacitación</option>
                 <option {{ old('origen_asistencia') == 'Mejora' ? 'selected' : '' }} value="Mejora">Mejora</option>
                 <option {{ old('origen_asistencia') == 'Especialización' ? 'selected' : '' }} value="Especialización">Especialización</option>
-                <option {{ old('origen_asistencia') == 'Otros' ? 'selected' : '' }} selected value="Otros">Otros</option>
+                <option {{ old('origen_asistencia') == 'Importación' ? 'selected' : '' }} selected value="Importación">Importación</option>
+                <option {{ old('origen_asistencia') == 'Servidor' ? 'selected' : '' }} value="Servidor">Servidor</option>
+                <option {{ old('origen_asistencia') == 'Reunión' ? 'selected' : '' }} value="Reunión">Reunión</option>
+                @elseif ($datos->origen_asistencia == "Servidor")
+                <option {{ old('origen_asistencia') == 'Asistencia' ? 'selected' : '' }} value="Asistencia">Asistencia</option>
+                <option {{ old('origen_asistencia') == 'Garantía' ? 'selected' : '' }} value="Garantía">Garantía</option>
+                <option {{ old('origen_asistencia') == 'Instalación' ? 'selected' : '' }} value="Instalación">Instalación</option>
+                <option {{ old('origen_asistencia') == 'Configuración' ? 'selected' : '' }} value="Configuración">Configuración</option>
+                <option {{ old('origen_asistencia') == 'Capacitación' ? 'selected' : '' }} value="Capacitación">Capacitación</option>
+                <option {{ old('origen_asistencia') == 'Mejora' ? 'selected' : '' }} value="Mejora">Mejora</option>
+                <option {{ old('origen_asistencia') == 'Especialización' ? 'selected' : '' }} value="Especialización">Especialización</option>
+                <option {{ old('origen_asistencia') == 'Importación' ? 'selected' : '' }} value="Importación">Importación</option>
+                <option {{ old('origen_asistencia') == 'Servidor' ? 'selected' : '' }} selected value="Servidor">Servidor</option>
+                <option {{ old('origen_asistencia') == 'Reunión' ? 'selected' : '' }} value="Reunión">Reunión</option>
+                @else
+                <option {{ old('origen_asistencia') == 'Asistencia' ? 'selected' : '' }} value="Asistencia">Asistencia</option>
+                <option {{ old('origen_asistencia') == 'Garantía' ? 'selected' : '' }} value="Garantía">Garantía</option>
+                <option {{ old('origen_asistencia') == 'Instalación' ? 'selected' : '' }} value="Instalación">Instalación</option>
+                <option {{ old('origen_asistencia') == 'Configuración' ? 'selected' : '' }} value="Configuración">Configuración</option>
+                <option {{ old('origen_asistencia') == 'Capacitación' ? 'selected' : '' }} value="Capacitación">Capacitación</option>
+                <option {{ old('origen_asistencia') == 'Mejora' ? 'selected' : '' }} value="Mejora">Mejora</option>
+                <option {{ old('origen_asistencia') == 'Especialización' ? 'selected' : '' }} value="Especialización">Especialización</option>
+                <option {{ old('origen_asistencia') == 'Importación' ? 'selected' : '' }} value="Importación">Importación</option>
+                <option {{ old('origen_asistencia') == 'Servidor' ? 'selected' : '' }} value="Servidor">Servidor</option>
+                <option {{ old('origen_asistencia') == 'Reunión' ? 'selected' : '' }} selected value="Reunión">Reunión</option>
               @endif
             </select>
           </div>
