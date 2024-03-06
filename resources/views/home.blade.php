@@ -70,6 +70,8 @@
                     <a href="{{url('/etapas')}}"><ion-icon name="copy-outline"></ion-icon> <span>Etapa</span></a>
                     <a href="{{url('/proyectos')}}"><ion-icon name="file-tray-stacked-outline"></ion-icon> <span>Proyectos</span></a>
                     <a href="{{url('/plantilla_proyectos')}}"><ion-icon name="create-outline"></ion-icon> <span>Plantilla Proyectos</span></a>
+                    <a href="{{url('/preguntas')}}"><ion-icon name="help-outline"></ion-icon> <span>Preguntas</span></a>
+                    <a href="{{url('/respuestas')}}"><ion-icon name="alert-outline"></ion-icon> <span>Respuestas</span></a>
                     @endrole
                 </div>
             </div>

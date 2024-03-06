@@ -3,7 +3,6 @@ const selectColaborador = document.querySelector('#colaborador');
 const selectEstado = document.querySelector('#estado');
 const selectEmpresa = document.querySelector('#select_empresa');
 const selectOrigenAsistencia = document.querySelector('#origen_asistencia');
-const listaSoporte = document.querySelectorAll('#listaSoporte tr');
 const fecha1 = document.querySelector('#fecha1');
 const fecha2 = document.querySelector('#fecha2');
 
@@ -55,7 +54,10 @@ fecha2.addEventListener('change', () => {
 })
 
 function filtrarListaSoporte() {
+  const listaSoporte = document.querySelectorAll('#listaSoporte tr');
+  
   listaSoporte.forEach((item) => {
+    console.log(item);
     const valorEmpresa = item.querySelector('td:nth-child(3)').textContent;
     const valorColaboradorTd = item.querySelector('td:nth-child(4)').textContent;
     const valorClienteTd = item.querySelector('td:nth-child(8)').textContent;

@@ -8,9 +8,11 @@ html{
 }
 
 body{
+    position: relative;
     background: #EAF2F8;
     font-family: 'Poppins', sans-serif;
 }
+
 // Dashboard
 .contadores{
     display: grid;
@@ -394,14 +396,8 @@ body{
                     // min-width: 158rem;
                     min-width: 189rem;
                 }
-                // tbody tr td:last-child{
-                //     display: grid;
-                //     grid-template-columns: 1fr;
-                //     justify-items: center;
-                //     @media (min-width: 992px){
-                //         display: unset;
-                //         border: unset;
-                //     }
+                // tbody tr td:nth-child(1){
+                //     // width: 10rem;
                 // }
             }
         }
@@ -684,6 +680,21 @@ body{
         &:hover{
             color: black;
         }
+    }
+}
+.span-delete{
+    padding: .5rem;
+    width: 2rem;
+    background: #CD6155;
+    color: white;
+    border-radius: .4rem;
+    font-size: 1rem;
+    display: block;
+    margin-top: 1rem;
+    margin-left: 20%;
+    cursor: pointer;
+    &:hover{
+        color: black;
     }
 }
 

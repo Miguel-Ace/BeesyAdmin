@@ -1,6 +1,14 @@
 @extends('home')
 
-@vite(['resources/js/filtro.js','resources/js/exportSoporte.js'])
+@vite(['resources/js/filtro.js','resources/js/exportSoporte.js','resources/js/soporte.js','resources/sass/pantalla_de_carga.scss'])
+
+<div class="display-carga">
+    <div class="cajita">
+        <span class="s1"></span>
+        <span class="s2"></span>
+        <span class="s3"></span>
+    </div>
+</div>
 
 @section('titulo')
 soporte
@@ -57,6 +65,8 @@ Agregar soporte
                 <option {{ old('colaborador') == 'Ramses Rivas' ? 'selected' : '' }} value="Ramses Rivas">Ramses Rivas</option>
                 <option {{ old('colaborador') == 'Mauro Pettyn' ? 'selected' : '' }} value="Mauro Pettyn">Mauro Pettyn</option>
                 <option {{ old('colaborador') == 'Deyna López' ? 'selected' : '' }} value="Deyna López">Deyna López</option>
+                <option {{ old('colaborador') == 'Gerson Ruiz' ? 'selected' : '' }} value="Gerson Ruiz">Gerson Ruiz</option>
+                <option {{ old('colaborador') == 'Gabriel Reyes' ? 'selected' : '' }} value="Gabriel Reyes">Gabriel Reyes</option>
               </select>
           </div>
 
@@ -229,11 +239,12 @@ Agregar soporte
 @section('tituloTabla')
 Lista de soporte
 
+<div class="check-completados">
+    <input type="checkbox" name="completados" id="completados">
+    <label for="completados">Quitar Completados</label>
+</div>
+
 <button class="botnExportar" id="exportarSoporte">Soporte</button>
-{{-- <a href="{{ route('exportar.soporte') }}" class="botnExportar">CSV</a> --}}
-{{-- <button class="botnExportar" id="exportarSoporteCliente">Asistencia x cliente</button> --}}
-{{-- <button class="botnExportar" id="exportarSoporteColaborador">Asistencia x colaborador</button> --}}
-{{-- <a href="{{ route('exportar.licencia') }}" class="botnExportar">Licencia</a> --}}
 @endsection
 
 @section('tablas')
@@ -263,6 +274,8 @@ Lista de soporte
                         <option value="Ramses Rivas">Ramses Rivas</option>
                         <option value="Mauro Pettyn">Mauro Pettyn</option>
                         <option value="Deyna López">Deyna López</option>
+                        <option value="Gerson Ruiz">Gerson Ruiz</option>
+                        <option value="Gabriel Reyes">Gabriel Reyes</option>
                     </select>
                 </th>
                 <th scope="col"></th>
@@ -334,14 +347,15 @@ Lista de soporte
                 <th scope="col">Origen Asistencia</th>
                 <th scope="col">Soluciòn</th>
                 <th scope="col">Observaciones</th>
-                <th scope="col">Archivos</th>
+                {{-- <th scope="col">Archivos</th> --}}
             </tr>
         </thead>
         <tbody class="text-center" id="listaSoporte">
-            @php
+            {{-- @php
                 use Carbon\Carbon;
-            @endphp
-            @foreach ($datos as $dato)
+            @endphp --}}
+            
+            {{-- @foreach ($datos as $dato)
                 <tr>
                     <td style="width: 9rem">
                         <a href="{{url('soporte/'.$dato->id.'/edit')}}" class="edit"><ion-icon name="pencil-outline"></ion-icon></a>
@@ -389,14 +403,11 @@ Lista de soporte
                             $horas = $diferencia->h;
                             $minutos = $diferencia->i;
                             
-                            // $diferenciaDays = $fechaFinal->diffInDays($fechaInicio);
                         @endphp
                         <p style="color: #795548" class="color-dias">{{ $dias }} dias </p>
                         <p style="color: #004D40" class="color-horas">{{ $horas }} horas </p>
                         <p style="color: #F06292" class="color-min">{{ $minutos }} minutos </p>
                     </td>
-                    {{-- <td>{{$dato->usuario}}</td> --}}
-                    {{-- <td>{{$dato->numLaboral}}</td> --}}
                     <td>{{$dato->origen_asistencia}}</td>
                     <td>{{$dato->solucion}}</td>
                     <td>{{$dato->observaciones}}</td>
@@ -410,7 +421,7 @@ Lista de soporte
                         @endif
                     </td>
                 </tr>
-            @endforeach
+            @endforeach --}}
         </tbody>
     </table>
 </div>

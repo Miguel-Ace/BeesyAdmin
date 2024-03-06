@@ -41,6 +41,8 @@ Actualizar soporte
                     <option value="Ramses Rivas">Ramses Rivas</option>
                     <option value="Mauro Pettyn">Mauro Pettyn</option>
                     <option value="Deyna López">Deyna López</option>
+                    <option value="Gerson Ruiz">Gerson Ruiz</option>
+                    <option value="Gabriel Reyes">Gabriel Reyes</option>
                 @elseif ($datos->colaborador === 'Norman Logo')
                     <option value="Roxana Baez">Roxana Baez</option>
                     <option value="Norman Logo" selected>Norman Logo</option>
@@ -51,6 +53,8 @@ Actualizar soporte
                     <option value="Ramses Rivas">Ramses Rivas</option>
                     <option value="Mauro Pettyn">Mauro Pettyn</option>
                     <option value="Deyna López">Deyna López</option>
+                    <option value="Gerson Ruiz">Gerson Ruiz</option>
+                    <option value="Gabriel Reyes">Gabriel Reyes</option>
                 @elseif ($datos->colaborador === 'Edwin Torres')
                     <option value="Roxana Baez">Roxana Baez</option>
                     <option value="Norman Logo">Norman Logo</option>
@@ -61,6 +65,8 @@ Actualizar soporte
                     <option value="Ramses Rivas">Ramses Rivas</option>
                     <option value="Mauro Pettyn">Mauro Pettyn</option>
                     <option value="Deyna López">Deyna López</option>
+                    <option value="Gerson Ruiz">Gerson Ruiz</option>
+                    <option value="Gabriel Reyes">Gabriel Reyes</option>
                 @elseif ($datos->colaborador === 'Jasson Ulloa')
                     <option value="Roxana Baez">Roxana Baez</option>
                     <option value="Norman Logo">Norman Logo</option>
@@ -71,6 +77,8 @@ Actualizar soporte
                     <option value="Ramses Rivas">Ramses Rivas</option>
                     <option value="Mauro Pettyn">Mauro Pettyn</option>
                     <option value="Deyna López">Deyna López</option>
+                    <option value="Gerson Ruiz">Gerson Ruiz</option>
+                    <option value="Gabriel Reyes">Gabriel Reyes</option>
                 @elseif ($datos->colaborador === 'José Rizo')
                     <option value="Roxana Baez">Roxana Baez</option>
                     <option value="Norman Logo">Norman Logo</option>
@@ -81,6 +89,8 @@ Actualizar soporte
                     <option value="Ramses Rivas">Ramses Rivas</option>
                     <option value="Mauro Pettyn">Mauro Pettyn</option>
                     <option value="Deyna López">Deyna López</option>
+                    <option value="Gerson Ruiz">Gerson Ruiz</option>
+                    <option value="Gabriel Reyes">Gabriel Reyes</option>
                 @elseif ($datos->colaborador === 'Kenneth Granados')
                     <option value="Roxana Baez">Roxana Baez</option>
                     <option value="Norman Logo">Norman Logo</option>
@@ -91,6 +101,8 @@ Actualizar soporte
                     <option value="Ramses Rivas">Ramses Rivas</option>
                     <option value="Mauro Pettyn">Mauro Pettyn</option>
                     <option value="Deyna López">Deyna López</option>
+                    <option value="Gerson Ruiz">Gerson Ruiz</option>
+                    <option value="Gabriel Reyes">Gabriel Reyes</option>
                 @elseif ($datos->colaborador === 'Ramses Rivas')
                     <option value="Roxana Baez">Roxana Baez</option>
                     <option value="Norman Logo">Norman Logo</option>
@@ -101,6 +113,8 @@ Actualizar soporte
                     <option value="Ramses Rivas" selected>Ramses Rivas</option>
                     <option value="Mauro Pettyn">Mauro Pettyn</option>
                     <option value="Deyna López">Deyna López</option>
+                    <option value="Gerson Ruiz">Gerson Ruiz</option>
+                    <option value="Gabriel Reyes">Gabriel Reyes</option>
                 @elseif ($datos->colaborador === 'Mauro Pettyn')
                     <option value="Roxana Baez">Roxana Baez</option>
                     <option value="Norman Logo">Norman Logo</option>
@@ -111,6 +125,32 @@ Actualizar soporte
                     <option value="Ramses Rivas">Ramses Rivas</option>
                     <option value="Mauro Pettyn" selected>Mauro Pettyn</option>
                     <option value="Deyna López">Deyna López</option>
+                    <option value="Gerson Ruiz">Gerson Ruiz</option>
+                    <option value="Gabriel Reyes">Gabriel Reyes</option>
+                @elseif ($datos->colaborador === 'Gerson Ruiz')
+                    <option value="Roxana Baez">Roxana Baez</option>
+                    <option value="Norman Logo">Norman Logo</option>
+                    <option value="Edwin Torres">Edwin Torres</option>
+                    <option value="Jasson Ulloa">Jasson Ulloa</option>
+                    <option value="José Rizo">José Rizo</option>
+                    <option value="Kenneth Granados">Kenneth Granados</option>
+                    <option value="Ramses Rivas">Ramses Rivas</option>
+                    <option value="Mauro Pettyn">Mauro Pettyn</option>
+                    <option value="Deyna López">Deyna López</option>
+                    <option value="Gerson Ruiz" selected>Gerson Ruiz</option>
+                    <option value="Gabriel Reyes">Gabriel Reyes</option>
+                  @elseif ($datos->colaborador === 'Gabriel Reyes')
+                    <option value="Roxana Baez">Roxana Baez</option>
+                    <option value="Norman Logo">Norman Logo</option>
+                    <option value="Edwin Torres">Edwin Torres</option>
+                    <option value="Jasson Ulloa">Jasson Ulloa</option>
+                    <option value="José Rizo">José Rizo</option>
+                    <option value="Kenneth Granados">Kenneth Granados</option>
+                    <option value="Ramses Rivas">Ramses Rivas</option>
+                    <option value="Mauro Pettyn">Mauro Pettyn</option>
+                    <option value="Deyna López">Deyna López</option>
+                    <option value="Gerson Ruiz">Gerson Ruiz</option>
+                    <option value="Gabriel Reyes" selected>Gabriel Reyes</option>
                 @else
                     <option value="Roxana Baez">Roxana Baez</option>
                     <option value="Norman Logo">Norman Logo</option>
@@ -121,6 +161,8 @@ Actualizar soporte
                     <option value="Ramses Rivas">Ramses Rivas</option>
                     <option value="Mauro Pettyn">Mauro Pettyn</option>
                     <option value="Deyna López" selected>Deyna López</option>
+                    <option value="Gerson Ruiz">Gerson Ruiz</option>
+                    <option value="Gabriel Reyes">Gabriel Reyes</option>
                 @endif
               </select>
           </div>

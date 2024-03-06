@@ -29,6 +29,7 @@ Route::post('/userinfo',[AuthController::class, 'infouser'])->middleware('auth:s
 //
 Route::get('/soporte', [ApiController::class, 'getSoporte'])->middleware('auth:sanctum');
 Route::post('/soporte/insert', [ApiController::class, 'insertSoporte'])->middleware('auth:sanctum');
+Route::delete('/soporte/delete/{id}', [ApiController::class, 'deleteSoporte'])->middleware('auth:sanctum');
 //
 Route::get('/cliente', [ApiController::class, 'getCliente'])->middleware('auth:sanctum');
 Route::get('/cliente/{id}', [ApiController::class, 'getClienteid'])->middleware('auth:sanctum');
@@ -39,3 +40,11 @@ Route::get('/licencia/{id}', [ApiController::class, 'getLicenciaid'])->middlewar
 Route::get('/terminal', [ApiController::class, 'getTerminal'])->middleware('auth:sanctum');
 Route::get('/terminal/{id}', [ApiController::class, 'getTerminalid'])->middleware('auth:sanctum');
 Route::post('/terminal/insert', [ApiController::class, 'insertTerminal'])->middleware('auth:sanctum');
+//
+Route::get('/pregunta', [ApiController::class, 'getPregunta'])->middleware('auth:sanctum');
+Route::get('/pregunta/{id}', [ApiController::class, 'getPreguntaId'])->middleware('auth:sanctum');
+Route::post('/pregunta/insert', [ApiController::class, 'insertPregunta'])->middleware('auth:sanctum');
+//
+Route::get('/respuesta', [ApiController::class, 'getRespuesta'])->middleware('auth:sanctum');
+Route::get('/respuesta/{id}', [ApiController::class, 'getRespuestaId'])->middleware('auth:sanctum');
+Route::post('/respuesta/insert', [ApiController::class, 'insertRespuesta'])->middleware('auth:sanctum');

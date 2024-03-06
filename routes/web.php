@@ -22,6 +22,7 @@ use App\Http\Controllers\SoporteExportController;
 use App\Http\Controllers\DetalleProyectoController;
 use App\Http\Controllers\EjecucionProyectoController;
 use App\Http\Controllers\LicenciaExportController;
+use App\Http\Controllers\NosImportaController;
 use App\Http\Controllers\plantillaProyectoController;
 use App\Http\Controllers\PlantillaDetalleProyectoController;
 
@@ -87,3 +88,13 @@ Route::get('/exportar-licencia', [LicenciaExportController::class, 'exportarLice
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// catálogo preguntas
+Route::get('/preguntas', [NosImportaController::class, 'pregIndex']);
+Route::post('/preguntas', [NosImportaController::class, 'pregStore']);
+Route::get('/preguntas/{id}/edit', [NosImportaController::class, 'pregEdit']);
+Route::patch('/preguntas/{id}', [NosImportaController::class, 'pregUpdate']);
+Route::delete('/preguntas/{id}', [NosImportaController::class, 'pregDestroy']);
+
+// catálogo respuestas
+Route::get('/respuestas', [NosImportaController::class, 'resIndex']);
