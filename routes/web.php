@@ -15,14 +15,15 @@ use App\Http\Controllers\ProyectoController;
 use App\Http\Controllers\SoftwareController;
 use App\Http\Controllers\TerminalController;
 use App\Http\Controllers\DashboardController;
+
+use App\Http\Controllers\NosImportaController;
+
 use App\Http\Controllers\UserClienteController;
-
 use App\Http\Controllers\SoporteExportController;
-
+use App\Http\Controllers\LicenciaExportController;
 use App\Http\Controllers\DetalleProyectoController;
 use App\Http\Controllers\EjecucionProyectoController;
-use App\Http\Controllers\LicenciaExportController;
-use App\Http\Controllers\NosImportaController;
+use App\Http\Controllers\ExpedienteController;
 use App\Http\Controllers\plantillaProyectoController;
 use App\Http\Controllers\PlantillaDetalleProyectoController;
 
@@ -98,3 +99,10 @@ Route::delete('/preguntas/{id}', [NosImportaController::class, 'pregDestroy']);
 
 // catálogo respuestas
 Route::get('/respuestas', [NosImportaController::class, 'resIndex']);
+
+// Expediente
+Route::get('/expedientes', [ExpedienteController::class, 'index']);
+Route::post('/expedientes', [ExpedienteController::class, 'store']);
+Route::get('/expedientes/{id}/edit', [ExpedienteController::class, 'edit']);
+Route::patch('/expedientes/{id}', [ExpedienteController::class, 'update']);
+// Route::get('/expedientes/{id}/{obtenerId}', [ExpedienteController::class, 'show']);

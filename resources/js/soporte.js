@@ -9,7 +9,7 @@ async function soporte() {
     // Definir la URL del endpoint para obtener el token
     const URL_SERVER = 'http://46.183.112.214/api';
     const URL_LOCAL = 'http://127.0.0.1:8000/api';
-    const URL = URL_SERVER
+    const URL = URL_LOCAL
     const tokenEndpoint = `${URL}/login`;
 
     // Definir los datos de autenticación (por ejemplo, nombre de usuario y contraseña)
@@ -194,6 +194,17 @@ async function soporte() {
             const td_observaciones = document.createElement('td')
             td_observaciones.textContent = array.observaciones
 
+            // imagen
+            const td_imagen = document.createElement('td')
+            td_imagen.setAttribute('class','td_image')
+            if (array.imagen) {
+                const imagen = document.createElement('img')
+                imagen.setAttribute('src', array.imagen)
+                imagen.setAttribute('style','width: 20rem')
+                td_imagen.appendChild(imagen)
+            }
+
+
             // archivos
             // const td_archivos = document.createElement('td')
             // const a_archivos = document.createElement('a')
@@ -220,6 +231,7 @@ async function soporte() {
             tr.appendChild(td_origen_asistencia)
             tr.appendChild(td_solucion)
             tr.appendChild(td_observaciones)
+            tr.appendChild(td_imagen)
             // tr.appendChild(td_archivos)
 
             // agregando al tbody

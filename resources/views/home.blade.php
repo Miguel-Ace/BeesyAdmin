@@ -62,9 +62,11 @@
                     <a href="{{url('/dashboard')}}"><ion-icon name="home-outline"></ion-icon> <span>Dashboard</span></a>
                     <a href="{{url('/soporte')}}"><ion-icon name="apps-outline"></ion-icon> <span>Soporte</span></a>
                     <a href="{{url('/ejecucion_proyectos')}}"><ion-icon name="file-tray-full-outline"></ion-icon> <span>Ejecución Proyectos</span></a>
+                    <a href="{{url('/expedientes')}}"><ion-icon name="book-outline"></ion-icon> <span>Expedientes</span></a>
                     @endrole
                     
                     @role('admin')
+                    <a href="{{url('/expedientes')}}"><ion-icon name="book-outline"></ion-icon> <span>Expedientes</span></a>
                     <a href="{{url('/soporte')}}"><ion-icon name="apps-outline"></ion-icon> <span>Soporte</span></a>
                     <a href="{{url('/estados')}}"><ion-icon name="barcode-outline"></ion-icon> <span>Estado</span></a>
                     <a href="{{url('/etapas')}}"><ion-icon name="copy-outline"></ion-icon> <span>Etapa</span></a>
@@ -107,5 +109,6 @@
     <script src="https://unpkg.com/flowbite@1.5.4/dist/flowbite.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </body>
 </html>

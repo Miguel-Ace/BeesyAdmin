@@ -39,11 +39,73 @@ class ApiController extends Controller
 
     // Insertar soportes
     public function insertSoporte(Request $request){
-        $usuario = Soporte::create($request->all());
-        if (is_null($usuario)) {
+        $cantidad = Soporte::all()->last()->ticker;
+
+        $soporte = Soporte::create([
+            "ticker" => $cantidad ? $cantidad + 1 : 1,
+            "colaborador" => $request['colaborador'],
+            "fechaCreacionTicke" => $request['fechaCreacionTicke'] ? $request['fechaCreacionTicke'] : null,
+            "fechaInicioAsistencia" => $request['fechaInicioAsistencia'] ? $request['fechaInicioAsistencia'] : null,
+            "fechaFinalAsistencia" => $request['fechaFinalAsistencia'] ? $request['fechaFinalAsistencia'] : null,
+            "id_cliente" => $request['id_cliente'],
+            "id_software" => $request['id_software'],
+            "problema" => $request['problema'],
+            "solucion" => $request['solucion'],
+            "observaciones" => $request['observaciones'] ? $request['observaciones'] : null,
+            "numLaboral" => $cantidad ? $cantidad + 1 : 1,
+            "prioridad" => $request['prioridad'],
+            "estado" => $request['estado'],
+            "correo_cliente" => $request['correo_cliente'],
+            "archivo" => $request['archivo'] ? $request['archivo'] : null,
+            "id_expediente" => $request['id_expediente'] ? $request['id_expediente'] : '',
+            "empresa" => $request['empresa'],
+            "origen_asistencia" => $request['origen_asistencia'],
+            "interno" => $request['interno'] ? $request['interno'] : null,
+            "fecha_prevista_cumplimiento" => $request['fecha_prevista_cumplimiento'],
+            "user_cliente" => $request['user_cliente'],
+            "imagen" => $request['imagen'] ? $request['imagen'] : '-'
+        ]);
+
+        if (is_null($soporte)) {
             return response()->json(["message"=>"No se pudo insertar"],404);
         }
-        return response()->json($usuario,200);
+
+        return response()->json($soporte,200);
+
+        // $usuario = Soporte::create($request->all());
+        // if (is_null($usuario)) {
+        //     return response()->json(["message"=>"No se pudo insertar"],404);
+        // }
+        // return response()->json($usuario,200);
+    }
+
+    // Obtener cantidad de soportes a clientes
+    public function countSoporteCliente($colaborador){
+        // Obtener todos los clientes
+        $clientes = Cliente::all();
+
+        // Inicializar el array de resultados
+        $resultado = [];
+
+        foreach ($clientes as $cliente) {
+            // Contar todos los soportes para el cliente
+            $conteo_total = Soporte::where('id_cliente', $cliente->contacto)->count();
+
+            // Contar los soportes específicos para el colaborador "Edwin Torres"
+            $conteo_colaborador = Soporte::where('colaborador', $colaborador)
+                                        ->where('id_cliente', $cliente->contacto)
+                                        ->count();
+
+            // Agregar resultados al array
+            $resultado[] = [
+                'empresa' => $cliente->nombre,
+                'contacto' => $cliente->contacto,
+                'conteo_total' => $conteo_total,
+                'conteo_colaborador' => $conteo_colaborador
+            ];
+        }
+
+        return response()->json($resultado, 200);
     }
 
     // borrar soportes
@@ -148,4 +210,21 @@ class ApiController extends Controller
         
         return response()->json($respuesta,200);
     }
+
+    //==================================
+    //Graficos
+
+    public function graficoSoporte(){
+        $contacto_clientes = Cliente::all()->pluck('contacto');
+        $nombre_clientes = Cliente::all()->pluck('nombre');
+        $resultados = [];
+
+        foreach ($contacto_clientes as $indice => $nombre) {
+            $conteo = Soporte::where('id_cliente', $nombre)->count();
+            $resultados[$indice] = $conteo;
+        }
+
+        return response()->json([$nombre_clientes,$resultados],200);
+    }
+
 }

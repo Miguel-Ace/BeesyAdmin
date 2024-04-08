@@ -4,7 +4,9 @@ const horasReales = document.getElementById('horas_reales');
 const rendimiento = document.getElementById('rendimiento');
 const btnEnviar = document.getElementById('btnEnviar');
 
-btnEnviar.addEventListener('click', agregarValor);
+btnEnviar ?
+btnEnviar.addEventListener('click', agregarValor)
+:''
 
 function agregarValor() {
     const hrsP = parseFloat(horasPropuestas.value);

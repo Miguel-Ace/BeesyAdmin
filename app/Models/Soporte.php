@@ -27,6 +27,13 @@ class Soporte extends Model
         'estado',
         'correo_cliente',
         'archivo',
+        'id_expediente',
+        'empresa',
+        'origen_asistencia',
+        'interno',
+        'fecha_prevista_cumplimiento',
+        'user_cliente',
+        'imagen',
     ];
 
     // function clientes(){
